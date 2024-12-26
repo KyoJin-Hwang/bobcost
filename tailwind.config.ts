@@ -2,13 +2,13 @@ import type { Config } from 'tailwindcss';
 
 export default {
   darkMode: ['class'],
-  content: [
-    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
-  ],
+  content: ['./src/**/*.{ts,tsx}'],
+  prefix: '',
   theme: {
     extend: {
+      fontFamily: {
+        pretendard: ['Pretendard'],
+      },
       colors: {
         background: 'var(--background)',
         foreground: 'var(--foreground)',
