@@ -1,5 +1,9 @@
-import Image from 'next/image';
+import ThemeSwitch from '@/layouts/theme/Switch';
 
 export default function Home() {
-  return <div className=''>Design</div>;
+  return (
+    <div>
+      <ThemeSwitch />
+    </div>
+  );
 }
