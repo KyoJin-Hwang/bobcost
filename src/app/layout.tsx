@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 
+import Header from '@/layouts/Header';
 import { ThemeProvider } from '@/layouts/theme/Provider';
 import '@/lib/globals.css';
 
@@ -15,8 +16,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en' suppressHydrationWarning>
-      <body className='font-pretendard flex min-h-screen flex-col'>
-        <ThemeProvider>{children}</ThemeProvider>
+      <body className='flex min-h-screen flex-col font-pretendard'>
+        <Header />
+        <ThemeProvider>
+          <main>{children}</main>
+        </ThemeProvider>
       </body>
     </html>
   );
