@@ -17,8 +17,8 @@ export default function RootLayout({
   return (
     <html lang='en' suppressHydrationWarning>
       <body className='flex min-h-screen flex-col font-pretendard'>
-        <Header />
         <ThemeProvider>
+          <Header />
           <main>{children}</main>
         </ThemeProvider>
       </body>
