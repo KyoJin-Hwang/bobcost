@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 
-import { Dot, LucideIcon, Monitor, Moon, Sun } from 'lucide-react';
+import { MoonIcon, SunIcon } from 'lucide-react';
 import { useTheme } from 'next-themes';
 
 const ThemeSwitch = () => {
@@ -22,8 +22,21 @@ const ThemeSwitch = () => {
   }
 
   return (
-    <button onClick={toggle} className=''>
-      {theme === 'dark' ? 'light' : 'dark'}
+    <button
+      onClick={toggle}
+      className='group rounded-full border-[3px] border-black p-1.5 transition-colors duration-200 hover:bg-black dark:border-gray-200 dark:hover:bg-gray-200'
+    >
+      {theme === 'dark' ? (
+        <SunIcon
+          size={22}
+          className='transition-colors duration-200 group-hover:fill-orange-400 group-hover:stroke-orange-400'
+        />
+      ) : (
+        <MoonIcon
+          size={22}
+          className='transition-colors duration-200 group-hover:fill-yellow-400 group-hover:stroke-slate-500'
+        />
+      )}
     </button>
   );
 };
