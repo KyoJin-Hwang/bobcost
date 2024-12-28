@@ -1,9 +1,5 @@
 import ThemeSwitch from '@/layouts/theme/Switch';
 
 export default function Home() {
-  return (
-    <div>
-      <ThemeSwitch />
-    </div>
-  );
+  return <div></div>;
 }

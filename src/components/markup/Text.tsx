@@ -6,14 +6,13 @@ interface TextProps {
   text: string;
   className?: string;
   fontSize?: number;
-  fontWeight?: 'bold';
   color?: string;
 }
 
-export const Text = ({ text, className, fontSize, fontWeight, color }: TextProps) => {
+export const Text = ({ text, className, fontSize, color }: TextProps) => {
   return (
     <p
-      className={clsx('pc:text-base text-sm', fontWeight && 'font-bold', className)}
+      className={clsx('text-sm pc:text-base', className)}
       style={{
         ...(fontSize && { fontSize: `${fontSize}px`, lineHeight: '100%' }),
         ...(color && { color }),
