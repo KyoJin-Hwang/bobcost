@@ -13,6 +13,9 @@ export default {
         background: 'var(--background)',
         foreground: 'var(--foreground)',
       },
+      spacing: {
+        header: '62px',
+      },
     },
     screens: {
       //pc

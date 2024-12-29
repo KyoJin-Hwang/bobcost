@@ -7,7 +7,7 @@ import { Text } from '@/components/ui/Text';
 
 const HeaderLeft = () => {
   return (
-    <a href='/' aria-label='Home' className='group flex cursor-pointer gap-2'>
+    <a href='/' className='group flex cursor-pointer gap-2'>
       <Avatar />
       <div className='flex flex-col justify-center'>
         <Text text='BOBcost' className='font-semibold' fontSize={16} />
@@ -19,7 +19,7 @@ const HeaderLeft = () => {
 
 const HeaderRight = () => {
   return (
-    <div>
+    <div className='flex items-center gap-6'>
       <ThemeSwitch />
       <Menu />
     </div>
@@ -28,9 +28,13 @@ const HeaderRight = () => {
 
 const Header = () => {
   return (
-    <header className='fixed left-0 top-0 z-10 flex w-full items-center justify-between border-b-2 border-b-[#121212] px-5 py-2.5 dark:border-b-white'>
-      <HeaderLeft />
-      <HeaderRight />
+    <header
+      className={`h-header fixed left-0 top-0 z-10 w-full border-b-2 bg-white dark:border-b-white dark:bg-[#121212]`}
+    >
+      <div className='flex h-full items-center px-5 py-2.5'>
+        <HeaderLeft />
+        <HeaderRight />
+      </div>
     </header>
   );
 };
