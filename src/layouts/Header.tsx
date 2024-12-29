@@ -1,12 +1,13 @@
 'use client';
 
 import ThemeSwitch from './theme/Switch';
-import { Text } from '@/components/markup/Text';
-import Avatar from '@/components/ui/Avatar';
+import Avatar from '@/components/common/avatar/Avatar';
+import Menu from '@/components/common/menu/Menu';
+import { Text } from '@/components/ui/Text';
 
 const HeaderLeft = () => {
   return (
-    <a href='/' className='group flex cursor-pointer gap-2'>
+    <a href='/' aria-label='Home' className='group flex cursor-pointer gap-2'>
       <Avatar />
       <div className='flex flex-col justify-center'>
         <Text text='BOBcost' className='font-semibold' fontSize={16} />
@@ -20,6 +21,7 @@ const HeaderRight = () => {
   return (
     <div>
       <ThemeSwitch />
+      <Menu />
     </div>
   );
 };
