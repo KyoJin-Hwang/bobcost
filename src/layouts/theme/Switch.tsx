@@ -24,7 +24,7 @@ const ThemeSwitch = () => {
   return (
     <button
       onClick={toggle}
-      className='group rounded-full border-[2px] border-black p-1.5 transition-colors duration-200 hover:bg-black dark:border-gray-200 dark:hover:bg-gray-200'
+      className='group rounded-full border-black p-1.5 transition-colors duration-200 hover:bg-black dark:border-gray-200 dark:hover:bg-gray-200'
     >
       {theme === 'dark' ? (
         <SunIcon
