@@ -10,16 +10,14 @@ const useResize = (breakpoint: number) => {
     const handleResize = () => {
       setIsPc(window.innerWidth >= breakpoint);
     };
-
     // 초기 실행
     handleResize();
-
     window.addEventListener('resize', handleResize);
 
     return () => {
       window.removeEventListener('resize', handleResize);
     };
-  }, [breakpoint]);
+  }, []);
 
   return isPc;
 };
