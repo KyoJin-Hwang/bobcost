@@ -19,7 +19,7 @@ export default function RootLayout({
       <body className='flex min-h-screen flex-col font-pretendard'>
         <ThemeProvider>
           <Header />
-          <main>{children}</main>
+          <main className='pt-header relative block'>{children}</main>
         </ThemeProvider>
       </body>
     </html>
