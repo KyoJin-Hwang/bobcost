@@ -19,7 +19,7 @@ const HeaderLeft = () => {
 
 const HeaderRight = () => {
   return (
-    <div className='flex items-center gap-6'>
+    <div className='flex items-center gap-4'>
       <ThemeSwitch />
       <Menu />
     </div>
@@ -29,9 +29,9 @@ const HeaderRight = () => {
 const Header = () => {
   return (
     <header
-      className={`h-header fixed left-0 top-0 z-10 w-full border-b-2 bg-white dark:border-b-white dark:bg-[#121212]`}
+      className={`h-header fixed left-0 top-0 z-10 w-full border-b-2 border-b-[#121212] bg-white dark:border-b-white dark:bg-[#121212]`}
     >
-      <div className='flex h-full items-center px-5 py-2.5'>
+      <div className='flex h-full items-center justify-between px-5 py-2.5'>
         <HeaderLeft />
         <HeaderRight />
       </div>
