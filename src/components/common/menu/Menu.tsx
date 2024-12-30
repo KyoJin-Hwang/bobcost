@@ -50,11 +50,15 @@ const MenuList = () => {
         menuListVariants({ visibility: open ? 'visible' : 'hidden' })
       )}
     >
-      <ul className='flex h-full flex-col items-center gap-8 py-5 pc:flex-row'>
+      <ul className='flex h-full flex-col items-center gap-8 py-5 pc:flex-row pc:gap-4 pc:py-0'>
         {menuArray.map((el) => (
-          <a key={el.id} href={el.href}>
+          <a
+            key={el.id}
+            href={el.href}
+            className='transition-all duration-500 pc:rounded pc:px-2 pc:hover:bg-[#121212] pc:hover:text-[white] pc:dark:hover:bg-gray-200 pc:dark:hover:text-[#121212]'
+          >
             <Text
-              className='border-b-2 py-1 pc:border-b-0'
+              className='border-b-2 border-b-[#121212] py-1 font-semibold dark:border-b-white pc:border-b-0'
               text={el.name}
             ></Text>
           </a>
@@ -69,7 +73,7 @@ const MenuToggle = () => {
 
   return (
     <button
-      className='flex items-center gap-1 pc:hidden'
+      className='flex items-center gap-1 font-semibold pc:hidden'
       onClick={() => setOpen((el) => !el)}
     >
       {!open ? <MenuIcon /> : <XIcon />} 메뉴
