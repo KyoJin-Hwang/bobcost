@@ -16,7 +16,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en' suppressHydrationWarning>
-      <body className='flex min-h-screen flex-col font-pretendard'>
+      <body className='flex min-h-screen flex-col bg-background font-pretendard'>
         <ThemeProvider>
           <Header />
           <main className='pt-header relative block'>{children}</main>
