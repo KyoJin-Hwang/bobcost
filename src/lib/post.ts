@@ -89,3 +89,13 @@ export const getSortedPostList = async (category?: string) => {
   const postList = await getPostList(category);
   return sortPostList(postList);
 };
+
+export const getSitemapPostList = async () => {
+  const postList = await getPostList();
+  const baseUrl = 'https://www.bobcost.kr';
+  const sitemapPostList = postList.map(({ url }) => ({
+    lastModified: new Date(),
+    url: `${baseUrl}${url}`,
+  }));
+  return sitemapPostList;
+};
