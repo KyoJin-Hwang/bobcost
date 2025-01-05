@@ -110,3 +110,19 @@ export const getSitemapPostList = async () => {
   }));
   return sitemapPostList;
 };
+
+// 글 갯수
+export const getAllPostCount = async () => (await getPostList()).length;
+
+// 카테고리 리스트
+export const getCategoryList = () => {
+  const cgPaths: string[] = sync(`${POSTS_PATH}/*`);
+  const cgList = cgPaths.map((p) => p.split(path.sep).slice(-1)?.[0]);
+  return cgList;
+};
+
+export function generateStaticParams() {
+  const categoryList = getCategoryList();
+  const paramList = categoryList.map((category) => ({ category }));
+  return paramList;
+}
