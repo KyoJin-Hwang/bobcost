@@ -1,15 +1,9 @@
 import { getPostList, getSortedPostList } from '@/lib/post';
 
-type Props = {
-  params: { category: string };
-};
-
-const Blog = async ({ params }: Props) => {
-  return (
-    <div className=''>
-      <div>blog </div>
-    </div>
-  );
+const Blog = async () => {
+  const test = await getSortedPostList('retrospect');
+  const test2 = await getSortedPostList('frontend');
+  return <div>blog</div>;
 };
 
 export default Blog;

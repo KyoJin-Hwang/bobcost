@@ -1,4 +1,4 @@
-import { Post, PostMatter } from '@/config/types';
+import { CategoryDetail, Post, PostMatter } from '@/config/types';
 import dayjs from 'dayjs';
 import fs from 'fs';
 import { sync } from 'glob';
@@ -17,14 +17,9 @@ export const getCategoryPublicName = (dirPath: string) =>
     .join(' ');
 
 // 모든 MDX 파일 조회
-export const getPostPaths = (mainCategory?: string, subCategory?: string) => {
-  const main = mainCategory || '**';
-  const sub = subCategory || '**';
-  const mainPaths: string[] = sync(`${POSTS_PATH}/${main}/**/**/*.mdx`);
-  const subPaths: string[] = sync(`${POSTS_PATH}/${main}/${sub}/**/*.mdx`);
-
-  const postPaths = subPaths || mainPaths;
-
+export const getPostPaths = (category?: string) => {
+  const folder = category || '**';
+  const postPaths: string[] = sync(`${POSTS_PATH}/${folder}/**/*.mdx`);
   return postPaths;
 };
 
@@ -38,8 +33,8 @@ export const parsePostAbstract = (postPath: string) => {
     .replace('.mdx', '');
 
   const [categoryPath, slug] = filePath.split('/');
-
   const url = `/blog/${categoryPath}/${slug}`;
+
   const categoryPublicName = getCategoryPublicName(categoryPath);
   return { url, categoryPath, categoryPublicName, slug };
 };
@@ -83,11 +78,8 @@ const sortPostList = (PostList: Post[]) => {
 };
 
 // 모든 포스트 목록 조회. 블로그 메인 페이지에서 사용
-export const getPostList = async (
-  mainCategory?: string,
-  subCategory?: string
-): Promise<Post[]> => {
-  const postPaths = getPostPaths(mainCategory, subCategory);
+export const getPostList = async (category?: string): Promise<Post[]> => {
+  const postPaths = getPostPaths(category);
   const postList = await Promise.all(
     postPaths.map((postPath) => parsePost(postPath))
   );
@@ -111,7 +103,7 @@ export const getSitemapPostList = async () => {
   return sitemapPostList;
 };
 
-// 글 갯수
+// 글 전체 갯수
 export const getAllPostCount = async () => (await getPostList()).length;
 
 // 카테고리 리스트
@@ -121,8 +113,32 @@ export const getCategoryList = () => {
   return cgList;
 };
 
-export function generateStaticParams() {
-  const categoryList = getCategoryList();
-  const paramList = categoryList.map((category) => ({ category }));
-  return paramList;
-}
+// 카테고리 글 전체 갯수
+export const getCategoryDetailList = async () => {
+  const postList = await getPostList();
+  const result: { [key: string]: number } = {};
+  for (const post of postList) {
+    const category = post.categoryPath;
+
+    if (result[category]) {
+      result[category] += 1;
+    } else {
+      result[category] = 1;
+    }
+  }
+  const detailList: CategoryDetail[] = Object.entries(result).map(
+    ([category, count]) => ({
+      dirName: category,
+      publicName: getCategoryPublicName(category),
+      count,
+    })
+  );
+  return detailList;
+};
+
+// 글 상세 페이지 내용 조회
+export const getPostDetail = async (category: string, slug: string) => {
+  const filePath = `${POSTS_PATH}/${category}/${slug}/content.mdx`;
+  const detail = await parsePost(filePath);
+  return detail;
+};
