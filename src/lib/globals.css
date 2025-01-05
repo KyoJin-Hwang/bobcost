@@ -5,17 +5,42 @@
 @tailwind utilities;
 
 :root {
-  --white: #ffffff;
+  --white: hsl(210 40% 98%);
   --black: #121212;
-  --mobile-header-height: 62px;
+
+  --background: white;
+  --foreground: var(--black);
+
+  --secondary: hsl(210 40% 96.1%);
+  --secondary-foreground: hsl(222.2 47.4% 11.2%);
+
+  --informative: #e0f2fe;
+  --informative-foreground: var(--black);
+
+  --warning: #fef3c7;
+  --warning-foreground: var(--black);
+
+  --destructive: #fecdd3;
+  --destructive-foreground: var(--black);
 }
 
 .dark {
   --background: var(--black);
   --foreground: var(--white);
+
+  --secondary: hsl(217.2 32.6% 17.5%);
+  --secondary-foreground: var(--white);
+
+  --informative: #075985;
+  --informative-foreground: var(--white);
+
+  --warning: #ca8a04;
+  --warning-foreground: var(--white);
+
+  --destructive: #7f1d1d;
+  --destructive-foreground: var(--white);
 }
 
 body {
-  background-color: var(--background);
   font-weight: 500;
 }
