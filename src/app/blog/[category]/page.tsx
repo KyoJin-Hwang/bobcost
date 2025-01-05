@@ -1,5 +1,5 @@
 const CategoryPage = async () => {
-  return;
+  return <div>category</div>;
 };
 
 export default CategoryPage;
