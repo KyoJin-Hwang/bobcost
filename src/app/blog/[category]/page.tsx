@@ -1,5 +1,5 @@
-const CategoryPage = async () => {
+const MainCategory = async () => {
   return <div>category</div>;
 };
 
-export default CategoryPage;
+export default MainCategory;
