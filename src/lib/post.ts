@@ -9,7 +9,7 @@ import readingTime from 'reading-time';
 const BASE_PATH = 'src/posts';
 const POSTS_PATH = path.join(process.cwd(), BASE_PATH);
 
-// category folder name을 public name으로 변경 : dir_name -> Dir Name
+// Category folder name을 public name으로 변경 : dir_name -> Dir Name
 export const getCategoryPublicName = (dirPath: string) =>
   dirPath
     .split('_')
@@ -17,9 +17,14 @@ export const getCategoryPublicName = (dirPath: string) =>
     .join(' ');
 
 // 모든 MDX 파일 조회
-export const getPostPaths = (category?: string) => {
-  const folder = category || '**';
-  const postPaths: string[] = sync(`${POSTS_PATH}/${folder}/**/*.mdx`);
+export const getPostPaths = (mainCategory?: string, subCategory?: string) => {
+  const main = mainCategory || '**';
+  const sub = subCategory || '**';
+  const mainPaths: string[] = sync(`${POSTS_PATH}/${main}/**/**/*.mdx`);
+  const subPaths: string[] = sync(`${POSTS_PATH}/${main}/${sub}/**/*.mdx`);
+
+  const postPaths = subPaths || mainPaths;
+
   return postPaths;
 };
 
@@ -33,6 +38,7 @@ export const parsePostAbstract = (postPath: string) => {
     .replace('.mdx', '');
 
   const [categoryPath, slug] = filePath.split('/');
+
   const url = `/blog/${categoryPath}/${slug}`;
   const categoryPublicName = getCategoryPublicName(categoryPath);
   return { url, categoryPath, categoryPublicName, slug };
@@ -42,6 +48,7 @@ export const parsePostAbstract = (postPath: string) => {
 const parsePostDetail = async (postPath: string) => {
   const file = fs.readFileSync(postPath, 'utf8');
   const { data, content } = matter(file);
+
   const grayMatter = data as PostMatter;
   const readingMinutes = Math.ceil(readingTime(content).minutes);
   const createdAt = dayjs(grayMatter.createdAt)
@@ -53,7 +60,6 @@ const parsePostDetail = async (postPath: string) => {
 
   const dateString = updatedAt || createdAt;
 
-  console.log({ ...grayMatter, dateString, content, readingMinutes });
   return { ...grayMatter, dateString, content, readingMinutes };
 };
 
@@ -77,19 +83,24 @@ const sortPostList = (PostList: Post[]) => {
 };
 
 // 모든 포스트 목록 조회. 블로그 메인 페이지에서 사용
-export const getPostList = async (category?: string): Promise<Post[]> => {
-  const postPaths = getPostPaths(category);
+export const getPostList = async (
+  mainCategory?: string,
+  subCategory?: string
+): Promise<Post[]> => {
+  const postPaths = getPostPaths(mainCategory, subCategory);
   const postList = await Promise.all(
     postPaths.map((postPath) => parsePost(postPath))
   );
   return postList;
 };
 
+// 정렬한 postList를 반납
 export const getSortedPostList = async (category?: string) => {
   const postList = await getPostList(category);
   return sortPostList(postList);
 };
 
+// 사이트맵 함수
 export const getSitemapPostList = async () => {
   const postList = await getPostList();
   const baseUrl = 'https://www.bobcost.kr';
