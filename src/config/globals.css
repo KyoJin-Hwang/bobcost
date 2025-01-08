@@ -26,7 +26,7 @@
   --destructive: #fecdd3;
   --destructive-foreground: var(--black);
 
-  --accent: hsl(210, 22%, 69%);
+  --accent: hsl(195, 8%, 81%);
   --accent-foreground: hsl(222.2 47.4% 11.2%);
 }
 
@@ -49,7 +49,7 @@
   --destructive: #7f1d1d;
   --destructive-foreground: var(--white);
 
-  --accent: hsl(216, 62%, 23%);
+  --accent: hsl(216, 54%, 19%);
   --accent-foreground: hsl(210 40% 98%);
 }
 
