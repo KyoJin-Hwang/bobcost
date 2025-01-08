@@ -1,9 +1,7 @@
-import { getPostList, getSortedPostList } from '@/lib/post';
+import PostListPage from '@/components/post_list/PostListPage';
 
 const Blog = async () => {
-  const test = await getSortedPostList('retrospect');
-  const test2 = await getSortedPostList('frontend');
-  return <div>blog</div>;
+  return <PostListPage />;
 };
 
 export default Blog;
