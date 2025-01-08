@@ -6,21 +6,14 @@ import { VariantProps, cva } from 'class-variance-authority';
 export const ButtonVariants = cva(
   `
   flex justify-center items-center rounded-md
-  text-base font-bold transition-all shadow-md
-  px-3 py-2 dark:bg-white dark:text-black text-white bg-black
-  text-sm pc:text-[1rem]
+  font-bold transition-all 
+  px-3 py-2 text-sm pc:text-[1rem]
   `,
   {
     variants: {
-      hover: {
-        false: '',
-        true: 'hover:bg-blue-400 dark:hover:bg-red-400',
-      },
-      backGround: {
-        default: '',
-        grey: ' bg-slate-400',
-        blue: ' bg-blue-400',
-        red: 'bg-red-400',
+      variant: {
+        default: 'bg-primary text-primary-foreground',
+        ghost: 'hover:bg-accent hover:text-accent-foreground',
       },
       size: {
         default: '',
@@ -28,8 +21,7 @@ export const ButtonVariants = cva(
       },
     },
     defaultVariants: {
-      hover: false,
-      backGround: 'default',
+      variant: 'default',
       size: 'default',
     },
   }
@@ -48,7 +40,7 @@ interface ButtonProps
 }
 
 /**
- * @backGround 색상 지정 ex) gray, blue, red
+ * @variant 백그라운드 색상 지정 및 hover
  * @size 사이즈 지정 md, lg, wlg
  * @children ReactElement 아이콘같은걸 넣어준다
  * @label String을 넣어 버튼 라벨을 지정해준다
@@ -56,16 +48,18 @@ interface ButtonProps
  * @props 추가할 버튼 속성을 넣어준다
  */
 const Button: FC<ButtonProps> = ({
-  backGround,
+  variant,
   size,
-  hover,
   children,
   label,
   additionalClass,
   ...props
 }) => {
   return (
-    <button className={cn(ButtonVariants({ backGround, size, hover }), additionalClass)} {...props}>
+    <button
+      className={cn(ButtonVariants({ variant, size }), additionalClass)}
+      {...props}
+    >
       {children && children}
       {label && label}
     </button>

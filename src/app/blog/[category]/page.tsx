@@ -4,9 +4,7 @@ import PostListPage from '@/components/post_list/PostListPage';
 import { baseDomain, blogName, blogThumbnailURL } from '@/config/const';
 import { getCategoryList, getCategoryPublicName } from '@/lib/post';
 
-type Props = {
-  params: { category: string };
-};
+type Props = Promise<{ category: string }>;
 
 // 허용된 param 외 접근시 404
 export const dynamicParams = false;
@@ -18,8 +16,11 @@ export function generateStaticParams() {
 }
 
 export async function generateMetadata({
-  params: { category },
-}: Props): Promise<Metadata> {
+  params,
+}: {
+  params: Props;
+}): Promise<Metadata> {
+  const { category } = await params;
   const cg = getCategoryPublicName(category);
   const title = `${cg} | ${blogName}`;
   const url = `${baseDomain}/${category}`;
@@ -38,8 +39,10 @@ export async function generateMetadata({
   };
 }
 
-const CategoryPage = async ({ params }: Props) => {
-  return <PostListPage category={params.category} />;
+const CategoryPage = async ({ params }: { params: Props }) => {
+  const { category } = await params;
+
+  return <PostListPage category={category} />;
 };
 
 export default CategoryPage;

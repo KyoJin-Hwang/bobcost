@@ -11,6 +11,9 @@
   --background: white;
   --foreground: var(--black);
 
+  --primary: hsl(222.2 47.4% 11.2%);
+  --primary-foreground: var(--white);
+
   --secondary: hsl(210 40% 96.1%);
   --secondary-foreground: hsl(222.2 47.4% 11.2%);
 
@@ -22,11 +25,17 @@
 
   --destructive: #fecdd3;
   --destructive-foreground: var(--black);
+
+  --accent: hsl(210, 22%, 69%);
+  --accent-foreground: hsl(222.2 47.4% 11.2%);
 }
 
 .dark {
   --background: var(--black);
   --foreground: var(--white);
+
+  --primary: hsl(210 40% 98%);
+  --primary-foreground: var(--black);
 
   --secondary: hsl(217.2 32.6% 17.5%);
   --secondary-foreground: var(--white);
@@ -39,6 +48,9 @@
 
   --destructive: #7f1d1d;
   --destructive-foreground: var(--white);
+
+  --accent: hsl(216, 62%, 23%);
+  --accent-foreground: hsl(210 40% 98%);
 }
 
 body {
