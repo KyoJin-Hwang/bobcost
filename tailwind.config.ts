@@ -40,7 +40,11 @@ export default {
       spacing: {
         header: '62px',
       },
+      gridTemplateColumns: {
+        listGrid: 'repeat(auto-fill, minmax(300px, 1fr))',
+      },
     },
+
     screens: {
       //pc
       pc: '992px',

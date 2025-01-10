@@ -1,6 +1,15 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
+
 import CategoryButton from './CategoryButton';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import { CategoryDetail } from '@/config/types';
 
 interface CategoryListProps {
@@ -14,9 +23,20 @@ const CategoryList = ({
   allPostCount,
   currentCategory = 'all',
 }: CategoryListProps) => {
+  const router = useRouter();
+
+  const onCategoryChange = (value: string) => {
+    if (value === 'all') {
+      router.push('/blog');
+    } else {
+      router.push(`/blog/${value}`);
+    }
+  };
+
   return (
     <>
-      <section>
+      {/* pc */}
+      <section className='hidden pc:block'>
         <ul className='flex gap-3'>
           <CategoryButton
             href='/blog'
@@ -36,7 +56,22 @@ const CategoryList = ({
         </ul>
       </section>
 
-      <section>모바일</section>
+      {/* mobile */}
+      <section className='block pc:hidden'>
+        <Select onValueChange={onCategoryChange} defaultValue={currentCategory}>
+          <SelectTrigger className='w-[180px]'>
+            <SelectValue placeholder='Theme' />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value='all'>All ({allPostCount})</SelectItem>
+            {categoryList.map((cg) => (
+              <SelectItem key={cg.dirName} value={cg.dirName}>
+                {cg.publicName} ({cg.count})
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </section>
     </>
   );
 };

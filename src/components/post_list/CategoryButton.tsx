@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import Button from '../ui/Button';
+import Button from '../ui/button';
 
 interface Props {
   isCurrent: boolean;
@@ -12,9 +12,11 @@ interface Props {
 const CategoryButton = ({ isCurrent, displayName, href, count }: Props) => {
   return (
     <li>
-      <Link href={href}>
-        <Button label={displayName} variant={isCurrent ? 'default' : 'ghost'} />
-      </Link>
+      <Button variant={isCurrent ? 'default' : 'ghost'}>
+        <Link href={href}>
+          {displayName} ({count})
+        </Link>
+      </Button>
     </li>
   );
 };

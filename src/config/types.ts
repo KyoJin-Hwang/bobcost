@@ -2,6 +2,7 @@ export interface PostMatter {
   title: string;
   createdAt: Date;
   updatedAt?: Date;
+  group: string;
   dateString: string;
   thumbnail: string;
   desc: string;
