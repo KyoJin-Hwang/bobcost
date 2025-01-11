@@ -36,6 +36,22 @@ export default {
           DEFAULT: 'var(--accent)',
           foreground: 'var(--accent-foreground)',
         },
+        html: {
+          DEFAULT: 'var(--html)',
+          foreground: 'var(--html-foreground)',
+        },
+        css: {
+          DEFAULT: 'var(--css)',
+          foreground: 'var(--css-foreground)',
+        },
+        js: {
+          DEFAULT: 'var(--js)',
+          foreground: 'var(--js-foreground)',
+        },
+        react: {
+          DEFAULT: 'var(--react)',
+          foreground: 'var(--react-foreground)',
+        },
       },
       spacing: {
         header: '62px',

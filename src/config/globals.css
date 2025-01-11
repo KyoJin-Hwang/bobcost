@@ -28,6 +28,18 @@
 
   --accent: hsl(195, 8%, 81%);
   --accent-foreground: hsl(222.2 47.4% 11.2%);
+
+  --html: rgb(228, 88, 88);
+  --html-foreground: var(--white);
+
+  --css: hsl(241, 68%, 55%);
+  --css-foreground: var(--white);
+
+  --js: #f1db57;
+  --js-foreground: var(--black);
+
+  --react: #149eca;
+  --react-foreground: var(--white);
 }
 
 .dark {

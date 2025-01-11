@@ -14,9 +14,8 @@ const PostListPage = async ({ category }: PostListProps) => {
   const postList = await getSortedPostList(category);
   const categoryList = await getCategoryDetailList();
   const allPostCount = await getAllPostCount();
-  console.log(postList);
   return (
-    <section className='mt-5 px-5'>
+    <section className='mt-5 px-5 pb-[100px]'>
       <CategoryList
         allPostCount={allPostCount}
         categoryList={categoryList}

@@ -1,7 +1,6 @@
 import clsx from 'clsx';
 
-// clsx만 사용해보기
-
+// 인터페이스 정의
 interface TextProps {
   text: string;
   className?: string;
@@ -9,6 +8,7 @@ interface TextProps {
   color?: string;
 }
 
+// Text 컴포넌트
 export const Text = ({ text, className, fontSize, color }: TextProps) => {
   return (
     <p
@@ -20,14 +20,5 @@ export const Text = ({ text, className, fontSize, color }: TextProps) => {
     >
       {text}
     </p>
-  );
-};
-
-export const HoverText = (props: TextProps) => {
-  return (
-    <Text
-      {...props}
-      className={`transition-colors duration-200 hover:text-blue-400 dark:hover:text-red-400`}
-    />
   );
 };
