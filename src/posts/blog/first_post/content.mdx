@@ -1,0 +1,31 @@
+---
+title: '첫 게시글 테스트'
+desc: 사이다?
+createdAt: 2021-11-24
+updatedAt: 2025-12-03
+thumbnail: /posts/frontend/javascript/2022.jpg
+group: CSS
+---
+
+<Callout type='info'>정보</Callout>
+<Callout type='warn'>중요</Callout>
+<Callout type='danger'>위험</Callout>
+<Callout type='normal'>기본</Callout>
+
+# 안녕
+
+<Callout type='warn'>
+  상세한 내용은 [이전 게시글(CSS Trigger)](/blog/manual/css-trigger)을 참고하세요.
+</Callout>
+
+
+```javascript {5-6}
+import fs from 'fs';
+import matter from 'gray-matter';
+
+const parsePost = async (postPath: string) => {
+  const file = fs.readFileSync(postPath, 'utf8');
+  const { data, content } = matter(file);
+};
+```
+
