@@ -57,7 +57,7 @@ const CategoryList = ({
       </section>
 
       {/* mobile */}
-      <section className='block pc:hidden'>
+      <section className='relative z-10 block pc:hidden'>
         <Select onValueChange={onCategoryChange} defaultValue={currentCategory}>
           <SelectTrigger className='w-[180px]'>
             <SelectValue placeholder='Theme' />
