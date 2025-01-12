@@ -24,7 +24,7 @@ const PostCard = ({ post }: Props) => {
 
   return (
     <Link href={post.url} className='group relative z-0'>
-      <li className='flex h-full flex-col gap-3 overflow-hidden rounded-md border shadow-lg dark:shadow-none'>
+      <li className='flex h-full flex-col gap-3 overflow-hidden rounded-md border hover:translate-y-[-5px] hover:shadow-xl dark:shadow-gray-500'>
         <div className='relative w-full overflow-hidden border-b'>
           <img
             className='cover transition-all duration-100 group-hover:scale-[1.2]'
