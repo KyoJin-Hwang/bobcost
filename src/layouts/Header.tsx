@@ -1,9 +1,22 @@
 'use client';
 
+import { useContext } from 'react';
+import { createContext } from 'react';
+
 import ThemeSwitch from './theme/Switch';
 import Avatar from '@/components/common/avatar/Avatar';
 import Menu from '@/components/common/menu/Menu';
 import { Text } from '@/components/ui/Text';
+
+type HeaderContextProps = {
+  update: string;
+  create: string;
+};
+
+export const HeaderContext = createContext<HeaderContextProps>({
+  update: '/',
+  create: '/',
+});
 
 const HeaderLeft = () => {
   return (
@@ -29,17 +42,18 @@ const HeaderRight = () => {
     </div>
   );
 };
-
-const Header = () => {
+const Header = ({ update, create }: HeaderContextProps) => {
   return (
-    <header
-      className={`fixed left-0 top-0 z-50 h-header w-full border-b-2 border-b-[#121212] bg-white dark:border-b-white dark:bg-[#121212]`}
-    >
-      <div className='flex h-full items-center justify-between px-5 py-2.5'>
-        <HeaderLeft />
-        <HeaderRight />
-      </div>
-    </header>
+    <HeaderContext.Provider value={{ update, create }}>
+      <header
+        className={`fixed left-0 top-0 z-50 h-header w-full border-b-2 border-b-[#121212] bg-white dark:border-b-white dark:bg-[#121212]`}
+      >
+        <div className='flex h-full items-center justify-between px-5 py-2.5'>
+          <HeaderLeft />
+          <HeaderRight />
+        </div>
+      </header>
+    </HeaderContext.Provider>
   );
 };
 

@@ -5,6 +5,7 @@ import { createContext, useContext, useEffect, useState } from 'react';
 import { menuListVariants } from './Menu.style';
 import { Text } from '@/components/ui/Text';
 import useResize from '@/hooks/useResize';
+import { HeaderContext } from '@/layouts/Header';
 import { cn } from '@/lib/utils';
 import { MenuIcon, XIcon } from 'lucide-react';
 
@@ -37,12 +38,13 @@ const MenuProvider = ({ children }: { children: React.ReactNode }) => {
 };
 
 const MenuList = () => {
+  const { open } = useContext(MenuContext);
+  const { update, create } = useContext(HeaderContext);
   const menuArray = [
-    { id: 1, name: '최신 생성 글', href: '' },
-    { id: 2, name: '최신 수정 글', href: '' },
+    { id: 1, name: '최신 생성 글', href: create },
+    { id: 2, name: '최신 수정 글', href: update },
     { id: 3, name: '개발자 소개', href: 'about' },
   ];
-  const { open } = useContext(MenuContext);
 
   return (
     <nav
