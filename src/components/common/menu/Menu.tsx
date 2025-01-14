@@ -43,7 +43,7 @@ const MenuList = () => {
   const menuArray = [
     { id: 1, name: '최신 생성 글', href: create },
     { id: 2, name: '최신 수정 글', href: update },
-    { id: 3, name: '개발자 소개', href: 'about' },
+    { id: 3, name: '개발자 소개', href: '/about' },
   ];
 
   return (

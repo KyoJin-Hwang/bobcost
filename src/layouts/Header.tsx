@@ -4,6 +4,7 @@ import { useContext } from 'react';
 import { createContext } from 'react';
 
 import ThemeSwitch from './theme/Switch';
+import ScrollProgressBar from '@/components/common/ScrollProgressBar';
 import Avatar from '@/components/common/avatar/Avatar';
 import Menu from '@/components/common/menu/Menu';
 import { Text } from '@/components/ui/Text';
@@ -52,6 +53,8 @@ const Header = ({ update, create }: HeaderContextProps) => {
           <HeaderLeft />
           <HeaderRight />
         </div>
+
+        <ScrollProgressBar />
       </header>
     </HeaderContext.Provider>
   );
