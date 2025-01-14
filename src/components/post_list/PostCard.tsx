@@ -1,19 +1,29 @@
-import Image from 'next/image';
+import { useState } from 'react';
+
 import Link from 'next/link';
 
 import { Text } from '../ui/Text';
 import { Post } from '@/config/types';
+import { findLatestDates, getSortedPostList } from '@/lib/post';
 import clsx from 'clsx';
-import { CalendarDays, Clock3 } from 'lucide-react';
+import { CalendarDays, Clock3, Upload } from 'lucide-react';
 
 interface Props {
   post: Post;
 }
 
-const PostCard = ({ post }: Props) => {
+const PostCard = async ({ post }: Props) => {
+  const posts = await getSortedPostList();
+  const result = findLatestDates(posts);
+
+  const dateStatus = () => {
+    if (result.create === post.url) return 'New';
+    else if (result.update === post.url) return 'Updated';
+    else return 'hidden';
+  };
+
   const lowerCase = post.group.toLowerCase();
-  const classGroup = (group: string) => {
-    console.log(group);
+  const postClassGroup = (group: string) => {
     return clsx('absolute font-bold right-2 top-2 rounded px-2 py-1', {
       'bg-html text-html-foreground': group === 'html',
       'bg-css text-css-foreground': group === 'css',
@@ -21,7 +31,16 @@ const PostCard = ({ post }: Props) => {
       'bg-react text-react-foreground': group === 'react',
     });
   };
-
+  const postDateGroup = (status: string) => {
+    return clsx(
+      'absolute right-2 bottom-2 rounded px-2 py-1 flex items-center gap-2',
+      {
+        'bg-teal-500 ': status === 'New',
+        'bg-orange-500 ': status === 'Updated',
+        hidden: status === 'hidden',
+      }
+    );
+  };
   return (
     <Link href={post.url} className='group relative z-0'>
       <li className='flex h-full flex-col gap-3 overflow-hidden rounded-md border hover:translate-y-[-5px] hover:shadow-xl dark:shadow-gray-500'>
@@ -32,10 +51,13 @@ const PostCard = ({ post }: Props) => {
             alt={`thumbnail for ${post.title}`}
           />
           <Text
-            className={classGroup(lowerCase)}
+            className={postClassGroup(lowerCase)}
             text={post.group}
             fontSize={14}
           />
+          <Text className={postDateGroup(dateStatus())} fontSize={14}>
+            <Upload size={14} /> {dateStatus()}
+          </Text>
         </div>
         <div className='flex flex-1 flex-col justify-between p-4'>
           {/* 카테고리명, 포스트 제목 및 간략내용 */}

@@ -2,14 +2,21 @@ import clsx from 'clsx';
 
 // 인터페이스 정의
 interface TextProps {
-  text: string;
+  text?: string;
   className?: string;
   fontSize?: number;
   color?: string;
+  children?: React.ReactNode;
 }
 
 // Text 컴포넌트
-export const Text = ({ text, className, fontSize, color }: TextProps) => {
+export const Text = ({
+  text,
+  className,
+  fontSize,
+  color,
+  children,
+}: TextProps) => {
   return (
     <p
       className={clsx('text-sm pc:text-base', className)}
@@ -19,6 +26,7 @@ export const Text = ({ text, className, fontSize, color }: TextProps) => {
       }}
     >
       {text}
+      {children}
     </p>
   );
 };
