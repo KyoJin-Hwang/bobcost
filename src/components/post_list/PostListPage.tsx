@@ -21,7 +21,7 @@ const PostListPage = async ({ category }: PostListProps) => {
         categoryList={categoryList}
         currentCategory={category}
       />
-      <section className='mt-4 grid grid-cols-listGrid gap-x-6 gap-y-8'>
+      <section className='mt-8 grid grid-cols-listGrid gap-x-6 gap-y-8'>
         {postList.map((post) => (
           <PostCard key={post.url + post.createdAt} post={post} />
         ))}
