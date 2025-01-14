@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 
+import { Toaster } from '@/components/ui/toaster';
 import '@/config/globals.css';
+import Footer from '@/layouts/Footer';
 import Header from '@/layouts/Header';
 import { ThemeProvider } from '@/layouts/theme/Provider';
 
@@ -15,12 +17,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang='en' suppressHydrationWarning>
+    <html
+      lang='en'
+      className='h-full scroll-my-20 scroll-smooth'
+      suppressHydrationWarning
+    >
       <body className='flex min-h-screen flex-col bg-background font-pretendard'>
-        <ThemeProvider>
+        <ThemeProvider defaultTheme='dark'>
           <Header />
-          <main className='pt-header relative block'>{children}</main>
+          <main className='relative block pt-header'>{children}</main>
+          <Footer />
         </ThemeProvider>
+        <Toaster />
       </body>
     </html>
   );

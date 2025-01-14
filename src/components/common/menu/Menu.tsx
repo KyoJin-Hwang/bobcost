@@ -55,7 +55,7 @@ const MenuList = () => {
           <a
             key={el.id}
             href={el.href}
-            className='pc:hover:bg-accent transition-all duration-300 pc:rounded pc:px-2'
+            className='transition-all duration-300 pc:rounded pc:px-2 pc:hover:bg-accent'
           >
             <Text
               className='border-b-2 border-b-[#121212] px-3 py-2 font-semibold dark:border-b-white pc:border-b-0'
