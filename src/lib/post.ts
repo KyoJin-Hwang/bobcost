@@ -162,3 +162,22 @@ export const parseToc = (content: string): HeadingItem[] => {
     })) || []
   );
 };
+
+// 최근 생성글 및 수정글 url 반환함수
+
+export const findLatestDates = (data: Post[]) => {
+  const latestCreated = [...data].sort(
+    (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+  )[0];
+
+  const latestUpdated = [...data].sort(
+    (a, b) =>
+      new Date(b.updatedAt || '0').getTime() -
+      new Date(a.updatedAt || '0').getTime()
+  )[0];
+
+  return {
+    create: latestCreated.url,
+    update: latestUpdated.url || '/',
+  };
+};
