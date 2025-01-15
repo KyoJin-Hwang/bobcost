@@ -29,6 +29,9 @@ const PostCard = async ({ post }: Props) => {
       'bg-css text-css-foreground': group === 'css',
       'bg-js text-js-foreground': group === 'js',
       'bg-react text-react-foreground': group === 'react',
+      'bg-nextjs text-nextjs-foreground': group === 'nextjs',
+      'bg-ts text-ts-foreground': group === 'ts',
+      'bg-zustand text-zustand-foreground': group === 'zustand',
     });
   };
   const postDateGroup = (status: string) => {

@@ -52,6 +52,34 @@ export default {
           DEFAULT: 'var(--react)',
           foreground: 'var(--react-foreground)',
         },
+        next: {
+          DEFAULT: 'var(--next)',
+          foreground: 'var(--next-foreground)',
+        },
+        ts: {
+          DEFAULT: 'var(--ts)',
+          foreground: 'var(--ts-foreground)',
+        },
+        supabase: {
+          DEFAULT: 'var(--supabase)',
+          foreground: 'var(--supabase-foreground)',
+        },
+        tailwind: {
+          DEFAULT: 'var(--tailwind)',
+          foreground: 'var(--tailwind-foreground)',
+        },
+        docker: {
+          DEFAULT: 'var(--docker)',
+          foreground: 'var(--docker-foreground)',
+        },
+        sass: {
+          DEFAULT: 'var(--sass)',
+          foreground: 'var(--sass-foreground)',
+        },
+        zustand: {
+          DEFAULT: 'var(--zustand)',
+          foreground: 'var(--zustand-foreground)',
+        },
       },
       spacing: {
         header: '62px',
