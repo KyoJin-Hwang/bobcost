@@ -1,9 +1,16 @@
 import IconGithub from '@/components/icon/Github';
+import { currentDate } from '@/lib/utils';
 
 export const Resume = {
-  name: '황교진',
-  birthday: '1997.11.27',
-  locationLink: 'https://www.google.com/maps/place/seoul',
+  name: '황 교 진',
+  birthday: '1997 .11 .27',
+  company: '없음',
+  interest: '취업준비',
+  github: {
+    name: 'GitHub',
+    url: 'https://github.com/Kyojin-Hwang',
+    icon: IconGithub,
+  },
   interview: [
     {
       qusetion: '왜 프론트엔드 개발자가 되고 싶으신가요?',
@@ -15,14 +22,8 @@ export const Resume = {
   ],
   avatarUrl: '/image/profile.jpg',
   contact: {
+    phone: '010-7445-6268',
     email: 'rywls4248@gmail.com',
-    social: [
-      {
-        name: 'GitHub',
-        url: 'https://github.com/Kyojin-Hwang',
-        icon: IconGithub,
-      },
-    ],
   },
   education: [
     {
