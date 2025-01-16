@@ -12,6 +12,10 @@ interface Props {
 interface Head extends Props {
   children: React.ReactNode;
 }
+
+interface AboutMe extends Props {
+  desc: string;
+}
 interface Skill extends Props {
   category: string;
 }
@@ -42,6 +46,14 @@ export const AboutHeading = ({ title, children }: Head) => {
       {children}
       <Text text={title} className='text-3xl font-bold' />
     </div>
+  );
+};
+
+export const AboutMy = ({ title, desc }: AboutMe) => {
+  return (
+    <li>
+      {title} : <span className='font-medium'>{desc}</span>
+    </li>
   );
 };
 

@@ -46,7 +46,7 @@ const HeaderRight = () => {
 const Header = ({ update, create }: HeaderContextProps) => {
   return (
     <HeaderContext.Provider value={{ update, create }}>
-      {/* <header
+      <header
         className={`fixed left-0 top-0 z-50 h-header w-full border-b-2 border-b-[#121212] bg-white dark:border-b-white dark:bg-[#121212]`}
       >
         <div className='flex h-full items-center justify-between px-5 py-2.5'>
@@ -55,7 +55,7 @@ const Header = ({ update, create }: HeaderContextProps) => {
         </div>
 
         <ScrollProgressBar />
-      </header> */}
+      </header>
     </HeaderContext.Provider>
   );
 };
