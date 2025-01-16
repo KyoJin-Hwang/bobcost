@@ -19,7 +19,7 @@ export const Text = ({
 }: TextProps) => {
   return (
     <p
-      className={clsx('text-sm pc:text-base', className)}
+      className={clsx(className)}
       style={{
         ...(fontSize && { fontSize: `${fontSize}px`, lineHeight: '100%' }),
         ...(color && { color }),

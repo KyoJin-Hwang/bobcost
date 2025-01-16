@@ -100,6 +100,41 @@ export const Resume = {
       category: 'front',
       color: 'bg-sass text-sass-foreground',
     },
+    {
+      name: 'Supabase',
+      category: 'back',
+      color: 'bg-supabase text-supabase-foreground',
+    },
+    {
+      name: 'Vercel',
+      category: 'dev',
+      color: 'bg-next text-next-foreground',
+    },
+    {
+      name: 'Git',
+      category: 'tool',
+      color: 'bg-zustand text-zustand-foreground',
+    },
+    {
+      name: 'GitHub',
+      category: 'tool',
+      color: 'bg-next text-next-foreground',
+    },
+    {
+      name: 'Notion',
+      category: 'tool',
+      color: 'bg-next text-next-foreground',
+    },
+    {
+      name: 'Postman',
+      category: 'tool',
+      color: 'bg-zustand text-zustand-foreground',
+    },
+    {
+      name: 'Figma',
+      category: 'tool',
+      color: 'bg-supabase text-supabase-foreground',
+    },
   ],
   hobby: [
     { name: '', desc: '' },
