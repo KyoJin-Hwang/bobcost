@@ -49,11 +49,8 @@ const parsePostDetail = async (postPath: string) => {
   const createdAt = dayjs(grayMatter.createdAt)
     .locale('ko')
     .format('YYYY년 MM월 DD일');
-  const updatedAt = grayMatter.updatedAt
-    ? dayjs(grayMatter.updatedAt).locale('ko').format('YYYY년 MM월 DD일')
-    : null;
 
-  const dateString = updatedAt || createdAt;
+  const dateString = createdAt;
 
   return { ...grayMatter, dateString, content, readingMinutes };
 };
@@ -71,8 +68,8 @@ const parsePost = async (postPath: string): Promise<Post> => {
 // post를 날짜 최신순으로 정렬
 const sortPostList = (PostList: Post[]) => {
   return PostList.sort((a, b) => {
-    const dateA = a.updatedAt || a.createdAt; // updatedAt 우선
-    const dateB = b.updatedAt || b.createdAt; // updatedAt 우선
+    const dateA = a.createdAt; // updatedAt 우선
+    const dateB = b.createdAt; // updatedAt 우선
     return dateA > dateB ? -1 : 1; // 최신순 정렬
   });
 };
@@ -166,18 +163,22 @@ export const parseToc = (content: string): HeadingItem[] => {
 // 최근 생성글 및 수정글 url 반환함수
 
 export const findLatestDates = (data: Post[]) => {
-  const latestCreated = [...data].sort(
-    (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-  )[0];
+  const today = new Date().getTime();
 
-  const latestUpdated = [...data].sort(
-    (a, b) =>
-      new Date(b.updatedAt || '0').getTime() -
-      new Date(a.updatedAt || '0').getTime()
-  )[0];
+  // 가장 가까운 updatedAt의 차이값 계산
+  const closestDiff = Math.min(
+    ...data
+      .filter((post) => post.updatedAt)
+      .map((post) => Math.abs(new Date(post.updatedAt!).getTime() - today))
+  );
+  const latestUpdated = data.filter(
+    (post) =>
+      post.updatedAt &&
+      Math.abs(new Date(post.updatedAt!).getTime() - today) === closestDiff
+  );
 
   return {
-    create: latestCreated.url,
-    update: latestUpdated.url || '/',
+    create: data[0].url,
+    update: latestUpdated || [],
   };
 };
