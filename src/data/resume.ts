@@ -4,8 +4,8 @@ import { currentDate } from '@/lib/utils';
 export const Resume = {
   name: '황 교 진',
   birthday: '1997 .11 .27',
-  company: '없음',
-  interest: '취업준비',
+  company: 'X',
+  interest: '취업준비 및 프로젝트 구상',
   github: {
     name: 'GitHub',
     url: 'https://github.com/Kyojin-Hwang',
@@ -17,8 +17,11 @@ export const Resume = {
       answer:
         '저는 사용자와 가장 가까운 곳에서 가치를 전달할 수 있는 역할을 하고 싶었습니다. 프론트엔드 개발은 단순히 화면을 만드는 것을 넘어, 사용자가 기술을 직관적으로 느끼고 경험할 수 있는 환경을 만들어가는 일이라고 생각합니다.',
     },
-    { qusetion: '', answer: '' },
-    { qusetion: '', answer: '' },
+    {
+      qusetion: '개발자로서 중요하게 생각하는 점이 있다면 무엇인가요?',
+      answer:
+        '개발자로서 가장 중요하게 생각하는 점은 문제 해결 능력과 소통입니다. 효율적인 코드를 작성하는 것뿐만 아니라, 팀원들과 명확하게 소통하며 목표를 공유하고, 이를 기반으로 프로젝트의 가치를 높일 수 있는 결과물을 만드는 것이 중요하다고 생각합니다.',
+    },
   ],
   avatarUrl: '/image/profile.jpg',
   contact: {
@@ -39,7 +42,7 @@ export const Resume = {
       end: '2022. 07',
     },
   ],
-  work: [
+  carrer: [
     {
       company: '인디제이',
       link: 'https://corp.indj.ai/indj',
@@ -86,11 +89,11 @@ export const Resume = {
       category: 'front',
       color: 'bg-next text-next-foreground',
     },
-    {
-      name: 'Tanstack Query',
-      category: 'front',
-      color: 'bg-supabase text-supabase-foreground',
-    },
+    // {
+    //   name: 'Tanstack Query',
+    //   category: 'front',
+    //   color: 'bg-supabase text-supabase-foreground',
+    // },
     {
       name: 'TailwindCss',
       category: 'front',

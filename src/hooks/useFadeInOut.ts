@@ -35,7 +35,6 @@ export const useFadeInOut = () => {
       observerIn.observe(ref.current); // fadeIn observer
       observerOut.observe(ref.current); // fadeOut observer
     }
-
     return () => {
       observerIn.disconnect();
       observerOut.disconnect();
