@@ -82,7 +82,7 @@ export default {
         },
       },
       spacing: {
-        header: '62px',
+        header: '60px',
       },
       gridTemplateColumns: {
         listGrid: 'repeat(auto-fill, minmax(300px, 1fr))',
@@ -197,6 +197,7 @@ export default {
       screens: {
         //pc
         pc: '992px',
+        big: '1320px',
       },
       animation: {
         fadeIn: 'fadeIn 1s ease-in-out',
