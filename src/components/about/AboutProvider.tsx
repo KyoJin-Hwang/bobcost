@@ -20,7 +20,7 @@ const AboutProvider = ({ children }: { children: React.ReactNode }) => {
   const [headArray, setHeadArray] = useState<
     { title: string; isVisible: boolean; top: number }[]
   >([]);
-  // 클릭 시 해당 항목으로 스크롤
+
   const handleClick = (top: number) => {
     scrollTo({ behavior: 'smooth', top: top + 40 });
   };
