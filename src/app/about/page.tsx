@@ -80,7 +80,7 @@ const About = () => {
         <AboutHeading title='Carrer'>
           <Building2 size={40} className='fill-slate-400' />
         </AboutHeading>
-        <ul className='grid grid-cols-[repeat(auto-fill,minmax(400px,1fr))] gap-4'>
+        <ul className='grid grid-cols-1 gap-4 pc:grid-cols-[repeat(auto-fill,minmax(400px,1fr))]'>
           <AboutCarrer />
         </ul>
       </FadeInOutSection>
