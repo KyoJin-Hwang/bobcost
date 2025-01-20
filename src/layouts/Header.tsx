@@ -7,14 +7,15 @@ import ScrollProgressBar from '@/components/common/ScrollProgressBar';
 import Avatar from '@/components/common/avatar/Avatar';
 import Menu from '@/components/common/menu/Menu';
 import { Text } from '@/components/ui/Text';
+import { Post } from '@/config/types';
 
 type HeaderContextProps = {
-  update: string;
+  update: Post[];
   create: string;
 };
 
 export const HeaderContext = createContext<HeaderContextProps>({
-  update: '/',
+  update: [],
   create: '/',
 });
 

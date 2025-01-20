@@ -2,16 +2,10 @@ import type { Metadata } from 'next';
 
 import { Toaster } from '@/components/ui/toaster';
 import '@/config/globals.css';
-import { Post } from '@/config/types';
 import Footer from '@/layouts/Footer';
 import Header from '@/layouts/Header';
 import { ThemeProvider } from '@/layouts/theme/Provider';
-import {
-  findLatestDates,
-  getPostList,
-  getPostPaths,
-  getSortedPostList,
-} from '@/lib/post';
+import { findLatestDates, getSortedPostList } from '@/lib/post';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
