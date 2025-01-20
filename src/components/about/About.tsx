@@ -96,6 +96,7 @@ export const AboutCarrer = () => {
             text={`${el.start} ~ ${el.end}`}
             className='text-sm text-slate-400'
           />
+          <Text text={el.team} className='text-sm text-slate-400' />
           <Text text={el.desc} />
         </div>
       </div>
