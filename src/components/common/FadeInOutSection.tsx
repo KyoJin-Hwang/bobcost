@@ -1,13 +1,25 @@
 'use client';
 
-import { useContext, useEffect } from 'react';
+import {
+  ForwardRefExoticComponent,
+  RefAttributes,
+  useContext,
+  useEffect,
+} from 'react';
 
 import { AboutContext } from '../about/AboutProvider';
 import { useFadeInOut } from '@/hooks/useFadeInOut';
 import { cn } from '@/lib/utils';
+import { LucideProps } from 'lucide-react';
 
 // 애니메이션 Section
-const FadeInOutSection = ({ children }: { children: React.ReactNode }) => {
+const FadeInOutSection = ({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) => {
   const { ref, isVisible } = useFadeInOut();
 
   const { setHeadArray } = useContext(AboutContext);
@@ -34,7 +46,9 @@ const FadeInOutSection = ({ children }: { children: React.ReactNode }) => {
         isVisible ? 'animate-fadeIn' : 'animate-fadeOut'
       )}
     >
-      {children}
+      <section className={cn(className, 'flex flex-col gap-4')}>
+        {children}
+      </section>
     </div>
   );
 };
