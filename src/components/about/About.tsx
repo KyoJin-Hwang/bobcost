@@ -1,7 +1,7 @@
 'use client';
 
 import { Text } from '../ui/Text';
-import { Resume } from '@/data/resume';
+import { Resume as resume } from '@/data/resume';
 import { cn } from '@/lib/utils';
 
 interface Props {
@@ -61,11 +61,9 @@ export const AboutInterview = ({ question, answer }: Interview) => {
 export const AboutSkill = ({ title, category }: Skill) => {
   return (
     <div className='flex flex-col flex-wrap items-start gap-3'>
-      <div className='min-w-[118px]'>
-        <Text text={title} className='text-2xl' />
-      </div>
+      <Text text={title} className='text-2xl' />
       <ul className='flex flex-wrap gap-2'>
-        {Resume.skills
+        {resume.skills
           .filter((el) => el.category === category)
           .map((el) => (
             <li key={el.name}>
@@ -82,4 +80,28 @@ export const AboutSkill = ({ title, category }: Skill) => {
       </ul>
     </div>
   );
+};
+
+// 경력 컴포넌트
+export const AboutCarrer = () => {
+  return resume.carrer.map((el) => (
+    <li
+      key={el.company}
+      className='flex flex-col gap-4 rounded-md bg-secondary p-6'
+    >
+      <div className='flex flex-col gap-2'>
+        <Text text={el.company} className='text-2xl font-bold' />
+        <div>
+          <Text
+            text={`${el.start} ~ ${el.end}`}
+            className='text-sm text-slate-400'
+          />
+          <Text text={el.desc} />
+        </div>
+      </div>
+      <div>
+        <Text />
+      </div>
+    </li>
+  ));
 };

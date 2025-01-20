@@ -22,11 +22,11 @@ const AboutProvider = ({ children }: { children: React.ReactNode }) => {
   >([]);
 
   const handleClick = (top: number) => {
-    scrollTo({ behavior: 'smooth', top: top + 40 });
+    scrollTo({ behavior: 'smooth', top: top });
   };
   return (
     <AboutContext.Provider value={{ headArray, setHeadArray }}>
-      <div className='relative mx-auto mt-header flex gap-12 pc:max-w-[1100px]'>
+      <div className='relative mx-auto mt-header flex gap-12 px-5 pc:max-w-[1100px]'>
         <nav className='big:flex fixed left-10 top-[120px] z-50 hidden h-screen min-w-[120px]'>
           <ul className='flex flex-col gap-4'>
             {headArray.map((el, index) => (
@@ -43,7 +43,7 @@ const AboutProvider = ({ children }: { children: React.ReactNode }) => {
             ))}
           </ul>
         </nav>
-        <div className='flex flex-col gap-10'>{children}</div>
+        <div className='flex w-full flex-col gap-16'>{children}</div>
       </div>
     </AboutContext.Provider>
   );
