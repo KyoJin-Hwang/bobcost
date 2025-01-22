@@ -47,7 +47,6 @@ export const AboutMy = ({ title, desc }: AboutMe) => {
 };
 
 // 인터뷰 컴포넌트
-
 export const AboutInterview = ({ question, answer }: Interview) => {
   return (
     <div className='rounded-lg bg-secondary p-6'>
@@ -87,22 +86,52 @@ export const AboutCarrer = () => {
   return resume.carrer.map((el) => (
     <li
       key={el.company}
-      className='flex flex-col gap-4 rounded-md bg-secondary p-6'
+      className='flex flex-col gap-4 rounded-lg bg-secondary p-6'
     >
+      {/* Header */}
       <div className='flex flex-col gap-2'>
-        <Text text={el.company} className='text-2xl font-bold' />
+        <a target='_blank' href={el.link} className='flex cursor-pointer gap-2'>
+          <img src={el.logo} alt='inDJ로고' className='w-8 rounded-lg' />
+          <Text text={el.company} className='text-2xl font-bold' />
+        </a>
         <div>
           <Text
             text={`${el.start} ~ ${el.end}`}
             className='text-sm text-slate-400'
           />
           <Text text={el.team} className='text-sm text-slate-400' />
-          <Text text={el.desc} />
         </div>
+        <Text text={el.desc} />
       </div>
-      <div>
-        <Text />
+      <div className='flex flex-col gap-9'>
+        <section className='flex flex-col gap-3'>
+          {/* Point */}
+          <h2 className='text-xl font-bold'>Description</h2>
+          <ul className='flex flex-col gap-3'>
+            {el.points.map((point, index) => (
+              <li key={index} className='border-l-4 border-foreground pl-2'>
+                {point}
+              </li>
+            ))}
+          </ul>
+        </section>
+        {/* Skill */}
+        <section className='flex flex-col gap-3'>
+          <h2 className='text-xl font-bold'>Tech Stack</h2>
+          <ul className='flex flex-wrap gap-3'>
+            {el.skills.map((skill, index) => (
+              <li className='rounded-lg bg-informative p-2' key={index}>
+                {skill}
+              </li>
+            ))}
+          </ul>
+        </section>
       </div>
     </li>
   ));
+};
+
+// 프로젝트 컴포넌트
+export const AboutProject = () => {
+  return;
 };
