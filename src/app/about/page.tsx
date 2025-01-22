@@ -10,7 +10,13 @@ import AboutProvider from '@/components/about/AboutProvider';
 import FadeInOutSection from '@/components/common/FadeInOutSection';
 import { Resume as resume } from '@/data/resume';
 import { currentDate } from '@/lib/utils';
-import { Building2, Earth, Gem, MicVocal } from 'lucide-react';
+import {
+  BriefcaseBusiness,
+  Building2,
+  Earth,
+  Gem,
+  MicVocal,
+} from 'lucide-react';
 
 const About = () => {
   return (
@@ -80,9 +86,15 @@ const About = () => {
         <AboutHeading title='Carrer'>
           <Building2 size={40} className='fill-slate-400' />
         </AboutHeading>
-        <ul className='grid grid-cols-1 gap-4 pc:grid-cols-[repeat(auto-fill,minmax(400px,1fr))]'>
+        <ul className='flex flex-col gap-4'>
           <AboutCarrer />
         </ul>
+      </FadeInOutSection>
+      {/* 프로젝트 */}
+      <FadeInOutSection>
+        <AboutHeading title='Project'>
+          <BriefcaseBusiness size={40} className='fill-amber-600' />
+        </AboutHeading>
       </FadeInOutSection>
     </AboutProvider>
   );
