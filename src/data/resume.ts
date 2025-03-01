@@ -5,7 +5,11 @@ export const Resume = {
   name: '황 교 진',
   birthday: '1997 .11 .27',
   company: 'X',
-  interest: '취업준비 및 프로젝트 구상',
+  goal: '코딩테스트 실력 향상',
+  book: {
+    url: 'https://product.kyobobook.co.kr/detail/S000213641007',
+    name: '코딩 테스트 합격자 되기 : 자바스크립트 편',
+  },
   github: {
     name: 'GitHub',
     url: 'https://github.com/Kyojin-Hwang',
@@ -166,7 +170,7 @@ export const Resume = {
       color: 'bg-supabase text-supabase-foreground',
     },
   ],
-  project: [PR_BOOK, PR_BLOG],
+  project: [PR_BLOG, PR_BOOK],
   awards: [
     {
       name: '2022 K-디지털 해커톤 우수상',

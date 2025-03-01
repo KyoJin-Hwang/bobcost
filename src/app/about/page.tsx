@@ -1,8 +1,11 @@
+import Link from 'next/link';
+
 import {
   AboutCarrer,
   AboutHeading,
   AboutInterview,
   AboutMy,
+  AboutProject,
   AboutSkill,
 } from '@/components/about/About';
 import AboutLink from '@/components/about/AboutLink';
@@ -39,12 +42,19 @@ const About = () => {
             alt='프로필이미지'
             className='w-52 rounded-lg'
           />
-          <ul className='flex flex-col items-center gap-5 text-lg font-bold pc:items-start'>
+          <ul className='flex flex-col items-center gap-[0.75rem] text-lg font-bold pc:items-start'>
             <AboutMy title={'이름'} desc={resume.name} />
             <AboutMy title={'생년월일'} desc={resume.birthday} />
             <AboutMy title={'전화번호'} desc={resume.contact.phone} />
             <AboutMy title={'소속회사'} desc={resume.company} />
-            <AboutMy title={currentDate()} desc={resume.interest} />
+            <Link
+              href={resume.book.url}
+              target='_blank'
+              className='hover:text-blue-300'
+            >
+              <AboutMy title={'읽고 있는 책'} desc={resume.book.name} />
+            </Link>
+            <AboutMy title={currentDate()} desc={resume.goal} />
             <AboutLink />
           </ul>
         </article>
@@ -73,7 +83,7 @@ const About = () => {
         <AboutHeading title='Skill'>
           <Earth size={40} className='rounded-full bg-[#3bff45] stroke-black' />
         </AboutHeading>
-        <div className='flex w-full flex-col items-start gap-4 rounded-lg bg-secondary p-6'>
+        <div className='flex w-full flex-col items-start gap-4 rounded-lg bg-secondary p-6 shadow-[0_0_0.5rem] shadow-gray-400'>
           <AboutSkill title='Language' category='lang' />
           <AboutSkill title='Frontend' category='front' />
           <AboutSkill title='Backend' category='back' />
@@ -95,6 +105,9 @@ const About = () => {
         <AboutHeading title='Project'>
           <BriefcaseBusiness size={40} className='fill-amber-600' />
         </AboutHeading>
+        <ul className='flex flex-row flex-wrap gap-8 pc:flex-nowrap'>
+          <AboutProject />
+        </ul>
       </FadeInOutSection>
     </AboutProvider>
   );

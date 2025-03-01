@@ -10,5 +10,5 @@ export function currentDate() {
   const year = currentDate.getFullYear(); // 현재 년도
   const month = currentDate.getMonth() + 1; // 현재 월 (0부터 시작하므로 +1 해줍니다)
 
-  return `${year}년 ${month}월 관심사`;
+  return `${year}년 ${month}월 목표`;
 }
