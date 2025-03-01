@@ -1,4 +1,4 @@
-import { ButtonHTMLAttributes, FC, forwardRef } from 'react';
+import { ButtonHTMLAttributes, forwardRef } from 'react';
 
 import { cn } from '@lib/utils';
 // classNames 유틸리티

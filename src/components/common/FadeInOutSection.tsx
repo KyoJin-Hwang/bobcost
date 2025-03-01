@@ -46,7 +46,7 @@ const FadeInOutSection = ({
         isVisible ? 'animate-fadeIn' : 'animate-fadeOut'
       )}
     >
-      <section className={cn(className, 'flex flex-col gap-4')}>
+      <section className={cn(className, 'flex flex-col gap-6')}>
         {children}
       </section>
     </div>

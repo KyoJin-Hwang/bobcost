@@ -27,9 +27,9 @@ const AboutProvider = ({ children }: { children: React.ReactNode }) => {
   return (
     <AboutContext.Provider value={{ headArray, setHeadArray }}>
       <div className='relative mx-auto mt-header flex gap-12 px-5 pc:max-w-[1200px]'>
-        <nav className='big:flex fixed left-10 top-[120px] z-50 hidden h-screen min-w-[120px]'>
+        <nav className='fixed left-10 top-[120px] z-50 hidden h-screen min-w-[120px] big:flex'>
           <ul className='flex flex-col gap-4'>
-            {headArray.map((el, index) => (
+            {headArray.map((el) => (
               <li
                 key={el.title}
                 className={cn(

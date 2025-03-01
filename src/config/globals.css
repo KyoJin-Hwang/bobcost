@@ -17,7 +17,7 @@
   --secondary: hsl(210 40% 96.1%);
   --secondary-foreground: hsl(222.2 47.4% 11.2%);
 
-  --informative: #e0f2fe;
+  --informative: #d1e9f9;
   --informative-foreground: var(--black);
 
   --warning: #fef3c7;
