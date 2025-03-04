@@ -67,9 +67,10 @@ const parsePost = async (postPath: string): Promise<Post> => {
 
 // post를 날짜 최신순으로 정렬
 const sortPostList = (PostList: Post[]) => {
+  console.log(PostList);
   return PostList.sort((a, b) => {
-    const dateA = a.createdAt; // updatedAt 우선
-    const dateB = b.createdAt; // updatedAt 우선
+    const dateA = a.createdAt;
+    const dateB = b.createdAt;
     return dateA > dateB ? -1 : 1; // 최신순 정렬
   });
 };
@@ -86,6 +87,7 @@ export const getPostList = async (category?: string): Promise<Post[]> => {
 // 정렬한 postList를 반납
 export const getSortedPostList = async (category?: string) => {
   const postList = await getPostList(category);
+
   return sortPostList(postList);
 };
 
@@ -161,7 +163,6 @@ export const parseToc = (content: string): HeadingItem[] => {
 };
 
 // 최근 생성글 및 수정글 url 반환함수
-
 export const findLatestDates = (data: Post[]) => {
   const today = new Date().getTime();
 
@@ -179,6 +180,6 @@ export const findLatestDates = (data: Post[]) => {
 
   return {
     create: data[0].url,
-    update: latestUpdated || [],
+    update: latestUpdated[0].url || '/',
   };
 };

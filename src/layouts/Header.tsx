@@ -2,26 +2,27 @@
 
 import { createContext } from 'react';
 
+import Link from 'next/link';
+
 import ThemeSwitch from './theme/Switch';
 import ScrollProgressBar from '@/components/common/ScrollProgressBar';
 import Avatar from '@/components/common/avatar/Avatar';
 import Menu from '@/components/common/menu/Menu';
 import { Text } from '@/components/ui/Text';
-import { Post } from '@/config/types';
 
 type HeaderContextProps = {
-  update: Post[];
+  update: string;
   create: string;
 };
 
 export const HeaderContext = createContext<HeaderContextProps>({
-  update: [],
+  update: '/',
   create: '/',
 });
 
 const HeaderLeft = () => {
   return (
-    <a href='/' className='group flex cursor-pointer gap-2'>
+    <Link href='/' className='group flex cursor-pointer gap-2'>
       <Avatar />
       <div className='flex flex-col justify-center'>
         <Text
@@ -31,7 +32,7 @@ const HeaderLeft = () => {
         />
         <Text text='Dev' className='font-semibold' fontSize={16} />
       </div>
-    </a>
+    </Link>
   );
 };
 

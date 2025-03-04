@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 import Link from 'next/link';
 
 import { Text } from '../ui/Text';
@@ -14,11 +12,11 @@ interface Props {
 
 const PostCard = async ({ post }: Props) => {
   const posts = await getSortedPostList();
-
   const result = findLatestDates(posts);
+
   const dateStatus = () => {
     if (result.create === post.url) return 'New';
-    else if (result.update) return 'Updated';
+    else if (post.updatedAt) return 'Updated';
     else return 'hidden';
   };
 
@@ -29,7 +27,7 @@ const PostCard = async ({ post }: Props) => {
       'bg-css text-css-foreground': group === 'css',
       'bg-js text-js-foreground': group === 'js',
       'bg-react text-react-foreground': group === 'react',
-      'bg-nextjs text-nextjs-foreground': group === 'nextjs',
+      'bg-next text-next-foreground': group === 'next',
       'bg-ts text-ts-foreground': group === 'ts',
       'bg-zustand text-zustand-foreground': group === 'zustand',
     });
