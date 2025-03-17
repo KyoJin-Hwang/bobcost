@@ -9,6 +9,7 @@ import {
   AboutSkill,
 } from '@/components/about/About';
 import AboutLink from '@/components/about/AboutLink';
+import AboutModal from '@/components/about/AboutModal';
 import AboutProvider from '@/components/about/AboutProvider';
 import FadeInOutSection from '@/components/common/FadeInOutSection';
 import { Resume as resume } from '@/data/resume';
@@ -109,6 +110,7 @@ const About = () => {
           <AboutProject />
         </ul>
       </FadeInOutSection>
+      <AboutModal />
     </AboutProvider>
   );
 };

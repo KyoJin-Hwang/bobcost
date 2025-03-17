@@ -67,7 +67,6 @@ const parsePost = async (postPath: string): Promise<Post> => {
 
 // post를 날짜 최신순으로 정렬
 const sortPostList = (PostList: Post[]) => {
-  console.log(PostList);
   return PostList.sort((a, b) => {
     const dateA = a.createdAt;
     const dateB = b.createdAt;

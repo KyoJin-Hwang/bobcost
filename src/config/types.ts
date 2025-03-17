@@ -28,3 +28,25 @@ export interface HeadingItem {
   link: string;
   indent: number;
 }
+
+export interface ResumeProject {
+  key: string;
+  title: string;
+  start: string;
+  end: string;
+  team: string;
+  url: string;
+  summary: {
+    title: string;
+    point: string;
+    devlop: string[];
+  };
+  back: string;
+  trouble: {
+    title: string;
+    desc: string;
+  }[];
+  skill: string[];
+  img: string[];
+  review: string;
+}
