@@ -1,16 +1,10 @@
 'use client';
 
-import {
-  ForwardRefExoticComponent,
-  RefAttributes,
-  useContext,
-  useEffect,
-} from 'react';
+import { useContext, useEffect } from 'react';
 
 import { AboutContext } from '../about/AboutProvider';
 import { useFadeInOut } from '@/hooks/useFadeInOut';
 import { cn } from '@/lib/utils';
-import { LucideProps } from 'lucide-react';
 
 // 애니메이션 Section
 const FadeInOutSection = ({

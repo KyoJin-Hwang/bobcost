@@ -1,13 +1,21 @@
-export const PR_BLOG = {
+import { ResumeProject } from '@/config/types';
+
+export const PR_BLOG: ResumeProject = {
+  key: '1',
   title: '개인블로그 및 포트폴리오',
   start: '2024 .12',
-  end: '2025 .01',
+  end: '2025 .02',
   team: '1인 개인프로젝트',
   url: 'https://bobcost.kr',
   summary: {
-    title: '',
-    point: '',
-    devlop: [''],
+    title: '개발블로그 및 포트폴리오 반응형 웹사이트',
+    point:
+      '개발공부 정리, 프로젝트 경험, 자기소개, 기술 스택, GA를 활용한 분석',
+    devlop: [
+      'ContextAPI 상태관리',
+      'Tailwind Clsx,cva 등등 조건부 스타일링',
+      'Fade InOut 커스텀훅 생성',
+    ],
   },
   back: ``,
   trouble: [
@@ -16,18 +24,19 @@ export const PR_BLOG = {
       desc: ``,
     },
   ],
-  skill: ['Nextjs15', 'React18', 'Zustand', 'CSSModule', 'Vercel'],
+  skill: ['Nextjs15', 'React18', 'TailwindCSS', 'Typescript', 'Vercel'],
   img: [''],
   review: '',
 };
-export const PR_BOOK = {
+export const PR_BOOK: ResumeProject = {
+  key: '0',
   title: '오늘의 책님',
   start: '2024 .11',
   end: '2024 .12',
   team: '1인 개인프로젝트',
   url: 'https://book.bobcost.kr',
   summary: {
-    title: '랜덤한 답변으로 점을 쳐보는 반응형 웹사이트',
+    title: '질문을 하고 랜덤한 답변을 받는 반응형 웹사이트',
     point:
       '음식 랜덤룰렛, SNS 공유, 여러가지의 랜덤한 답변, PC에서 답변을 읽어주는 기능',
     devlop: [

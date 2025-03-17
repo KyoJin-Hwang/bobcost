@@ -1,10 +1,15 @@
 'use client';
 
+import { useContext } from 'react';
+
 import Link from 'next/link';
 
 import { Text } from '../ui/Text';
+import { AboutContextModal, AboutContextProject } from './AboutProvider';
+import { ResumeProject } from '@/config/types';
 import { Resume as resume } from '@/data/resume';
 import { cn } from '@/lib/utils';
+import { BookOpenIcon, Image } from 'lucide-react';
 
 interface Props {
   title: string;
@@ -139,6 +144,21 @@ export const AboutCarrer = () => {
 
 // 프로젝트 컴포넌트
 export const AboutProject = () => {
+  const contextProject = useContext(AboutContextProject);
+  const contextModal = useContext(AboutContextModal);
+
+  // null 체크: contextProject가 null일 경우 오류를 방지
+  if (!contextProject) {
+    throw new Error('AboutContextProject must be used within an AboutProvider');
+  }
+
+  const { setProject } = contextProject;
+  const { modal, setModal } = contextModal;
+
+  const ProjectClick = (item: ResumeProject) => {
+    setModal(() => !modal);
+    return setProject(item);
+  };
   return resume.project.map((item) => (
     <li
       key={item.title}
@@ -174,6 +194,19 @@ export const AboutProject = () => {
           </li>
         ))}
       </ul>
+      <div className='flex gap-4'>
+        <button
+          onClick={() => ProjectClick(item)}
+          className='mt-4 flex gap-2 rounded-md border-2 p-2 font-bold transition-all duration-300 hover:bg-gray-500'
+        >
+          <BookOpenIcon />
+          README
+        </button>
+        <button className='mt-4 flex gap-2 rounded-md border-2 p-2 font-bold transition-all duration-300 hover:bg-gray-500'>
+          <Image />
+          이미지
+        </button>
+      </div>
     </li>
   ));
 };
