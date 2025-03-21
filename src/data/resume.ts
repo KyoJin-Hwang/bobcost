@@ -1,11 +1,11 @@
-import { PR_BLOG, PR_BOOK } from './project';
+import { SortedProjects } from './project';
 import IconGithub from '@/components/icon/Github';
 
 export const Resume = {
   name: '황 교 진',
-  birthday: '1997 .11 .27',
+  birthday: '1997-11-27',
   company: 'X',
-  goal: '코딩테스트 실력 향상',
+  goal: '프로그래머스 LV1 완료하기',
   book: {
     url: 'https://product.kyobobook.co.kr/detail/S000213641007',
     name: '코딩 테스트 합격자 되기 : 자바스크립트 편',
@@ -77,9 +77,9 @@ export const Resume = {
         '웹 라디오 서비스 페이지에서 재사용 가능한 컴포넌트를 설계',
         'AI 기반 음악 추천 챗봇을 개발하고, RESTful API와 연동하여 사용자 맞춤형 음악 추천 기능을 구현',
         'Chart.js를 활용한 커스터마이징 차트 구현',
-        '모바일 유저에게 실시간 푸시 알림 및 예약된 시간에 자동으로 알림을 발송하는 기능을 구현',
         '총 22가지의 WebView 프로모션 페이지를 개발',
-        '관리자 페이지, 회사소개 페이지 CRUD 기능 개발 및 유지보수',
+        '관리자 페이지 (BackOffice) CRUD 기능 개발 및 유지보수',
+        '회사소개 페이지 퍼블리싱 및 기능개발',
       ],
     },
   ],
@@ -170,7 +170,7 @@ export const Resume = {
       color: 'bg-supabase text-supabase-foreground',
     },
   ],
-  project: [PR_BLOG, PR_BOOK],
+  project: SortedProjects, // 자동으로 프로젝트를 배열에 추가
   awards: [
     {
       name: '2022 K-디지털 해커톤 우수상',

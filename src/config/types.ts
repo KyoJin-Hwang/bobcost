@@ -30,7 +30,7 @@ export interface HeadingItem {
 }
 
 export interface ResumeProject {
-  key: string;
+  type: number;
   title: string;
   start: string;
   end: string;

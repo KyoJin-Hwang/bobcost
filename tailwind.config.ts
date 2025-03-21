@@ -1,3 +1,4 @@
+import typography from '@tailwindcss/typography';
 import type { Config } from 'tailwindcss';
 
 export default {
@@ -12,6 +13,11 @@ export default {
       colors: {
         background: 'var(--background)',
         foreground: 'var(--foreground)',
+        kyo: {
+          red: 'var(--kyo-red)',
+          green: 'var(--kyo-green)',
+          blue: 'var(--kyo-blue)',
+        },
         primary: {
           DEFAULT: 'var(--primary)',
           foreground: 'var(--primary-foreground)',
@@ -197,7 +203,7 @@ export default {
       screens: {
         //pc
         pc: '992px',
-        big: '1320px',
+        big: '1500px',
       },
       animation: {
         fadeIn: 'fadeIn 1s ease-in-out',
@@ -215,5 +221,5 @@ export default {
       },
     },
   },
-  plugins: [require('@tailwindcss/typography')],
+  plugins: [typography],
 } satisfies Config;

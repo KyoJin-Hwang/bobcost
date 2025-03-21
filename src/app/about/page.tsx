@@ -106,9 +106,7 @@ const About = () => {
         <AboutHeading title='Project'>
           <BriefcaseBusiness size={40} className='fill-amber-600' />
         </AboutHeading>
-        <ul className='flex flex-row flex-wrap gap-8 pc:flex-nowrap'>
-          <AboutProject />
-        </ul>
+        <AboutProject />
       </FadeInOutSection>
       <AboutModal />
     </AboutProvider>
