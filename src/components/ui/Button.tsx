@@ -18,10 +18,13 @@ export const ButtonVariants = cva(
         ghost: 'hover:bg-accent hover:text-accent-foreground',
         outline:
           'outline outline-input outline-1 outline-accent bg-background hover:bg-accent hover:text-accent-foreground',
+        hover:
+          'transform transition-transform duration-300 hover:-translate-y-1',
       },
       size: {
         default: '',
         icon: 'aspect-square p-2',
+        project: 'w-20',
       },
     },
     defaultVariants: {
@@ -44,7 +47,7 @@ interface ButtonProps
 
 /**
  * @variant 버튼 테마
- * @size 사이즈 지정 default, icon
+ * @size 사이즈 지정 default, icon, project
  * @children ReactElement 아이콘같은걸 넣어준다
  * @label String을 넣어 버튼 라벨을 지정해준다
  * @className 추가할 클래스 속성을 넣어준다

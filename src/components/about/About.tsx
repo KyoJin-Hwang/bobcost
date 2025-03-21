@@ -1,9 +1,10 @@
 'use client';
 
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 
 import Link from 'next/link';
 
+import Button from '../ui/Button';
 import { Text } from '../ui/Text';
 import { AboutContextModal, AboutContextProject } from './AboutProvider';
 import { ResumeProject } from '@/config/types';
@@ -155,58 +156,105 @@ export const AboutProject = () => {
   const { setProject } = contextProject;
   const { modal, setModal } = contextModal;
 
-  const ProjectClick = (item: ResumeProject) => {
+  const projectClick = (item: ResumeProject) => {
     setModal(() => !modal);
     return setProject(item);
   };
-  return resume.project.map((item) => (
-    <li
-      key={item.title}
-      className='w-full translate-y-0 rounded-lg bg-secondary p-8 shadow-[0_0_0.5rem] shadow-gray-400'
-    >
-      <Text
-        text={item.title}
-        className='mb-2 inline-block rounded-lg bg-informative px-4 py-2 font-bold'
-      />
-      <Text text={`${item.start} ~ ${item.end}`} className='text-foreground' />
-      <Text
-        text={`${item.team}`}
-        className='mb-2 border-b-[1px] border-b-slate-400 pb-2 text-slate-400'
-      />
-      <Text text={item.summary.title} className='mb-3 font-bold' />
-      <ul className='mb-2 list-disc px-4 font-normal'>
-        {item.summary.devlop.map((el, idx) => (
-          <li key={idx}>{el}</li>
+
+  const [selectedType, setSelectedType] = useState(0);
+  const projectFilter = (type: number) => {
+    setSelectedType(type);
+  };
+
+  const titleColor = (itemKey: number) => {
+    if (itemKey === 1) return `bg-kyo-green`;
+    else if (itemKey === 2) return `bg-kyo-blue`;
+    else if (itemKey === 3) return `bg-kyo-red`;
+    else return ``;
+  };
+
+  const projectTypes = [
+    { type: 0, label: '전체', color: `bg-warning` },
+    { type: 1, label: '개인', color: 'bg-kyo-green' },
+    { type: 2, label: '팀', color: 'bg-kyo-blue' },
+    { type: 3, label: '기업', color: 'bg-kyo-red' },
+  ];
+  return (
+    <div className='flex flex-col gap-5'>
+      <section className='flex gap-4'>
+        {projectTypes.map((item) => (
+          <Button
+            key={item.type}
+            variant='hover'
+            label={item.label}
+            className={` ${selectedType === item.type ? `outline outline-2 ${item.color}` : ''}`}
+            size='project'
+            onClick={() => projectFilter(item.type)}
+          />
         ))}
+      </section>
+      <ul className='grid grid-cols-1 gap-8 pc:grid-cols-2'>
+        {resume.project
+          .filter((item) => selectedType === 0 || item.type === selectedType)
+          .map((item) => (
+            <li
+              key={item.title}
+              className='w-full translate-y-0 rounded-lg bg-secondary p-8 shadow-[0_0_0.5rem] shadow-gray-400'
+            >
+              <Text
+                text={item.title}
+                className={cn(
+                  titleColor(item.type),
+                  'mb-2 inline-block rounded-lg px-4 py-2 font-bold'
+                )}
+              />
+              <Text
+                text={`${item.start} ~ ${item.end}`}
+                className='text-foreground'
+              />
+              <Text
+                text={`${item.team}`}
+                className='mb-2 border-b-[1px] border-b-slate-400 pb-2 text-slate-400'
+              />
+              <Text text={item.summary.title} className='mb-3 font-bold' />
+              <ul className='mb-2 list-disc px-4 font-normal'>
+                {item.summary.devlop.map((el, idx) => (
+                  <li key={idx}>{el}</li>
+                ))}
+              </ul>
+              <Link
+                className='group relative mb-2 inline-block overflow-hidden border-l-4 border-l-foreground pl-3 pr-3'
+                href={item.url}
+                target='_blank'
+              >
+                <span className='absolute inset-0 -translate-x-full bg-foreground opacity-0 duration-300 ease-in-out group-hover:translate-x-0 group-hover:opacity-100'></span>
+                <span className='relative group-hover:text-background'>
+                  {item.url}
+                </span>
+              </Link>
+              <ul className='flex flex-wrap gap-3'>
+                {item.skill.map((el) => (
+                  <li className='rounded-lg bg-warning px-2 py-1' key={el}>
+                    {el}
+                  </li>
+                ))}
+              </ul>
+              <div className='flex gap-4'>
+                <button
+                  onClick={() => projectClick(item)}
+                  className='mt-4 flex gap-2 rounded-md border-2 p-2 font-bold transition-all duration-300 hover:bg-gray-500'
+                >
+                  <BookOpenIcon />
+                  README
+                </button>
+                <button className='mt-4 flex gap-2 rounded-md border-2 p-2 font-bold transition-all duration-300 hover:bg-gray-500'>
+                  <Image />
+                  이미지
+                </button>
+              </div>
+            </li>
+          ))}
       </ul>
-      <Link
-        className='group relative mb-2 inline-block overflow-hidden border-l-4 border-l-foreground pl-3 pr-3'
-        href={item.url}
-        target='_blank'
-      >
-        <span className='absolute inset-0 -translate-x-full bg-foreground opacity-0 duration-300 ease-in-out group-hover:translate-x-0 group-hover:opacity-100'></span>
-        <span className='relative group-hover:text-background'>{item.url}</span>
-      </Link>
-      <ul className='flex flex-wrap gap-3'>
-        {item.skill.map((el) => (
-          <li className='rounded-lg bg-warning px-2 py-1' key={el}>
-            {el}
-          </li>
-        ))}
-      </ul>
-      <div className='flex gap-4'>
-        <button
-          onClick={() => ProjectClick(item)}
-          className='mt-4 flex gap-2 rounded-md border-2 p-2 font-bold transition-all duration-300 hover:bg-gray-500'
-        >
-          <BookOpenIcon />
-          README
-        </button>
-        <button className='mt-4 flex gap-2 rounded-md border-2 p-2 font-bold transition-all duration-300 hover:bg-gray-500'>
-          <Image />
-          이미지
-        </button>
-      </div>
-    </li>
-  ));
+    </div>
+  );
 };

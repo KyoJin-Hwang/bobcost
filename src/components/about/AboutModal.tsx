@@ -54,9 +54,9 @@ const AboutModal = () => {
       onClick={handleBackgroundClick}
     >
       <div
-        className={`relative h-screen w-full max-w-3xl overflow-scroll rounded-lg border bg-white transition-transform duration-500 ease-out dark:bg-black pc:max-h-[45rem]`}
+        className={`relative h-screen w-full max-w-2xl overflow-scroll rounded-lg border bg-white transition-transform duration-500 ease-out dark:bg-black pc:max-h-[45rem]`}
       >
-        <div className='flex h-16 justify-between rounded-t-lg bg-gray-300 p-4 dark:bg-gray-500'>
+        <div className='flex h-12 items-center justify-between rounded-t-lg bg-gray-300 px-4 dark:bg-gray-500'>
           <span className='text-xl font-bold'>README.md</span>
           <XIcon
             size={28}
