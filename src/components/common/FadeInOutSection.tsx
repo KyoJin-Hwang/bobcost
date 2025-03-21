@@ -2,7 +2,7 @@
 
 import { useContext, useEffect } from 'react';
 
-import { AboutContext } from '../about/AboutProvider';
+import { AboutContext, AboutContextType } from '../about/AboutProvider';
 import { useFadeInOut } from '@/hooks/useFadeInOut';
 import { cn } from '@/lib/utils';
 
@@ -16,22 +16,23 @@ const FadeInOutSection = ({
 }) => {
   const { ref, isVisible } = useFadeInOut();
 
-  const { setHeadArray } = useContext(AboutContext);
+  const { setHeadArray } = useContext(AboutContext) as AboutContextType;
 
   useEffect(() => {
     const aboutMeText = ref.current?.querySelector('p.text-3xl')?.textContent;
     const aboutMeTop = ref.current?.offsetTop ?? 0;
-
     if (aboutMeText) {
-      setHeadArray((prevArray) =>
-        prevArray.some((el) => el.title === aboutMeText)
-          ? prevArray.map((el) =>
-              el.title === aboutMeText ? { ...el, isVisible } : el
-            )
-          : [...prevArray, { title: aboutMeText, isVisible, top: aboutMeTop }]
+      setHeadArray(
+        (prevArray: { title: string; isVisible: boolean; top: number }[]) =>
+          prevArray.some((el) => el.title === aboutMeText)
+            ? prevArray.map((el) =>
+                el.title === aboutMeText ? { ...el, isVisible } : el
+              )
+            : [...prevArray, { title: aboutMeText, isVisible, top: aboutMeTop }]
       );
     }
-  }, [isVisible]);
+  }, [isVisible, setHeadArray]);
+
   return (
     <div
       ref={ref as React.RefObject<HTMLDivElement>}
