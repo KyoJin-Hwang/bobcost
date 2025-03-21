@@ -10,23 +10,6 @@ import { ResumeProject } from '@/config/types';
 
 export const Projects: ResumeProject[] = [
   {
-    type: 2,
-    title: 'title',
-    start: 'start',
-    end: 'end',
-    team: '2人 팀프로젝트',
-    url: 'https://',
-    summary: {
-      title: '',
-      point: '',
-      devlop: [''],
-    },
-    back: '',
-    trouble: [{ title: '', desc: '' }],
-    skill: [''],
-    review: 'review',
-  },
-  {
     type: 1,
     title: '개인블로그 및 포트폴리오',
     start: '2024.12',

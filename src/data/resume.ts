@@ -184,4 +184,5 @@ export const Resume = {
       skill: ['HTML', 'CSS', 'Javascript', 'Java(jsp)', 'Python'],
     },
   ],
+  community: '',
 } as const;

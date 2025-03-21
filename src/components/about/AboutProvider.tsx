@@ -5,12 +5,12 @@ import { createContext, useState } from 'react';
 import { ResumeProject } from '@/config/types';
 import { cn } from '@/lib/utils';
 
-type AboutContextType = {
+export interface AboutContextType {
   headArray: { title: string; isVisible: boolean; top: number }[];
   setHeadArray: React.Dispatch<
     React.SetStateAction<{ title: string; isVisible: boolean; top: number }[]>
   >;
-};
+}
 
 type AboutContextProject = {
   project: ResumeProject | null;
