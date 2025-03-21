@@ -247,10 +247,12 @@ export const AboutProject = () => {
                   <BookOpenIcon />
                   README
                 </button>
-                <button className='mt-4 flex gap-2 rounded-md border-2 p-2 font-bold transition-all duration-300 hover:bg-gray-500'>
-                  <Image />
-                  이미지
-                </button>
+                {item.img && (
+                  <button className='mt-4 flex gap-2 rounded-md border-2 p-2 font-bold transition-all duration-300 hover:bg-gray-500'>
+                    <Image />
+                    이미지
+                  </button>
+                )}
               </div>
             </li>
           ))}
