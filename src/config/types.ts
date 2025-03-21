@@ -47,6 +47,6 @@ export interface ResumeProject {
     desc: string;
   }[];
   skill: string[];
-  img: string[];
+  img?: string[];
   review: string;
 }

@@ -1,13 +1,37 @@
 // project.ts
 import { ResumeProject } from '@/config/types';
 
+/**
+ * docs : 포트폴리오 프로젝트 템플릿
+ * kyo1 : 개인
+ * kyo2 : 팀
+ * kyo3 : 회사
+ */
+
 export const Projects: ResumeProject[] = [
   {
     type: 2,
+    title: 'title',
+    start: 'start',
+    end: 'end',
+    team: '2人 팀프로젝트',
+    url: 'https://',
+    summary: {
+      title: '',
+      point: '',
+      devlop: [''],
+    },
+    back: '',
+    trouble: [{ title: '', desc: '' }],
+    skill: [''],
+    review: 'review',
+  },
+  {
+    type: 1,
     title: '개인블로그 및 포트폴리오',
     start: '2024.12',
     end: '진행중',
-    team: '1인 개인프로젝트',
+    team: '1人 개인 프로젝트',
     url: 'https://bobcost.kr',
     summary: {
       title: '개발블로그 및 포트폴리오 반응형 웹사이트',
@@ -35,7 +59,7 @@ export const Projects: ResumeProject[] = [
     title: '오늘의 책님',
     start: '2024.11',
     end: '2024.12',
-    team: '1인 개인프로젝트',
+    team: '1人 개인 프로젝트',
     url: 'https://book.bobcost.kr',
     summary: {
       title: '질문을 하고 랜덤한 답변을 받는 반응형 웹사이트',
