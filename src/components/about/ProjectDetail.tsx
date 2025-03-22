@@ -1,8 +1,11 @@
+import { useState } from 'react';
+
 import Link from 'next/link';
 
 import Button from '../ui/Button';
 import { Text } from '../ui/Text';
 import { ResumeProject } from '@/config/types';
+import { cn } from '@/lib/utils';
 import { LinkIcon } from 'lucide-react';
 
 const ProjectDetailTitle = ({ title }: { title: string }) => {
@@ -10,6 +13,16 @@ const ProjectDetailTitle = ({ title }: { title: string }) => {
   return <Text text={title} className='text-2xl font-bold' />;
 };
 const ProjectDetail = ({ data }: { data: ResumeProject }) => {
+  const [selectedDesc, setSelectedDesc] = useState<string | null>(null);
+
+  const handleButtonClick = (desc: string) => {
+    if (selectedDesc === desc) {
+      setSelectedDesc(null);
+    } else {
+      setSelectedDesc(desc);
+    }
+  };
+
   return (
     <>
       <section className='border-b-2 border-gray-400 pb-4 text-2xl font-semibold'>
@@ -51,13 +64,31 @@ const ProjectDetail = ({ data }: { data: ResumeProject }) => {
       </section>
 
       {/* 스킬 */}
-      <section className='flex flex-col gap-2'>
+      <section className='flex flex-col gap-2 overflow-hidden'>
         <ProjectDetailTitle title={`⚙️ Tech Stack`} />
-        <div className='flex gap-2'>
+        <div className='flex flex-wrap gap-2'>
           {data.skill.map((item) => (
-            <Button key={item.title} label={item.title} />
+            <Button
+              variant={'hover'}
+              key={item.title}
+              label={item.title}
+              className={cn(
+                item.desc === selectedDesc
+                  ? 'bg-foreground text-background'
+                  : 'bg-background text-foreground',
+                'hover:bg-foreground hover:text-background'
+              )}
+              onClick={() => handleButtonClick(item.desc)}
+            />
           ))}
         </div>
+
+        {selectedDesc && (
+          <section className='mt-2'>
+            <h3 className='text-xl font-semibold'>Description:</h3>
+            <p>{selectedDesc}</p>
+          </section>
+        )}
       </section>
 
       {/* 백그라운드 */}

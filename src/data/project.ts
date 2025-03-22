@@ -34,8 +34,12 @@ export const Projects: ResumeProject[] = [
     //   },
     // ],
     skill: [
-      { title: 'Nextjs15', desc: '', color: 'next' },
-      { title: 'React18', desc: '', color: '' },
+      { title: 'Nextjs15', desc: '나는 Next15', color: 'next' },
+      {
+        title: 'React18',
+        desc: 'React 18을 이렇게까지 ',
+        color: '',
+      },
       { title: 'TailwindCSS', desc: '', color: '' },
       { title: 'Typescript', desc: '', color: '' },
       { title: 'Vercel', desc: '', color: '' },
