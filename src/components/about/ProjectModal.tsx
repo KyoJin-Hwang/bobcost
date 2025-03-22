@@ -57,30 +57,34 @@ const ProjectModal = () => {
 
   return (
     <div
-      className={`fixed bottom-0 left-0 right-0 top-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-3 transition-opacity duration-500 pc:p-0`}
+      className={`fixed bottom-0 left-0 right-0 top-0 z-50 flex items-center justify-center overflow-y-scroll bg-black bg-opacity-50 p-3 transition-opacity duration-500 pc:p-0`}
       onClick={handleBackgroundClick}
       style={{
         visibility: modal ? 'visible' : 'hidden',
         opacity: modal ? '1' : '0',
       }}
     >
-      <div
-        className={`relative h-screen w-full max-w-3xl transform overflow-scroll rounded-lg border border-foreground bg-white pb-16 transition-all duration-1000 ease-in-out dark:bg-secondary pc:mt-14 ${
-          showModal ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'
-        }`}
-      >
-        <div className='flex h-12 items-center justify-between bg-foreground px-4'>
-          <span className='text-lg font-bold text-primary-foreground'>
-            README.md
-          </span>
-          <XIcon
-            size={24}
-            className='cursor-pointer stroke-primary-foreground hover:stroke-red-400'
-            onClick={() => setModal(false)}
-          />
-        </div>
-        <div className='flex flex-col gap-8 p-4'>
-          <ProjectDetail data={project} />
+      <div className='m-auto'>
+        <div
+          className={`relative mx-auto h-auto w-full max-w-3xl transform rounded-lg border border-foreground bg-white transition-all duration-500 ease-in-out dark:bg-secondary pc:mt-14 ${
+            showModal
+              ? 'translate-y-0 opacity-100'
+              : 'translate-y-full opacity-0'
+          }`}
+        >
+          <div className='flex h-12 items-center justify-between rounded-t-lg bg-foreground px-4'>
+            <span className='text-lg font-bold text-primary-foreground'>
+              README.md
+            </span>
+            <XIcon
+              size={24}
+              className='cursor-pointer stroke-primary-foreground hover:stroke-red-400'
+              onClick={() => setModal(false)}
+            />
+          </div>
+          <div className='flex flex-col gap-8 px-4 pb-10 pt-4'>
+            <ProjectDetail data={project} />
+          </div>
         </div>
       </div>
     </div>

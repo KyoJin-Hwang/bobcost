@@ -174,7 +174,7 @@ export const AboutProject = () => {
   };
 
   const projectTypes = [
-    { type: 0, label: '전체', color: `bg-warning` },
+    { type: 0, label: '전체', color: `bg-warning ` },
     { type: 1, label: '개인', color: 'bg-kyo-green' },
     { type: 2, label: '팀', color: 'bg-kyo-blue' },
     { type: 3, label: '기업', color: 'bg-kyo-red' },
@@ -187,7 +187,7 @@ export const AboutProject = () => {
             key={item.type}
             variant='hover'
             label={item.label}
-            className={` ${selectedType === item.type ? `outline outline-2 ${item.color}` : ''}`}
+            className={` ${selectedType === item.type ? `outline outline-2 ${item.color}` : ``}`}
             size='project'
             onClick={() => projectFilter(item.type)}
           />
