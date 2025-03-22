@@ -232,13 +232,19 @@ export const AboutProject = () => {
                   {item.url}
                 </span>
               </Link>
+
+              {/* 스킬 */}
               <ul className='flex flex-wrap gap-3'>
                 {item.skill.map((el) => (
-                  <li className='rounded-lg bg-warning px-2 py-1' key={el}>
-                    {el}
+                  <li
+                    className='rounded-lg bg-warning px-2 py-1'
+                    key={el.title}
+                  >
+                    {el.title}
                   </li>
                 ))}
               </ul>
+              {/* Readme, 이미지 */}
               <div className='flex gap-4'>
                 <button
                   onClick={() => projectClick(item)}

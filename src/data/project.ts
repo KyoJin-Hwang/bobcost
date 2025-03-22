@@ -27,15 +27,21 @@ export const Projects: ResumeProject[] = [
       ],
     },
     back: ``,
-    trouble: [
-      {
-        title: ``,
-        desc: ``,
-      },
+    // trouble: [
+    //   {
+    //     title: ``,
+    //     desc: ``,
+    //   },
+    // ],
+    skill: [
+      { title: 'Nextjs15', desc: '', color: 'next' },
+      { title: 'React18', desc: '', color: '' },
+      { title: 'TailwindCSS', desc: '', color: '' },
+      { title: 'Typescript', desc: '', color: '' },
+      { title: 'Vercel', desc: '', color: '' },
     ],
-    skill: ['Nextjs15', 'React18', 'TailwindCSS', 'Typescript', 'Vercel'],
     img: [''],
-    review: '',
+    meaning: '',
   },
   {
     type: 1,
@@ -67,9 +73,15 @@ export const Projects: ResumeProject[] = [
         desc: `zustand는 현재 react 19를 지원하지 않아서, react 19를 react18로 다운그레이드하여 해결했습니다.`,
       },
     ],
-    skill: ['Next15', 'React18', 'Zustand', 'CSSModule', 'Vercel'],
+    skill: [
+      { title: 'Next15', desc: '', color: '' },
+      { title: 'React18', desc: '', color: '' },
+      { title: 'Zustand', desc: '', color: '' },
+      { title: 'CSSModule', desc: '', color: '' },
+      { title: 'Vercel', desc: '', color: '' },
+    ],
     img: [''],
-    review: '',
+    meaning: '',
   },
 ];
 

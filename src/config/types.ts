@@ -42,11 +42,15 @@ export interface ResumeProject {
     devlop: string[];
   };
   back: string;
-  trouble: {
+  trouble?: {
     title: string;
     desc: string;
   }[];
-  skill: string[];
+  skill: {
+    title: string;
+    desc: string;
+    color: string;
+  }[];
   img?: string[];
-  review: string;
+  meaning: string;
 }
