@@ -6,19 +6,42 @@ import Giscus from '@/components/post_detail/Giscus';
 import { PostBody } from '@/components/post_detail/PostBody';
 import { PostHeader } from '@/components/post_detail/PostHeader';
 import TocSideBar from '@/components/post_detail/TableOfContentSidebar';
-import {
-  getPostDetail,
-  getPostPaths,
-  parsePostAbstract,
-  parseToc,
-} from '@/lib/post';
+import { baseDomain } from '@/config/const';
+import { getPostDetail, parseToc } from '@/lib/post';
 
 type Props = {
-  params: Promise<{ category: string; slug: string }>;
+  params: { category: string; slug: string };
 };
 
 // 허용된 param 외 접근시 404
 export const dynamicParams = false;
+
+export async function generateMetadata({
+  params: { category, slug },
+}: Props): Promise<Metadata> {
+  const post = await getPostDetail(category, slug);
+
+  const title = `${post.title} | BOBcost`;
+  const imageURL = `${baseDomain}${post.thumbnail}`;
+
+  return {
+    title,
+    description: post.desc,
+
+    openGraph: {
+      title,
+      description: post.desc,
+      type: 'article',
+      url: `${baseDomain}${post.url}`,
+      images: [imageURL],
+    },
+    twitter: {
+      title,
+      description: post.desc,
+      images: [imageURL],
+    },
+  };
+}
 
 const PostDetail = async ({ params }: Props) => {
   const { category, slug } = await params;
