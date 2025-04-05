@@ -11,6 +11,7 @@ export interface AboutContextType {
     React.SetStateAction<{ title: string; isVisible: boolean; top: number }[]>
   >;
 }
+export type ModalContentType = 'image' | 'readme' | null;
 
 type AboutContextProject = {
   project: ResumeProject | null;
@@ -19,14 +20,18 @@ type AboutContextProject = {
 
 type AboutContextModalType = {
   modal: boolean;
+  modalContent: ModalContentType;
   setModal: React.Dispatch<React.SetStateAction<boolean>>;
+  setModalContent: React.Dispatch<React.SetStateAction<ModalContentType>>;
 };
 
 export const AboutContext = createContext<AboutContextType | null>(null);
 
 export const AboutContextModal = createContext<AboutContextModalType>({
   modal: false,
+  modalContent: null,
   setModal: () => {},
+  setModalContent: () => {},
 });
 
 export const AboutContextProject = createContext<
@@ -38,6 +43,7 @@ const AboutProvider = ({ children }: { children: React.ReactNode }) => {
     { title: string; isVisible: boolean; top: number }[]
   >([]);
   const [modal, setModal] = useState<boolean>(false);
+  const [modalContent, setModalContent] = useState<ModalContentType>(null);
   const [project, setProject] = useState<ResumeProject | null>(null);
 
   const handleClick = (top: number) => {
@@ -46,7 +52,9 @@ const AboutProvider = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <AboutContext.Provider value={{ headArray, setHeadArray }}>
-      <AboutContextModal.Provider value={{ modal, setModal }}>
+      <AboutContextModal.Provider
+        value={{ modal, modalContent, setModal, setModalContent }}
+      >
         <AboutContextProject.Provider value={{ project, setProject }}>
           <div className='relative mx-auto mt-header flex gap-12 px-5 pc:max-w-[1200px]'>
             <nav className='fixed left-10 top-[120px] z-50 hidden h-screen min-w-[120px] big:flex'>

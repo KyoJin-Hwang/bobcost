@@ -41,7 +41,7 @@ export interface ResumeProject {
     point: string;
     devlop: string[];
   };
-  back: string;
+  background: string;
   trouble?: {
     title: string;
     desc: string;
@@ -49,8 +49,7 @@ export interface ResumeProject {
   skill: {
     title: string;
     desc: string;
-    color: string;
   }[];
   img?: string[];
-  meaning: string;
+  learning: string;
 }

@@ -6,7 +6,11 @@ import Link from 'next/link';
 
 import Button from '../ui/Button';
 import { Text } from '../ui/Text';
-import { AboutContextModal, AboutContextProject } from './AboutProvider';
+import {
+  AboutContextModal,
+  AboutContextProject,
+  ModalContentType,
+} from './AboutProvider';
 import { ResumeProject } from '@/config/types';
 import { Resume as resume } from '@/data/resume';
 import { cn } from '@/lib/utils';
@@ -154,10 +158,11 @@ export const AboutProject = () => {
   }
 
   const { setProject } = contextProject;
-  const { modal, setModal } = contextModal;
+  const { modal, setModal, setModalContent } = contextModal;
 
-  const projectClick = (item: ResumeProject) => {
+  const projectClick = (item: ResumeProject, type: ModalContentType) => {
     setModal(() => !modal);
+    setModalContent(type);
     return setProject(item);
   };
 
@@ -247,14 +252,17 @@ export const AboutProject = () => {
               {/* Readme, 이미지 */}
               <div className='flex gap-4'>
                 <button
-                  onClick={() => projectClick(item)}
-                  className='mt-4 flex gap-2 rounded-md border-2 p-2 font-bold transition-all duration-300 hover:bg-gray-500'
+                  onClick={() => projectClick(item, 'readme')}
+                  className='mt-4 flex gap-2 rounded-md border-2 p-2 font-bold transition-all duration-300 hover:bg-foreground hover:text-background'
                 >
                   <BookOpenIcon />
                   README
                 </button>
                 {item.img && (
-                  <button className='mt-4 flex gap-2 rounded-md border-2 p-2 font-bold transition-all duration-300 hover:bg-gray-500'>
+                  <button
+                    onClick={() => projectClick(item, 'image')}
+                    className='mt-4 flex gap-2 rounded-md border-2 p-2 font-bold transition-all duration-300 hover:bg-foreground hover:text-background'
+                  >
                     <Image />
                     이미지
                   </button>

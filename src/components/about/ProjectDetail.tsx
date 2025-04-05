@@ -1,28 +1,75 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import Link from 'next/link';
 
-import Button from '../ui/Button';
 import { Text } from '../ui/Text';
 import { ResumeProject } from '@/config/types';
-import { cn } from '@/lib/utils';
 import { LinkIcon } from 'lucide-react';
 
-const ProjectDetailTitle = ({ title }: { title: string }) => {
+type DetailDropdownDataT = {
+  title: string;
+  desc: string;
+}[];
+
+const DetailTitle = ({ title }: { title: string }) => {
   // 올바른 문법
   return <Text text={title} className='text-2xl font-bold' />;
 };
-const ProjectDetail = ({ data }: { data: ResumeProject }) => {
-  const [selectedDesc, setSelectedDesc] = useState<string | null>(null);
 
-  const handleButtonClick = (desc: string) => {
-    if (selectedDesc === desc) {
-      setSelectedDesc(null);
-    } else {
-      setSelectedDesc(desc);
-    }
+const DetailDropdown = ({
+  data,
+  emoji,
+  defaultOpen = false,
+}: {
+  data: DetailDropdownDataT;
+  emoji?: string;
+  defaultOpen?: boolean;
+}) => {
+  const [openIndexes, setOpenIndexes] = useState<Set<number>>(new Set());
+
+  const handleToggle = (index: number) => {
+    setOpenIndexes((prevIndexes) => {
+      const newIndexes = new Set(prevIndexes);
+      if (newIndexes.has(index)) {
+        newIndexes.delete(index);
+      } else {
+        newIndexes.add(index);
+      }
+      return newIndexes;
+    });
   };
+  useEffect(() => {
+    if (defaultOpen) {
+      setOpenIndexes(new Set(data.map((_, idx) => idx)));
+    } else {
+      setOpenIndexes(new Set());
+    }
+  }, [data, defaultOpen]);
+  return (
+    <div className='flex flex-col gap-2'>
+      {data.map((item, index) => (
+        <div key={item.title}>
+          <div
+            onClick={() => handleToggle(index)}
+            className='flex w-full cursor-pointer gap-1 bg-gray-200 p-2 text-left font-semibold dark:bg-gray-400'
+          >
+            <p>{emoji ? emoji : openIndexes.has(index) ? '▼' : '▶'}</p>
+            <p>{item.title}</p>
+          </div>
+          <div
+            className={`overflow-hidden transition-all duration-300 ease-in-out ${
+              openIndexes.has(index) ? 'p-3 opacity-100' : 'max-h-0 opacity-0'
+            } text-sm`}
+          >
+            {item.desc}
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+};
 
+const ProjectDetail = ({ data }: { data: ResumeProject }) => {
   return (
     <>
       <section className='border-b-2 border-gray-400 pb-4 text-2xl font-semibold'>
@@ -45,7 +92,7 @@ const ProjectDetail = ({ data }: { data: ResumeProject }) => {
 
       {/* 요약 */}
       <section className='flex flex-col gap-5'>
-        <ProjectDetailTitle title={`📌 Summary`} />
+        <DetailTitle title={`📌 Summary`} />
         <p className='text-base font-semibold'>{data.summary.title}</p>
         <ul className='flex flex-col gap-2 pl-4'>
           {data.summary.devlop.map((el) => {
@@ -64,53 +111,34 @@ const ProjectDetail = ({ data }: { data: ResumeProject }) => {
       </section>
 
       {/* 스킬 */}
-      <section className='flex flex-col gap-2 overflow-hidden'>
-        <ProjectDetailTitle title={`⚙️ Tech Stack`} />
-        <div className='flex flex-wrap gap-2'>
-          {data.skill.map((item) => (
-            <Button
-              variant={'hover'}
-              key={item.title}
-              label={item.title}
-              className={cn(
-                item.desc === selectedDesc
-                  ? 'bg-foreground text-background'
-                  : 'bg-background text-foreground',
-                'hover:bg-foreground hover:text-background'
-              )}
-              onClick={() => handleButtonClick(item.desc)}
-            />
-          ))}
-        </div>
-
-        {selectedDesc && (
-          <section className='mt-2'>
-            <h3 className='text-xl font-semibold'>Description:</h3>
-            <p>{selectedDesc}</p>
-          </section>
-        )}
+      <section className='flex flex-col gap-2'>
+        <DetailTitle title={`⚙️ Tech Stack`} />
+        <DetailDropdown data={data.skill} />
       </section>
 
       {/* 백그라운드 */}
       <section className='flex flex-col gap-2'>
-        <ProjectDetailTitle title={`🧐 BackGround`} />
+        <DetailTitle title={`🧐 BackGround`} />
+        <p className='whitespace-pre-line'>{data.background}</p>
       </section>
 
       {/* 학습 */}
       <section className='flex flex-col gap-2'>
-        <ProjectDetailTitle title={`💡 Learning`} />
+        <DetailTitle title={`💡 Learning`} />
+        <p className='whitespace-pre-line'>{data.learning}</p>
       </section>
 
       {/* 트러블 슈팅 */}
       {data.trouble && (
         <section className='flex flex-col gap-2'>
-          <ProjectDetailTitle title={`🎯 Troubles Shooting`} />
+          <DetailTitle title={`🎯 Troubles Shooting`} />
+          <DetailDropdown data={data.trouble} emoji='🔥' defaultOpen />
         </section>
       )}
 
       {data.img && (
         <section>
-          <ProjectDetailTitle title={`🖼️ Image`} />
+          <DetailTitle title={`🖼️ Image`} />
         </section>
       )}
     </>
