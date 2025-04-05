@@ -135,12 +135,6 @@ const ProjectDetail = ({ data }: { data: ResumeProject }) => {
           <DetailDropdown data={data.trouble} emoji='🔥' defaultOpen />
         </section>
       )}
-
-      {data.img && (
-        <section>
-          <DetailTitle title={`🖼️ Image`} />
-        </section>
-      )}
     </>
   );
 };

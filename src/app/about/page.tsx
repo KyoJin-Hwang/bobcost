@@ -1,3 +1,4 @@
+import { Metadata } from 'next';
 import Link from 'next/link';
 
 import {
@@ -22,6 +23,12 @@ import {
   MicVocal,
 } from 'lucide-react';
 
+export function generateMetadata(): Metadata {
+  return {
+    title: `황교진 포트폴리오`,
+    description: '황교진의 포트폴리오를 보여주는 사이트',
+  };
+}
 const About = () => {
   return (
     <AboutProvider>
