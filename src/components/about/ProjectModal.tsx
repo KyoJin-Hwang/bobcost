@@ -4,6 +4,7 @@ import { useContext, useEffect, useState } from 'react';
 
 import { AboutContextModal, AboutContextProject } from './AboutProvider';
 import ProjectDetail from './ProjectDetail';
+import ProjectImg from './ProjectImg';
 import { XIcon } from 'lucide-react';
 
 const ProjectModal = () => {
@@ -15,7 +16,7 @@ const ProjectModal = () => {
   }
 
   const { project } = contextProject;
-  const { modal, setModal } = contextModal;
+  const { modal, setModal, modalContent } = contextModal;
 
   const [showModal, setShowModal] = useState(false);
 
@@ -64,17 +65,17 @@ const ProjectModal = () => {
         opacity: modal ? '1' : '0',
       }}
     >
-      <div className='m-auto'>
+      <div className='m-auto pc:min-w-[1200px]' onClick={handleBackgroundClick}>
         <div
-          className={`relative mx-auto h-auto w-full max-w-3xl transform rounded-lg border border-foreground bg-white transition-all duration-500 ease-in-out dark:bg-secondary pc:mt-14 ${
+          className={`relative mx-auto mb-14 h-auto w-full max-w-3xl transform rounded-b-lg border border-foreground bg-white transition-all duration-500 ease-in-out dark:bg-secondary pc:mt-14 ${
             showModal
               ? 'translate-y-0 opacity-100'
               : 'translate-y-full opacity-0'
           }`}
         >
-          <div className='flex h-12 items-center justify-between rounded-t-lg bg-foreground px-4'>
+          <div className='flex h-12 items-center justify-between bg-foreground px-4'>
             <span className='text-lg font-bold text-primary-foreground'>
-              README.md
+              {modalContent === 'image' ? `이미지` : 'README.md'}
             </span>
             <XIcon
               size={24}
@@ -82,8 +83,12 @@ const ProjectModal = () => {
               onClick={() => setModal(false)}
             />
           </div>
-          <div className='flex flex-col gap-8 px-4 pb-10 pt-4'>
-            <ProjectDetail data={project} />
+          <div className='flex flex-col flex-wrap gap-8 overflow-hidden break-all px-4 pb-10 pt-4'>
+            {modalContent === 'image' ? (
+              <ProjectImg data={project} />
+            ) : (
+              <ProjectDetail data={project} />
+            )}
           </div>
         </div>
       </div>
