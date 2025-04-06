@@ -1,49 +1,49 @@
 ---
-title: '첫번째'
-desc: 첫번째 desc
-createdAt: 2024-01-01 13:00
-updatedAt: 2024-01-04 16:00
-thumbnail: /posts/frontend/javascript/2022.jpg
+title: '자바스크립트 기초정리 (2025)'
+desc: 프론트엔드 개발자로서 반드시 알아야 할 JavaScript의 기초 문법과 주요 개념들을 정리, 변수 선언부터 배열, 객체, 함수 등 실무에서 자주 사용하는 부분 위주.
+createdAt: 2025-04-05 15:00
+thumbnail: /posts/frontend/javascript/javascript_basic.png
 group: Next
 ---
 
-## 브라우저의 구조
-### 브라우저 구조 서브
+## 💡Javascript 기초 정리하게 된 계기
+React와 같은 프레임워크를 사용하면서 점점 JavaScript의 기초 개념을 놓치고 있다는 생각이 들었습니다. 
+실제로 간단한 로직을 작성할 때도 문법이나 동작 방식이 헷갈릴 때가 많았고, 기초를 탄탄히 다지지 않으면 실력이 더 이상 올라가지 않을 거란 위기감이 들었습니다. 그래서 다시 한 번 JavaScript의 기본 개념들을 정리하며 제대로 이해하고 넘어가자는 마음으로 이 글을 작성하게 되었습니다.
 
-<Callout type='info'>정보</Callout>
-<Callout type='warn'>중요</Callout>
-<Callout type='danger'>위험</Callout>
-<Callout type='normal'>기본</Callout>
-<Callout type='warn'>
-  상세한 내용은 [이전 게시글(CSS Trigger)](/blog/manual/css-trigger)을 참고하세요.
-</Callout>
+<hr/> 
 
+## 원시 자료형 (Primitive Type)
 
-브라우저는 아래와 같은 구조로 이루어져 있습니다.
+- 객체가 아니며, 메서드를 가지지 않습니다.  
+- 하나의 값만을 저장합니다.  
+- 변수에 값 자체가 저장되며, 복사 시 값이 그대로 복제됩니다.  
+- 변경이 불가능한(immutable) 값입니다.  
 
-
-
-
-
-
-
-
-
-## 테스트1
-### 테스트1-1
-
-```javascript {5}
-import fs from 'fs';
-import matter from 'gray-matter';
-
-const parsePost = async (postPath: string) => {
-  const file = fs.readFileSync(postPath, 'utf8');
-  const { data, content } = matter(file);
-};
-```
-
-![](/posts/frontend/javascript/2022.jpg)
-![](/posts/frontend/javascript/test.png)
+### 📌 종류(원시)
+- `string` : 문자열  
+- `number` : 숫자 (정수 및 실수)  
+- `boolean` : true 또는 false  
+- `null` : 의도적으로 "값이 없음"을 명시  
+- `undefined` : 값이 할당되지 않은 변수  
+- `symbol` : 고유하고 변경 불가능한 값  
+- `bigint` : 아주 큰 정수를 다룰 수 있는 자료형
 
 
+## 참조 자료형 (Reference Type)
+
+- 객체를 기반으로 하며, 여러 개의 값을 담을 수 있는 구조입니다.  
+- 변수에는 값이 아닌 해당 객체의 참조 주소가 저장됩니다.  
+- 복사 시 참조값이 복제되어, 두 변수는 같은 객체를 가리키게 됩니다.  
+- 변경 가능한(mutable) 데이터입니다.  
+
+### 📌 종류(참조)
+- `object` : 키-값 쌍으로 구성된 데이터 집합  
+- `array` : 순서가 있는 값들의 리스트  
+- `function` : 재사용 가능한 코드 블록이며, 일급 객체로 취급됨  
+- `date` : 날짜와 시간 데이터를 표현하기 위한 객체  
+- `regexp` : 정규표현식 처리를 위한 객체  
+- `map` : 키-값 쌍의 컬렉션으로, 키에 어떤 타입이든 사용 가능  
+- `set` : 중복되지 않는 유일한 값들의 집합
+
+<hr/> 
 

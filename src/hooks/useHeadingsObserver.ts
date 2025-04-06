@@ -10,13 +10,18 @@ export const useHeadingsObserver = (query: string) => {
 
     const handleObserver: IntersectionObserverCallback = (entries) => {
       entries.forEach((entry) => {
-        const targetId = `#${entry.target.id}`;
+        const span = entry.target.querySelector('span');
+        const emoji = span?.textContent || '';
+        const targetId = `#${emoji}${entry.target.id}`;
+
         if (entry.isIntersecting) {
           setActiveIdList((prev) => [...prev, targetId]);
           setTempId(() => '');
         } else {
           setActiveIdList((prev) => {
-            if (prev.length === 1) setTempId(targetId);
+            // giscus 떄문에 마지막에 남은게 필요했지만 현재 필요하지않음
+            // 마지막 값을 알야할 필요없음
+            // if (prev.length === 1) setTempId(targetId);
             return prev.filter((elem) => elem !== targetId);
           });
         }
@@ -33,6 +38,5 @@ export const useHeadingsObserver = (query: string) => {
 
     return () => observer.current?.disconnect();
   }, [query]);
-
   return [...activeIdList, tempId];
 };

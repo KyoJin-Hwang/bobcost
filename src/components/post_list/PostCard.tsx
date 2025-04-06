@@ -45,9 +45,9 @@ const PostCard = async ({ post }: Props) => {
   return (
     <Link href={post.url} className='group relative z-0'>
       <li className='flex h-full flex-col gap-3 overflow-hidden rounded-md border hover:translate-y-[-5px] hover:shadow-xl dark:shadow-gray-500'>
-        <div className='relative w-full overflow-hidden border-b'>
+        <div className='relative h-[250px] w-full overflow-hidden border-b'>
           <img
-            className='cover transition-all duration-100 group-hover:scale-[1.2]'
+            className='h-full w-full object-cover transition-all duration-100 group-hover:scale-[1.2]'
             src={post.thumbnail}
             alt={`thumbnail for ${post.title}`}
           />

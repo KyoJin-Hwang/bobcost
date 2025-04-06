@@ -15,9 +15,21 @@ interface Props {
 const TableOfContent = ({ toc }: Props) => {
   const activeIdList = useHeadingsObserver('h2, h3');
 
+  const cleanLink = (link: string) => {
+    // 이모지 + 하이픈 + 나머지 문자열 매칭
+    const match = link.match(/^#(\p{Emoji})-(.+)/u);
+
+    if (match) {
+      // match[2]는 이모지 뒤의 본문
+      return `#-${match[2]}`;
+    }
+
+    return link;
+  };
+
   return (
     <aside className='not-prose absolute -top-[200px] left-full -mb-[100px] hidden h-[calc(100%+150px)] xl:block'>
-      <div className='sticky bottom-0 top-[200px] z-10 ml-[5rem] mt-[200px] w-[200px]'>
+      <div className='sticky bottom-0 top-[200px] z-10 ml-[5rem] mt-[200px] w-[220px]'>
         <div className='mb-4 border-l px-4 py-2'>
           <div className='mb-1 font-bold'>On this page</div>
           <ul className='text-xs'>
@@ -33,7 +45,7 @@ const TableOfContent = ({ toc }: Props) => {
                     'py-1 transition'
                   )}
                 >
-                  <Link href={item.link}>{item.text}</Link>
+                  <Link href={cleanLink(item.link)}>{item.text}</Link>
                 </li>
               );
             })}
