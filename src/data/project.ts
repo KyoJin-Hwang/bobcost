@@ -13,7 +13,7 @@ export const Projects: ResumeProject[] = [
     type: 1,
     title: '개인블로그 및 포트폴리오',
     start: '2024.12',
-    end: '진행중',
+    end: 'ing',
     team: '1人 개인 프로젝트',
     url: 'https://bobcost.kr',
     summary: {
@@ -91,12 +91,12 @@ export const Projects: ResumeProject[] = [
     summary: {
       title: '질문을 하고 랜덤한 답변을 받는 반응형 웹사이트',
       point:
-        '음식 랜덤룰렛, SNS 공유, 여러가지의 랜덤한 답변, PC에서 답변을 읽어주는 기능',
+        '음식 랜덤룰렛, SNS 공유, 여러가지의 랜덤한 답변, PC에서 답변을 읽어주는 TTS 기능',
       devlop: [
         'Next.js 이해도 향상',
         'Google Analytics를 사용하여 DAU 분석',
         'Zustand 상태관리',
-        '새로고침 재방지 persist middleware 사용',
+        '카카오톡 API를 사용하여 공유 기능 구현',
         'Web Speech API로 TTS 구현',
       ],
     },

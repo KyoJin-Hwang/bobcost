@@ -179,6 +179,6 @@ export const findLatestDates = (data: Post[]) => {
 
   return {
     create: data[0].url,
-    update: latestUpdated[0].url || '/',
+    update: latestUpdated[0]?.url || '/',
   };
 };
