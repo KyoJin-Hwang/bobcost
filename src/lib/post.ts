@@ -42,6 +42,7 @@ export const parsePostAbstract = (postPath: string) => {
 // MDX detail
 const parsePostDetail = async (postPath: string) => {
   const file = fs.readFileSync(postPath, 'utf8');
+  console.log(file);
   const { data, content } = matter(file);
 
   const grayMatter = data as PostMatter;

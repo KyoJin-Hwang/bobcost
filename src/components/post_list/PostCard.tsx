@@ -21,16 +21,20 @@ const PostCard = async ({ post }: Props) => {
   };
 
   const lowerCase = post.group.toLowerCase();
+  const groupStyleMap: Record<string, string> = {
+    html: 'bg-html text-html-foreground',
+    css: 'bg-css text-css-foreground',
+    js: 'bg-js text-js-foreground',
+    react: 'bg-react text-react-foreground',
+    docker: 'bg-react text-react-foreground',
+    next: 'bg-next text-next-foreground',
+    ts: 'bg-ts text-ts-foreground',
+    zustand: 'bg-zustand text-zustand-foreground',
+  };
+
   const postClassGroup = (group: string) => {
-    return clsx('absolute font-bold right-2 top-2 rounded px-2 py-1', {
-      'bg-html text-html-foreground': group === 'html',
-      'bg-css text-css-foreground': group === 'css',
-      'bg-js text-js-foreground': group === 'js',
-      'bg-react text-react-foreground': group === 'react',
-      'bg-next text-next-foreground': group === 'next',
-      'bg-ts text-ts-foreground': group === 'ts',
-      'bg-zustand text-zustand-foreground': group === 'zustand',
-    });
+    const style = groupStyleMap[group] || 'bg-next text-next-foreground';
+    return clsx('absolute font-bold right-2 top-2 rounded px-2 py-1', style);
   };
   const postDateGroup = (status: string) => {
     return clsx(
@@ -67,10 +71,13 @@ const PostCard = async ({ post }: Props) => {
               {post.categoryPublicName}
             </div>
             <div className='mb-3 mt-1 flex flex-col gap-1'>
-              <h2 className='line-clamp-1 text-lg font-bold pc:text-xl'>
+              <h2 className='line-clamp-1 text-lg font-bold transition-colors duration-300 ease-in-out group-hover:line-clamp-none group-hover:text-[#a6a646] dark:group-hover:text-[#e6eb00] pc:text-xl'>
                 {post.title}
               </h2>
-              <Text text={post.desc} fontSize={14} className='line-clamp-1' />
+              <Text
+                text={post.desc}
+                className='line-clamp-2 text-sm transition-colors duration-300 ease-in-out group-hover:line-clamp-none group-hover:text-[#a6a646] dark:group-hover:text-[#e6eb00]'
+              />
             </div>
           </div>
           {/* 날짜, 글 시간 */}
