@@ -1,4 +1,3 @@
-// project.ts
 import { ResumeProject } from '@/config/types';
 
 /**
