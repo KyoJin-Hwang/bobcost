@@ -12,14 +12,19 @@ const ProjectImg = ({ data }: { data: ResumeProject }) => {
   const handleNext = () => {
     setCurrentIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
   };
+
   return (
     <div className='flex min-h-[300px] flex-col items-center justify-center overflow-hidden pc:min-h-[500px]'>
       <div
-        className={`flex w-full translate-x-[-${currentIndex * 100}%] transition-all duration-300 ease-in-out`}
+        className='flex w-full'
+        style={{
+          transform: `translateX(-${currentIndex * 100}%)`, // 인라인 스타일로 transform 적용
+          transition: 'transform 0.3s ease-in-out',
+        }}
       >
         {images.map((item, idx) => (
           <img
-            key={item}
+            key={idx} // key는 고유해야 하므로 item 대신 idx 사용
             src={item}
             alt={`프로젝트 이미지${idx + 1}`}
             className='border-4 border-foreground'
