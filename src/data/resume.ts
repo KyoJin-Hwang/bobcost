@@ -5,7 +5,7 @@ export const Resume = {
   name: '황 교 진',
   birthday: '1997-11-27',
   company: 'X',
-  goal: '프로그래머스 LV1 완료하기',
+  goal: '블로그 이전 작업 완료하기',
   book: {
     url: 'https://product.kyobobook.co.kr/detail/S000213641007',
     name: '코딩 테스트 합격자 되기 : 자바스크립트 편',
@@ -34,8 +34,8 @@ export const Resume = {
   },
   education: [
     {
-      school: '한국호텔관광전문학교(전문학사)',
-      degree: '호텔조리과',
+      school: '여수충무고등학교',
+      degree: '자연계',
       start: '2013. 03',
       end: '2016. 02',
     },
