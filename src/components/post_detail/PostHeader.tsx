@@ -11,6 +11,7 @@ export const PostHeader = ({ post }: Props) => {
   return (
     <header className='mt-14 text-center'>
       <h1 className='mb-5 text-3xl'>{post.title}</h1>
+      <div className='mb-3 text-base'>{post.desc}</div>
       <div className='mb-3 text-base'>
         <Link
           href={`/blog/${post.categoryPath}`}
