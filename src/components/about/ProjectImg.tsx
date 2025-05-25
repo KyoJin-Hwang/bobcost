@@ -16,7 +16,6 @@ const ProjectImg = ({ data }: { data: ResumeProject }) => {
   const reset = () => {
     setCurrentIndex(0);
   };
-  console.log(images.length, currentIndex);
   return (
     <div className='flex min-h-[300px] flex-col items-center justify-center overflow-hidden pc:min-h-[500px]'>
       <div
