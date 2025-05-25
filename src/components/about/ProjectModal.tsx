@@ -1,6 +1,6 @@
 'use client';
 
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 
 import { AboutContextModal, AboutContextProject } from './AboutProvider';
 import ProjectDetail from './ProjectDetail';
@@ -8,6 +8,8 @@ import ProjectImg from './ProjectImg';
 import { XIcon } from 'lucide-react';
 
 const ProjectModal = () => {
+  const modalRef = useRef<HTMLDivElement>(null);
+
   const contextProject = useContext(AboutContextProject);
   const contextModal = useContext(AboutContextModal);
 
@@ -28,6 +30,7 @@ const ProjectModal = () => {
     }
   }, [modal]); // modal 상태가 변경될 때마다 실행
 
+  // 모달 외부 스크롤 방지 useEffect
   useEffect(() => {
     if (!project) {
       return;
@@ -45,6 +48,13 @@ const ProjectModal = () => {
       document.body.style.overflow = 'auto';
     };
   }, [modal, project]);
+
+  // 모달 닫을시 Scroll 초기화
+  useEffect(() => {
+    if (!modal && modalRef.current) {
+      modalRef.current.scrollTop = 0;
+    }
+  }, [modal]);
 
   if (!project) {
     return null; // project가 없으면 렌더링하지 않음
@@ -64,10 +74,11 @@ const ProjectModal = () => {
         visibility: modal ? 'visible' : 'hidden',
         opacity: modal ? '1' : '0',
       }}
+      ref={modalRef}
     >
       <div className='m-auto pc:min-w-[1200px]' onClick={handleBackgroundClick}>
         <div
-          className={`relative mx-auto mb-14 h-auto w-full max-w-3xl transform rounded-b-lg border border-foreground bg-white transition-all duration-500 ease-in-out dark:bg-secondary pc:mt-14 ${
+          className={`project-modal relative mx-auto mb-14 h-auto w-full max-w-4xl transform rounded-b-lg border border-foreground bg-white transition-all duration-500 ease-in-out dark:bg-secondary pc:mt-14 ${
             showModal
               ? 'translate-y-0 opacity-100'
               : 'translate-y-full opacity-0'
