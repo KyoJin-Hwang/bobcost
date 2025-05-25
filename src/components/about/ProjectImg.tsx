@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import Button from '../ui/Button';
 import { ResumeProject } from '@/config/types';
+import { ArrowBigLeft, ArrowBigRight, TimerReset } from 'lucide-react';
 
 const ProjectImg = ({ data }: { data: ResumeProject }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -12,7 +13,10 @@ const ProjectImg = ({ data }: { data: ResumeProject }) => {
   const handleNext = () => {
     setCurrentIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
   };
-
+  const reset = () => {
+    setCurrentIndex(0);
+  };
+  console.log(images.length, currentIndex);
   return (
     <div className='flex min-h-[300px] flex-col items-center justify-center overflow-hidden pc:min-h-[500px]'>
       <div
@@ -35,9 +39,23 @@ const ProjectImg = ({ data }: { data: ResumeProject }) => {
         <div className='text-lg'>
           {currentIndex + 1}/{data.img?.length}
         </div>
-        <div className='flex gap-2'>
-          <Button onClick={handlePrev}>이전</Button>
-          <Button onClick={handleNext}>다음</Button>
+        <div className='flex gap-4'>
+          {!currentIndex ? (
+            <></>
+          ) : (
+            <Button onClick={handlePrev}>
+              <ArrowBigLeft fill='black' />
+            </Button>
+          )}
+          {currentIndex + 1 === images.length ? (
+            <Button onClick={reset}>
+              <TimerReset />
+            </Button>
+          ) : (
+            <Button onClick={handleNext}>
+              <ArrowBigRight fill='black' />
+            </Button>
+          )}
         </div>
       </div>
     </div>
