@@ -123,6 +123,10 @@ export const Projects: ResumeProject[] = [
     img: [
       '/project/frontend/오늘의햇님/mainOff.png',
       '/project/frontend/오늘의햇님/mainOn.png',
+      '/project/frontend/오늘의햇님/mainOff.png',
+      '/project/frontend/오늘의햇님/mainOn.png',
+      '/project/frontend/오늘의햇님/mainOff.png',
+      '/project/frontend/오늘의햇님/mainOn.png',
     ],
     learning: `필요한 기능을 개발하는 것에 집중하고 싶었기 때문에, 백 엔드 개발에는 Firebase를 활용했어요. 그중에서도 소셜 로그인을 구현하기 위한 Firebase Auth를 처음으로 사용해보았는데, 확실히 직접 구현하는 것에 비해 훨씬 더 쉽다는 느낌을 받았어요. 그리고 Firebase Auth의 동작 원리를 파악하는 과정에서는 OAuth 2.0의 개념도 더욱 탄탄히 다질 수 있었어요.
 
