@@ -48,10 +48,10 @@ const PostCard = async ({ post }: Props) => {
   };
   return (
     <Link href={post.url} className='group relative z-0'>
-      <li className='flex h-full flex-col gap-3 overflow-hidden rounded-md border hover:translate-y-[-5px] hover:shadow-xl dark:shadow-gray-500'>
+      <li className='flex h-full flex-col gap-3 overflow-hidden rounded-md border transition-all duration-300 hover:translate-y-[-20px] hover:shadow-xl dark:shadow-gray-500'>
         <div className='relative h-[250px] w-full overflow-hidden border-b'>
           <img
-            className='h-full w-full object-cover transition-all duration-100 group-hover:scale-[1.2]'
+            className='h-full w-full object-cover transition-all duration-100 group-hover:scale-[1.3]'
             src={post.thumbnail}
             alt={`thumbnail for ${post.title}`}
           />
@@ -71,12 +71,12 @@ const PostCard = async ({ post }: Props) => {
               {post.categoryPublicName}
             </div>
             <div className='mb-3 mt-2 flex flex-col gap-2'>
-              <h2 className='line-clamp-1 text-lg font-bold transition-colors duration-300 ease-in-out group-hover:line-clamp-none group-hover:text-[#a6a646] dark:group-hover:text-[#e6eb00] pc:text-xl'>
+              <h2 className='line-clamp-1 text-lg font-bold transition-colors duration-300 ease-in-out group-hover:text-[#a6a646] dark:group-hover:text-[#e6eb00] pc:text-xl'>
                 {post.title}
               </h2>
               <Text
                 text={post.desc}
-                className='line-clamp-2 text-sm transition-colors duration-300 ease-in-out group-hover:line-clamp-none group-hover:text-[#a6a646] dark:group-hover:text-[#e6eb00]'
+                className='line-clamp-2 text-sm transition-colors duration-300 ease-in-out group-hover:text-[#a6a646] dark:group-hover:text-[#e6eb00]'
               />
             </div>
           </div>
