@@ -29,7 +29,6 @@ export const PostBody = ({ post }: Props) => {
           rehypePlugins: [
             // pretty code block
             [
-              // @ts-ignore
               rehypePrettyCode,
               {
                 theme: { dark: 'github-dark-dimmed', light: 'github-light' },
