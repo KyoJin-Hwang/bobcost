@@ -21,7 +21,10 @@ const ProjectModal = () => {
   const { modal, setModal, modalContent } = contextModal;
 
   const [showModal, setShowModal] = useState(false);
+  // 프로젝트 이미지 상태
+  const [currentIndex, setCurrentIndex] = useState(0);
 
+  // 애니메이션 Effect
   useEffect(() => {
     if (modal) {
       setShowModal(true); // 모달이 열리면 애니메이션을 시작
@@ -54,17 +57,16 @@ const ProjectModal = () => {
     if (!modal && modalRef.current) {
       modalRef.current.scrollTop = 0;
     }
+    setCurrentIndex(0);
   }, [modal]);
-
-  if (!project) {
-    return null; // project가 없으면 렌더링하지 않음
-  }
 
   const handleBackgroundClick = (e: React.MouseEvent) => {
     if (e.target === e.currentTarget) {
       setModal(false);
     }
   };
+
+  if (!project) return null; // project가 없으면 렌더링하지 않음
 
   return (
     <div
@@ -78,7 +80,7 @@ const ProjectModal = () => {
     >
       <div className='m-auto pc:min-w-[1200px]' onClick={handleBackgroundClick}>
         <div
-          className={`project-modal relative mx-auto mb-14 h-auto w-full max-w-4xl transform rounded-b-lg border border-foreground bg-white transition-all duration-500 ease-in-out dark:bg-secondary pc:mt-14 ${
+          className={`project-modal relative mx-auto h-auto w-full transform rounded-b-lg border border-foreground bg-white transition-all duration-500 ease-in-out dark:bg-secondary ${modalContent === 'image' ? 'max-w-3xl' : 'mb-14 max-w-4xl pc:mt-14'} ${
             showModal
               ? 'translate-y-0 opacity-100'
               : 'translate-y-full opacity-0'
@@ -96,7 +98,11 @@ const ProjectModal = () => {
           </div>
           <div className='flex flex-col flex-wrap gap-8 overflow-hidden break-all px-4 pb-10 pt-4'>
             {modalContent === 'image' ? (
-              <ProjectImg data={project} />
+              <ProjectImg
+                data={project}
+                currentIndex={currentIndex}
+                setCurrentIndex={setCurrentIndex}
+              />
             ) : (
               <ProjectDetail data={project} />
             )}
