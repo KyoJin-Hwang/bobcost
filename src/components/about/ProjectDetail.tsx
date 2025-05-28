@@ -57,9 +57,10 @@ const DetailDropdown = ({
             <p>{item.title}</p>
           </div>
           <div
-            className={`overflow-hidden transition-all duration-300 ease-in-out ${
+            className={`cursor-pointer overflow-hidden transition-all duration-300 ease-in-out hover:bg-foreground hover:text-background ${
               openIndexes.has(index) ? 'p-3 opacity-100' : 'max-h-0 opacity-0'
             } text-sm`}
+            onClick={() => handleToggle(index)}
           >
             {item.desc}
           </div>
@@ -113,7 +114,7 @@ const ProjectDetail = ({ data }: { data: ResumeProject }) => {
       {/* 스킬 */}
       <section className='flex flex-col gap-2'>
         <DetailTitle title={`⚙️ Tech Stack`} />
-        <DetailDropdown data={data.skill} />
+        <DetailDropdown data={data.skill} defaultOpen />
       </section>
 
       {/* 백그라운드 */}
