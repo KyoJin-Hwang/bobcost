@@ -80,7 +80,7 @@ export const AboutSkill = ({ title, category }: Skill) => {
             <li key={el.name}>
               <Text
                 className={cn(
-                  'rounded border-2 border-slate-400 px-2 py-1',
+                  'rounded border-2 border-slate-400 px-2 py-2',
                   el.color
                 )}
                 text={el.name}
