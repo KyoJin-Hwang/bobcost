@@ -94,7 +94,7 @@ const About = () => {
         <div className='flex w-full flex-col items-start gap-4 rounded-lg bg-secondary p-6 shadow-[0_0_0.5rem] shadow-gray-400'>
           <AboutSkill title='Language' category='lang' />
           <AboutSkill title='Frontend' category='front' />
-          <AboutSkill title='Backend' category='back' />
+          {/* <AboutSkill title='Backend' category='back' /> */}
           <AboutSkill title='DevOps' category='dev' />
           <AboutSkill title='Tools & ETC' category='tool' />
         </div>
