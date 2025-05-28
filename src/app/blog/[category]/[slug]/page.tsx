@@ -16,11 +16,9 @@ type Props = {
 // 허용된 param 외 접근시 404
 export const dynamicParams = false;
 
-export async function generateMetadata({
-  params: { category, slug },
-}: Props): Promise<Metadata> {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { category, slug } = await params;
   const post = await getPostDetail(category, slug);
-
   const title = `${post.title}`;
   const imageURL = `${baseDomain}${post.thumbnail}`;
 
