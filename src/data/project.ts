@@ -8,6 +8,7 @@ import { ResumeProject } from '@/config/types';
  */
 
 export const Projects: ResumeProject[] = [
+  // 개인블로그 포트폴리오
   {
     type: 1,
     title: '개인블로그 및 포트폴리오',
@@ -83,6 +84,7 @@ export const Projects: ResumeProject[] = [
 
 이 프로젝트는 제 기술적인 성장을 확인할 수 있었던 좋은 기회였습니다.`,
   },
+  // 오늘의 책님
   {
     type: 1,
     title: '오늘의 책님',
