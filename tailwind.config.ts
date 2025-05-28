@@ -106,7 +106,9 @@ export default {
             '.callout-contents > p': {
               margin: 0,
             },
-
+            figure: {
+              marginTop: '0',
+            },
             code: {
               counterReset: 'line',
             },
