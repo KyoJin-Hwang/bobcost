@@ -65,7 +65,10 @@ export const Projects: ResumeProject[] = [
         desc: 'Next.js 프로젝트와 궁합이 좋고, 빠른 배포 및 도메인 연결이 용이하여 Vercel을 사용했습니다.',
       },
     ],
-    img: ['/project/bobcost/개발자소개.png'],
+    img: [
+      '/project/bobcost/개발자소개.png',
+      '/project/frontend/오늘의햇님/오늘의답변.png',
+    ],
     learning: `이번 프로젝트를 통해 처음으로 TailwindCSS를 깊이 있게 사용해보았는데,
 초기 세팅만 잘 되어 있다면 빠르게 결과물을 만들어야 하는 프로젝트에서 정말 유용하겠다는 생각이 들었습니다.
 
