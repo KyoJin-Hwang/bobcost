@@ -45,6 +45,7 @@ const parsePostDetail = async (postPath: string) => {
   const { data, content } = matter(file);
 
   const grayMatter = data as PostMatter;
+  // 글 예상 읽기 시간
   const readingMinutes = Math.ceil(readingTime(content).minutes);
   const createdAt = dayjs(grayMatter.createdAt)
     .locale('ko')
