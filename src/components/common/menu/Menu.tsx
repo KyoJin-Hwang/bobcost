@@ -74,6 +74,7 @@ const MenuToggle = () => {
 
   return (
     <button
+      aria-label='메뉴버튼'
       className='flex items-center gap-1 font-semibold pc:hidden'
       onClick={() => setOpen((el) => !el)}
     >

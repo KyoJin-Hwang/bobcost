@@ -10,7 +10,7 @@ const ThemeSwitch = () => {
   const { theme, setTheme } = useTheme();
 
   const toggle = () => {
-    theme === 'dark' ? setTheme('light') : setTheme('dark');
+    setTheme(theme === 'dark' ? 'light' : 'dark');
   };
 
   useEffect(() => {
@@ -23,6 +23,7 @@ const ThemeSwitch = () => {
 
   return (
     <button
+      aria-label='테마버튼'
       onClick={toggle}
       className='group rounded-full border-black p-1.5 transition-colors duration-200 hover:bg-black dark:border-gray-200 dark:hover:bg-gray-200'
     >

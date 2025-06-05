@@ -72,7 +72,12 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     );
 
     return (
-      <button className={mergedClassName} ref={ref} {...props}>
+      <button
+        aria-label='button'
+        className={mergedClassName}
+        ref={ref}
+        {...props}
+      >
         {children} {/* 아이콘이나 컴포넌트 */}
         {label} {/* 라벨이 있을 경우 표시 */}
       </button>
