@@ -62,17 +62,51 @@ async function main() {
   const desc = await ask('\x1b[33mDescription: \x1b[0m');
   console.log('');
   console.log('썸네일 폴더 설정해주세요.');
-  console.log('1. frontend', '2. backend');
+  const publicPostsDir = path.join(__dirname, 'public', 'posts');
+  const thumbDirs = fs.readdirSync(publicPostsDir).filter((f) => {
+    const fullPath = path.join(publicPostsDir, f);
+    return fs.statSync(fullPath).isDirectory();
+  });
+
+  thumbDirs.forEach((dir, index) => {
+    console.log(`${index + 1}. ${dir}`);
+  });
+  console.log(`${thumbDirs.length + 1}. 썸네일 폴더 만들기`);
+
   const bfSelected = await ask('\x1b[33m번호 입력: \x1b[0m');
   let bfFolder;
-  if (bfSelected === '1') {
-    bfFolder = 'frontend';
-  } else if (bfSelected === '2') {
-    bfFolder = 'backend';
+
+  if (parseInt(bfSelected) === thumbDirs.length + 1) {
+    bfFolder = await ask('\x1b[33m새로운 썸네일 폴더명: \x1b[0m');
+    fs.mkdirSync(path.join(publicPostsDir, bfFolder), { recursive: true });
   } else {
-    console.log('default값인. frontend로 설정합니다.');
-    bfFolder = 'frontend';
+    bfFolder = thumbDirs[parseInt(bfSelected) - 1];
   }
+
+  // 하위 폴더 선택
+  const subThumbDirPath = path.join(publicPostsDir, bfFolder);
+  const subThumbDirs = fs.readdirSync(subThumbDirPath).filter((f) => {
+    const fullPath = path.join(subThumbDirPath, f);
+    return fs.statSync(fullPath).isDirectory();
+  });
+
+  let subFolder = '';
+  if (subThumbDirs.length > 0) {
+    console.log(`\n'${bfFolder}' 안에 있는 폴더를 선택해주세요:`);
+    subThumbDirs.forEach((dir, index) => {
+      console.log(`${index + 1}. ${dir}`);
+    });
+    console.log(`${subThumbDirs.length + 1}. 새 폴더 만들기`);
+    const subSelected = await ask('\x1b[33m번호 입력: \x1b[0m');
+
+    if (parseInt(subSelected) === subThumbDirs.length + 1) {
+      subFolder = await ask('\x1b[33m새로운 하위 폴더명: \x1b[0m');
+      fs.mkdirSync(path.join(subThumbDirPath, subFolder), { recursive: true });
+    } else {
+      subFolder = subThumbDirs[parseInt(subSelected) - 1];
+    }
+  }
+
   const thumbnailName = await ask(
     '\x1b[33m썸내일 파일명 (without .png): \x1b[0m'
   );
@@ -108,7 +142,9 @@ async function main() {
   }
 
   const createdAt = getCurrentDateTime();
-  const thumbnail = `/posts/${bfFolder}/${thumbnailName}.png`;
+  const thumbnailPathParts = [bfFolder];
+  if (subFolder) thumbnailPathParts.push(subFolder);
+  const thumbnail = `/posts/${thumbnailPathParts.join('/')}/${thumbnailName}.png`;
 
   const content = `---
 title: '${title}'
@@ -120,8 +156,8 @@ group: ${group}
 
 `;
 
-  fs.writeFileSync(path.join(fullPath, 'context.mdx'), content);
-  console.log(`✅ ${fullPath}/context.mdx 생성 완료`);
+  fs.writeFileSync(path.join(fullPath, 'content.mdx'), content);
+  console.log(`✅ ${fullPath}/content.mdx 생성 완료`);
 
   rl.close();
 }
