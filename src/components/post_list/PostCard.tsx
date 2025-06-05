@@ -38,10 +38,10 @@ const PostCard = async ({ post }: Props) => {
   };
   const postDateGroup = (status: string) => {
     return clsx(
-      'absolute right-2 bottom-2 rounded px-2 py-1 flex items-center gap-2',
+      'absolute right-2 bottom-2 rounded px-2 py-1 flex items-center gap-2 text-background',
       {
-        'bg-teal-500 ': status === 'New',
-        'bg-orange-500 ': status === 'Updated',
+        'bg-teal-500': status === 'New',
+        'bg-orange-500': status === 'Updated',
         hidden: status === 'hidden',
       }
     );
