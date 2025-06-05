@@ -252,6 +252,7 @@ export const AboutProject = () => {
               {/* Readme, 이미지 */}
               <div className='flex gap-4'>
                 <button
+                  aria-label='리드미버튼'
                   onClick={() => projectClick(item, 'readme')}
                   className='mt-4 flex gap-2 rounded-md border-2 p-2 font-bold transition-all duration-300 hover:bg-foreground hover:text-background'
                 >
@@ -260,6 +261,7 @@ export const AboutProject = () => {
                 </button>
                 {item.img && (
                   <button
+                    aria-label='이미지버튼'
                     onClick={() => projectClick(item, 'image')}
                     className='mt-4 flex gap-2 rounded-md border-2 p-2 font-bold transition-all duration-300 hover:bg-foreground hover:text-background'
                   >
