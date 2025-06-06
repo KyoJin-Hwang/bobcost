@@ -1,16 +1,95 @@
 ---
-title: '자바스크립트 기초정리 (2025)'
-desc: 프론트엔드 개발자로서 반드시 알아야 할 JavaScript의 기초 문법과 주요 개념들을 정리, 변수 선언부터 배열, 객체, 함수 등 실무에서 자주 사용하는 부분 위주.
+title: '자바스크립트 기초 정리 (2025)'
+desc: 프론트엔드 개발자로서 반드시 알아야 할 JavaScript의 기초 문법과 주요 개념들을 정리, 변수 선언부터 배열, 객체, 함수등.
 createdAt: 2025-04-05 15:00 
 thumbnail: /posts/frontend/javascript/javascript_basic.png
 group: JS
 ---
+
+
 
 ## 💡Javascript 기초 정리하게 된 계기
 React와 같은 프레임워크를 사용하면서 점점 JavaScript의 기초 개념을 놓치고 있다는 생각이 들었습니다. 
 실제로 간단한 로직을 작성할 때도 문법이나 동작 방식이 헷갈릴 때가 많았고, 기초를 탄탄히 다지지 않으면 실력이 더 이상 올라가지 않을 거란 위기감이 들었습니다. 그래서 다시 한 번 JavaScript의 기본 개념들을 정리하며 제대로 이해하고 넘어가자는 마음으로 이 글을 작성하게 되었습니다.
 
 <hr/> 
+
+
+
+## 📘 JavaScript란?
+
+**JavaScript**는 웹 브라우저에서 실행되는 대표적인 프로그래밍 언어로, 웹 페이지를 **동적으로 조작**하고, **사용자와의 상호작용**을 가능하게 합니다.
+
+> ✅ **HTML**은 웹 페이지의 **구조(structure)** 를 만들고,  
+> ✅ **CSS**는 그 구조에 **스타일(style)** 을 입히며,  
+> ✅ **JavaScript**는 웹 페이지에 **행동(behavior)** 을 부여합니다.
+
+---
+
+### 🧾 정의
+
+- **객체 기반(Object-oriented)**  
+- **이벤트 기반(Event-driven)**  
+- **동적 타입(Dynamically typed)**  
+- **인터프리터 언어(Interpreted language)** 입니다.
+
+> 브라우저가 HTML과 CSS를 해석한 후, JavaScript는 DOM(Document Object Model)을 제어하여 페이지에 생명력을 불어넣습니다.
+
+---
+
+### 🕘 역사 간단 정리
+
+- **1995년**: Netscape의 브렌던 아이크(Brendan Eich)가 10일 만에 JavaScript의 초안 개발  
+- **초기 이름**은 Mocha → LiveScript → JavaScript로 변경  
+- Java와는 이름만 비슷할 뿐, 전혀 다른 언어입니다  
+- 이후 ECMAScript(표준 스펙)로 발전하여 지속적으로 업그레이드됨
+
+---
+
+### 🧠 JavaScript는 어떤 역할을 하나요?
+
+JavaScript는 웹 페이지에 다음과 같은 **동적 기능**을 제공합니다:
+
+- 버튼 클릭 시 UI 변경  
+- 입력값 검증  
+- 모달 창 열기/닫기  
+- 슬라이더, 드롭다운, 애니메이션 처리  
+- 서버와의 데이터 통신 (AJAX, fetch 등)  
+- 실시간 채팅, 알림, 비디오 플레이어 제어 등
+
+---
+
+### 🔧 실행 환경
+
+#### 📍 브라우저 (Client-side)
+
+- HTML과 함께 웹 페이지 내에서 실행됩니다.
+- 각 브라우저에는 자체 JavaScript 엔진이 존재
+  - Chrome → **V8**
+  - Firefox → **SpiderMonkey**
+  - Safari → **JavaScriptCore**
+  - Edge → **Chakra (구버전)**
+
+#### 📍 Node.js (Server-side)
+
+- 2009년 이후, **Node.js** 등장으로 서버 사이드에서도 JavaScript 사용 가능해짐
+- 백엔드, CLI 툴, API 서버, 배치 작업 등으로 확장
+
+---
+
+### 🌐 지금의 JavaScript는?
+
+- 단순한 스크립트 언어를 넘어서,
+- 프론트엔드와 백엔드를 모두 커버하는 **풀스택 언어**
+- 모바일, 데스크탑, IoT, 머신러닝 등 다양한 분야로 확장 중
+
+```js
+// 예시: 버튼 클릭 시 텍스트 바꾸기
+document.getElementById("btn").addEventListener("click", () => {
+  document.getElementById("text").innerText = "버튼이 눌렸습니다!";
+});
+```
+
 
 ## 원시 자료형 (Primitive Type)
 
@@ -55,4 +134,3 @@ const [name, setName] = useState("Taylor");
 
 const red = 'hi'
 ```
-
