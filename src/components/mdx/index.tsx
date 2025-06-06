@@ -1,6 +1,7 @@
 import { Callout } from './Callout';
 import { Image } from './Image';
 import { ExternalLink } from './Link';
+import LiveCode from './liveCode';
 import { MDXComponents } from 'mdx/types';
 
 export const MdxComponents: MDXComponents = {
@@ -8,4 +9,5 @@ export const MdxComponents: MDXComponents = {
   img: Image as any,
   blockquote: Callout,
   Callout,
+  LiveCode,
 };
