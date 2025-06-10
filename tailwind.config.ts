@@ -100,8 +100,8 @@ export default {
               scrollMarginTop: '5rem',
             },
             p: {
-              marginTop: '1.5rem',
-              marginBottom: '1.5rem',
+              marginTop: '1.2rem',
+              marginBottom: '1.2rem',
             },
             '.callout-contents > p': {
               margin: 0,

@@ -1,6 +1,6 @@
 ---
 title: '자바스크립트 기초 정리 (2025)'
-desc: 프론트엔드 개발자로서 반드시 알아야 할 JavaScript의 기초 문법과 주요 개념들을 정리, 변수 선언부터 배열, 객체, 함수등.
+desc: 프론트엔드 개발자로서 반드시 알아야 할 JavaScript의 기초 문법과 주요 개념들을 정리
 createdAt: 2025-04-05 15:00 
 thumbnail: /posts/frontend/javascript/javascript_basic.png
 group: JS
@@ -152,3 +152,58 @@ console.log("숫자가 아님" + 2);
 // 👉 결과: "숫자가 아님2"
 ```
 
+---
+
+### 📌 문자형 (String)
+자바스크립트에선 문자열(string)을 따옴표로 묶습니다.
+
+문자열을 나타내는 방식은 3가지가 있습니다.
+- 큰따옴표: "Hello"
+- 작은따옴표: 'Hello'
+- 역 따옴표(백틱, backtick): `` `Hello` ``
+
+따옴표와 작은따옴표는 ‘기본적인’ 따옴표로, 자바스크립트에서는 이 둘에 차이를 두지 않습니다.
+역 따옴표로 변수나 표현식을 감싼 후 `${…}`안에 넣어주면, 아래와 같이 원하는 변수나 표현식을 문자열 중간에 손쉽게 넣을 수 있습니다.
+
+```js showLineNumbers
+let str = "Hello!";
+let str2 = 'Hello 2!';
+let str3 = `Owen ${str}`;
+```
+
+--- 
+
+### 📌 불린형 (Boolean)
+불린형(논리 타입)은 true와 false 두 가지 값밖에 없는 자료형입니다.
+불린형은 긍정(yes)이나 부정(no)을 나타내는 값을 저장할 때 사용합니다. true는 긍정, false는 부정을 의미합니다.
+
+```js showLineNumbers
+let yes = true
+let no = false
+
+let isGreater = 4 > 3
+console.log(isGreater)
+// 👉 결과: true
+```
+
+---
+
+### 📌 null 값 (null)
+`null` 값은 지금까지 소개한 자료형 중 **어느 자료형에도 속하지 않는 값**입니다.
+`null` 값은 오로지 `null` 값만 포함하는 **별도의 자료형**을 만듭니다.
+
+
+```js showLineNumbers
+// let age = null; 은 나이(age)를 알 수 없거나 그 값이 비어있음을 보여줍니다.
+let age = null;
+```
+
+자바스크립트에선 null 사용하는 방법
+- ‘존재하지 않는(nothing)’ 값
+- ‘비어 있는(empty)’ 값
+- ‘알 수 없는(unknown)’ 값을 나타내는 데 사용합니다. 
+
+### 📌 undefined 값 (undefined)
+`undefined` 값도 `null` 값처럼 자신만의 자료형을 형성합니다.
+`undefined`는 '값이 할당되지 않은 상태’를 나타낼 때 사용합니다.
+변수는 선언했지만, 값을 할당하지 않았다면 해당 변수에 `undefined`가 자동으로 할당됩니다.

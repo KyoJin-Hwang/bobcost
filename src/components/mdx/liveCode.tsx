@@ -17,12 +17,20 @@ export default function LiveCode({ code, title }: Props) {
     const isFunction = trimmed.startsWith('function');
     const isJSX = trimmed.startsWith('<');
 
-    console.log(trimmed);
     if (!isAlreadyWrapped && (isFunction || isJSX)) {
       return `render(${trimmed})`;
     }
     return code;
   }, [code]);
+
+  // Remove cssStyle definition for editor
+  const editorCode = React.useMemo(() => {
+    // Remove 'const cssStyle = { ... };' blocks (including possible whitespace and semicolon)
+    return transformedCode.replace(
+      /const\s+cssStyle\s*=\s*\{[\s\S]*?\};?\s*/g,
+      ''
+    );
+  }, [transformedCode]);
 
   return (
     <LiveProvider code={transformedCode} noInline scope={{ React, clsx }}>
@@ -33,11 +41,11 @@ export default function LiveCode({ code, title }: Props) {
         <div className='mb-6 grid gap-4 lg:grid-cols-2'>
           <div className='flex flex-col gap-3'>
             <LiveEditor
-              code={transformedCode}
-              className='max-h-[500px] overflow-scroll overscroll-contain rounded-md'
+              code={editorCode}
+              className='max-h-[500px] overscroll-contain rounded-md'
             />
           </div>
-          <div className='max-h-[500px] overflow-scroll overscroll-contain rounded-md border-2 border-foreground bg-secondary p-5 text-xl'>
+          <div className='max-h-[500px] overscroll-contain rounded-md border-2 border-foreground bg-secondary p-5 text-xl'>
             <LivePreview />
           </div>
         </div>
