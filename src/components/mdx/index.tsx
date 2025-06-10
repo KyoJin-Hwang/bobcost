@@ -1,6 +1,7 @@
 import { Callout } from './Callout';
 import { Image } from './Image';
 import { ExternalLink } from './Link';
+import CodeRunner from './codeRunner';
 import LiveCode from './liveCode';
 import { MDXComponents } from 'mdx/types';
 
@@ -10,4 +11,5 @@ export const MdxComponents: MDXComponents = {
   blockquote: Callout,
   Callout,
   LiveCode,
+  CodeRunner,
 };
