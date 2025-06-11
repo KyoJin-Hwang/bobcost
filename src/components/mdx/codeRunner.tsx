@@ -67,7 +67,7 @@ export default function CodeRunner({
             marginBottom: '0.5rem',
             borderRadius: '0.375rem',
             padding: '0.75rem 1rem',
-            // lineHeight: '2rem',
+            lineHeight: '1.5rem',
             fontSize: '0.875rem',
           }}
         >
