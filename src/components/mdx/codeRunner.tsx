@@ -5,7 +5,9 @@ import { useState } from 'react';
 import { cn } from '@/lib/utils';
 import { ObjectInspector } from 'react-inspector';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import vscDarkPlus from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
+
+type LogEntry = unknown[];
 
 interface CodeRunnerProps {
   code: string;
@@ -17,13 +19,13 @@ export default function CodeRunner({
   showLineNumbers = false,
 }: CodeRunnerProps) {
   const [copied, setCopied] = useState(false);
-  const [output, setOutput] = useState<any[][]>([]);
+  const [output, setOutput] = useState<LogEntry[]>([]);
   const [showOutput, setShowOutput] = useState(false);
 
   const runCode = () => {
-    const logs: any[][] = [];
+    const logs: LogEntry[] = [];
     const originalLog = console.log;
-    console.log = (...args: any[]) => {
+    console.log = (...args: unknown[]) => {
       logs.push(args);
       originalLog(...args);
     };
@@ -65,7 +67,7 @@ export default function CodeRunner({
             marginBottom: '0.5rem',
             borderRadius: '0.375rem',
             padding: '0.75rem 1rem',
-            lineHeight: '2rem',
+            // lineHeight: '2rem',
             fontSize: '0.875rem',
           }}
         >
