@@ -181,9 +181,11 @@ export default {
             'ol[role="tree"] > li[role="treeitem"]': {
               padding: '10px',
               borderRadius: '6px',
+              backgroundColor: 'var(--foreground) !important',
+              border: '1px solid white',
             },
             'ol[role="tree"] > li[role="treeitem"] > div > span': {
-              color: 'black !important',
+              color: 'var(--background) !important',
             },
             'pre code span': {
               color: 'var(--shiki-light)',
