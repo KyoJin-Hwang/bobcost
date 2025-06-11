@@ -175,6 +175,13 @@ export default {
               paddingRight: '1rem',
             },
 
+            '.runner > pre > code > span': {
+              padding: '0',
+            },
+            'ol[role="tree"] > li[role="treeitem"]': {
+              padding: '10px',
+              borderRadius: '6px',
+            },
             'pre code span': {
               color: 'var(--shiki-light)',
             },
@@ -193,7 +200,13 @@ export default {
             '.project p,ul,li': {
               fontSize: 15,
             },
-
+            '.scrollbar-hide': {
+              scrollbarWidth: 'none' /* Firefox */,
+              msOverflowStyle: 'none' /* IE and Edge */,
+            },
+            '.scrollbar-hide::-webkit-scrollbar': {
+              display: 'none' /* Chrome, Safari, Opera */,
+            },
             u: {
               textUnderlineOffset: '4px',
               textDecorationThickness: 1,

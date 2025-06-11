@@ -3,6 +3,9 @@
 import { useState } from 'react';
 
 import { cn } from '@/lib/utils';
+import { ObjectInspector } from 'react-inspector';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import vscDarkPlus from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 interface CodeRunnerProps {
   code: string;
@@ -14,13 +17,31 @@ export default function CodeRunner({
   showLineNumbers = false,
 }: CodeRunnerProps) {
   const [copied, setCopied] = useState(false);
+  const [output, setOutput] = useState<any[][]>([]);
+  const [showOutput, setShowOutput] = useState(false);
 
   const runCode = () => {
+    const logs: any[][] = [];
+    const originalLog = console.log;
+    console.log = (...args: any[]) => {
+      logs.push(args);
+      originalLog(...args);
+    };
+
     try {
       new Function(code)();
-    } catch (err: any) {
-      alert('Error: ' + err.message);
-      console.error('Error: ', err);
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        logs.push(['Error: ' + err.message]);
+        console.error('Error: ', err);
+      } else {
+        logs.push(['Unknown error occurred']);
+        console.error('Unknown error: ', err);
+      }
+    } finally {
+      console.log = originalLog;
+      setOutput(logs);
+      setShowOutput(true);
     }
   };
 
@@ -34,25 +55,24 @@ export default function CodeRunner({
     }
   };
 
-  const codeLines = code.split('\n');
-  const editorLines = codeLines.slice(1, codeLines.length - 1);
-
-  const formattedCode = showLineNumbers
-    ? editorLines
-        .map((line, i) => {
-          const lineNumber = i + 1;
-          return `<span class="block"><span class="inline-block w-4 mr-4 text-sm text-gray-500 select-none">${lineNumber}</span><span class="text-base">${line}</span></span>`;
-        })
-        .join('\n')
-    : editorLines.join('\n');
-
   return (
     <div className='my-4 rounded border bg-zinc-900 p-4 text-white'>
-      <div className='group relative'>
-        <pre
-          className='mb-2 overflow-x-auto whitespace-pre-wrap rounded bg-black p-4 text-sm'
-          dangerouslySetInnerHTML={{ __html: formattedCode }}
-        />
+      <div className='group runner relative'>
+        <SyntaxHighlighter
+          language='javascript'
+          style={vscDarkPlus}
+          showLineNumbers={showLineNumbers}
+          customStyle={{
+            marginBottom: '0.5rem',
+            borderRadius: '0.375rem',
+            padding: '0.75rem 1rem',
+            lineHeight: '2rem',
+            fontSize: '0.875rem',
+          }}
+        >
+          {code}
+        </SyntaxHighlighter>
+
         <button
           onClick={copyCode}
           aria-label='코드 복사'
@@ -79,7 +99,7 @@ export default function CodeRunner({
           ) : (
             <svg
               xmlns='http://www.w3.org/2000/svg'
-              className='h-5 w-5 text-gray-300 hover:text-white'
+              className='h-5 w-5 text-gray-400 hover:text-black'
               fill='none'
               viewBox='0 0 24 24'
               stroke='currentColor'
@@ -110,6 +130,29 @@ export default function CodeRunner({
       >
         ▶ 실행
       </button>
+      {output.length > 0 && (
+        <div className='mt-2'>
+          <button
+            onClick={() => setShowOutput(!showOutput)}
+            className='mb-1 rounded bg-gray-700 px-3 py-2 text-xs font-semibold hover:bg-gray-600'
+          >
+            {showOutput ? '출력 닫기' : '출력 보기'}
+          </button>
+          {showOutput && (
+            <div className='scrollbar-hide max-h-60 overflow-y-auto overscroll-contain text-sm text-white'>
+              {output.map((entry, idx) => (
+                <div key={idx} className='mb-2'>
+                  {entry.map((arg, i) => (
+                    <div key={i}>
+                      <ObjectInspector data={arg} expandLevel={1} />
+                    </div>
+                  ))}
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 }
