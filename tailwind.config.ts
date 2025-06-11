@@ -182,6 +182,9 @@ export default {
               padding: '10px',
               borderRadius: '6px',
             },
+            'ol[role="tree"] > li[role="treeitem"] > div > span': {
+              color: 'black !important',
+            },
             'pre code span': {
               color: 'var(--shiki-light)',
             },
