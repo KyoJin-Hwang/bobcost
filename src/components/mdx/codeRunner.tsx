@@ -27,7 +27,6 @@ export default function CodeRunner({
       logs.push(args);
       originalLog(...args);
     };
-
     try {
       new Function(code)();
     } catch (err: unknown) {
