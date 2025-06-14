@@ -1,76 +1,9 @@
 ---
-title: '자바스크립트 기초 정리 (2025)'
-desc: 프론트엔드 개발자로서 반드시 알아야 할 JavaScript의 기초 문법과 주요 개념들을 정리
-createdAt: 2025-04-05 15:00 
-thumbnail: /posts/frontend/javascript/javascript_basic.png
+title: '📚 자바스크립트 자료형'
+desc: 각 자료형 특징과 사용법을 쉽게 이해할 수 있도록 정리했습니다. 
+createdAt: 2025-04-05 15:05 
+thumbnail: /posts/frontend/javascript/자료형.png
 group: JS
----
-
-
-
-## 💡Javascript 기초 정리하게 된 계기
-React와 같은 프레임워크를 사용하면서 점점 JavaScript의 기초 개념을 놓치고 있다는 생각이 들었습니다. 
-실제로 간단한 로직을 작성할 때도 문법이나 동작 방식이 헷갈릴 때가 많았고, 기초를 탄탄히 다지지 않으면 실력이 더 이상 올라가지 않을 거란 위기감이 들었습니다. 그래서 다시 한 번 JavaScript의 기본 개념들을 정리하며 제대로 이해하고 넘어가자는 마음으로 이 글을 작성하게 되었습니다.
-
-<hr/> 
-
-
-
-## 📘 JavaScript란?
-
-**JavaScript**는 웹 브라우저에서 실행되는 대표적인 프로그래밍 언어로, 웹 페이지를 **동적으로 조작**하고, **사용자와의 상호작용**을 가능하게 합니다.
-
-> ✅ **HTML**은 웹 페이지의 **구조(structure)** 를 만들고,  
-> ✅ **CSS**는 그 구조에 **스타일(style)** 을 입히며,  
-> ✅ **JavaScript**는 웹 페이지에 **행동(behavior)** 을 부여합니다.
-
----
-
-### 🧾 정의
-- **객체 기반(Object-oriented)**  
-- **이벤트 기반(Event-driven)**  
-- **동적 타입(Dynamically typed)**  
-- **인터프리터 언어(Interpreted language)**
-> 브라우저가 HTML과 CSS를 해석한 후, JavaScript는 DOM(Document Object Model)을 제어하여 페이지에 생명력을 불어넣습니다.
----
-
-### 🕘 역사 간단 정리
-- **1995년**: Netscape의 브렌던 아이크(Brendan Eich)가 10일 만에 JavaScript의 초안 개발  
-- **초기 이름**은 Mocha → LiveScript → JavaScript로 변경  
-- Java와는 이름만 비슷할 뿐, 전혀 다른 언어입니다  
-- 이후 ECMAScript(표준 스펙)로 발전하여 지속적으로 업그레이드됨
----
-
-### 🧠 JavaScript는 어떤 역할을 하나요?
-JavaScript는 웹 페이지에 다음과 같은 **동적 기능**을 제공합니다:
-- 버튼 클릭 시 UI 변경  
-- 입력값 검증  
-- 모달 창 열기/닫기  
-- 슬라이더, 드롭다운, 애니메이션 처리  
-- 서버와의 데이터 통신 (AJAX, fetch 등)  
-- 실시간 채팅, 알림, 비디오 플레이어 제어 등
-
----
-
-### 🔧 실행 환경
-
-#### 📍 브라우저 (Client-side)
-- HTML과 함께 웹 페이지 내에서 실행됩니다.
-- 각 브라우저에는 자체 JavaScript 엔진이 존재
-  - Chrome → **V8**
-  - Firefox → **SpiderMonkey**
-  - Safari → **JavaScriptCore**
-  - Edge → **Chakra (구버전)**
-#### 📍 Node.js (Server-side)
-- 2009년 이후, **Node.js** 등장으로 서버 사이드에서도 JavaScript 사용 가능해짐
-- 백엔드, CLI 툴, API 서버, 배치 작업 등으로 확장
----
-
-### 🌐 지금의 JavaScript는?
-- 단순한 스크립트 언어를 넘어서,
-- 프론트엔드와 백엔드를 모두 커버하는 **풀스택 언어**
-- 모바일, 데스크탑, IoT, 머신러닝 등 다양한 분야로 확장 중
-
 ---
 
 ## ⭐️ 자료형이란?
@@ -216,3 +149,59 @@ let age = null;
   console.log(name)`}
   showLineNumbers
 />
+
+### 📌 객체와 심볼 (Object and Symbol)
+
+`객체 (Object)`
+- 특수한 자료형으로, 데이터와 동작을 함께 표현할 수 있는 구조입니다.
+- 일반적인 원시형(문자열, 숫자, 불린 등)과 달리, 하나 이상의 값을 그룹으로 묶어서 표현할 수 있습니다.
+- 객체는 **속성(key-value 쌍)** 으로 이루어져 있으며, 다양한 데이터를 담을 수 있어 **복잡한 개체(entity)** 를 표현할 때 사용됩니다. 
+
+```js showLineNumbers
+let user = {
+  name: "Kyojin",
+  age: 29
+  birth: "1997-11-27"
+  gender: "Man"
+};
+```
+
+`심볼 (Symbol)`
+- ES6에 도입된 자료형입니다.
+- 고유하고 유일한 식별자를 만들 때 사용됩니다.
+- 주로 객체의 속성 키로 사용되며, 다른 코드와 충돌하지 않도록 하는 데 유용합니다.
+- 심볼은 동일한 설명을 사용해 생성해도 서로 다른 값입니다.
+
+<CodeRunner
+  code={`// 'password'라는 설명을 가진 심볼을 생성 (고유한 값)
+let password = Symbol("password");
+
+// 'user' 객체 생성, 심볼 키를 이용해 비밀번호 정보를 감춤
+let user = {
+    name: "Admin",
+    [password]: "secret" // 일반 문자열 키가 아닌, 심볼 키를 사용
+};
+
+// 비밀번호를 확인하는 함수
+function checkPassword(obj, pwd) {
+    // 심볼 키로 저장된 비밀번호와 입력값을 비교
+    return obj[password] === pwd;
+}
+
+// 함수 호출: 비밀번호가 맞으면 true 반환
+console.log(checkPassword(user, "secret"));`}
+/>
+
+| 구분             | 객체 (Object)                                            | 심볼 (Symbol)                                           |
+|------------------|-----------------------------------------------------------|----------------------------------------------------------|
+| 자료형 종류      | 참조형 (Reference Type)                                   | 원시형 (Primitive Type)                                 |
+| 목적             | 데이터를 여러 개 묶어 표현 (컬렉션, 개체 등)              | 고유한 속성 키를 만들기 위해 사용                        |
+| 사용 용도        | 다양한 속성과 메서드를 가진 복합 데이터 구조              | 객체 속성의 **유일한 키**로 사용                         |
+| 생성 방법        | `{}` 또는 `new Object()`                                  | `Symbol()` 함수로 생성                                   |
+| 키로 사용 여부   | 일반적으로 키로 사용됨 (`key: value` 형식)               | 객체의 키로 사용 가능하나, 고유하고 숨겨진 키로 활용됨  |
+| 고유성           | 객체 자체는 고유하지만 키 이름은 문자열로 중복 가능       | 생성할 때마다 고유하며 절대 중복되지 않음               |
+| 비교 가능성      | 참조에 따라 동일 여부 판단 (`===`는 주소 비교)            | 항상 고유 (`Symbol("a") !== Symbol("a")`)               |
+| JSON 직렬화      | 가능 (`JSON.stringify`)                                   | 심볼 키는 직렬화되지 않음 (무시됨)                      |
+| 상징적 사용 예   | 사용자 정보, 설정, DOM 등 데이터 표현                    | 내부 속성 식별자, 라이브러리 간 충돌 방지                |
+
+![](https://blog.kakaocdn.net/dn/cMlPpJ/btrzzp5xhgK/JH0RKu6urt0mYuekeeXB11/img.gif)
