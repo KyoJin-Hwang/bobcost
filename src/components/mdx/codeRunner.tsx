@@ -69,6 +69,9 @@ export default function CodeRunner({
             padding: '0.75rem 1rem',
             lineHeight: '1.5rem',
             fontSize: '0.875rem',
+            maxHeight: '40rem',
+            overflowY: 'auto',
+            overscrollBehavior: 'contain',
           }}
         >
           {code}
@@ -79,7 +82,7 @@ export default function CodeRunner({
           aria-label='코드 복사'
           className={cn(
             'absolute right-2 top-2 opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus:opacity-100',
-            copied && 'opacity-100'
+            copied && 'max-h-6 opacity-100'
           )}
         >
           {copied ? (
