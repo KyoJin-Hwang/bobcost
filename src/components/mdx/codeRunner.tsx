@@ -12,11 +12,13 @@ type LogEntry = unknown[];
 interface CodeRunnerProps {
   code: string;
   showLineNumbers?: boolean;
+  title?: string;
 }
 
 export default function CodeRunner({
   code,
   showLineNumbers = false,
+  title = '',
 }: CodeRunnerProps) {
   const [copied, setCopied] = useState(false);
   const [output, setOutput] = useState<LogEntry[]>([]);
@@ -57,7 +59,12 @@ export default function CodeRunner({
   };
 
   return (
-    <div className='my-4 rounded border bg-zinc-900 p-4 text-white'>
+    <div className='my-4 rounded border bg-white p-4 text-white dark:border-[#374151] dark:bg-[#22272e]'>
+      {title && (
+        <span className='rounded-md border border-background bg-foreground px-2 py-1 text-background'>
+          {title}
+        </span>
+      )}
       <div className='group runner relative'>
         <SyntaxHighlighter
           language='javascript'
@@ -103,7 +110,7 @@ export default function CodeRunner({
           ) : (
             <svg
               xmlns='http://www.w3.org/2000/svg'
-              className='h-5 w-5 text-gray-400 hover:text-black'
+              className='h-5 w-5 text-gray-600 hover:text-white'
               fill='none'
               viewBox='0 0 24 24'
               stroke='currentColor'
