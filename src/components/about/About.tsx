@@ -182,7 +182,7 @@ export const AboutProject = () => {
     { type: 0, label: '전체', color: `bg-warning ` },
     { type: 1, label: '개인', color: 'bg-kyo-green' },
     { type: 2, label: '팀', color: 'bg-kyo-blue' },
-    { type: 3, label: '기업', color: 'bg-kyo-red' },
+    // { type: 3, label: '기업', color: 'bg-kyo-red' },
   ];
   return (
     <div className='flex flex-col gap-5'>
