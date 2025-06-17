@@ -59,11 +59,11 @@ export default function CodeRunner({
   };
 
   return (
-    <div className='my-4 rounded border bg-white p-4 text-white dark:border-[#374151] dark:bg-[#22272e]'>
+    <div className='relative my-4 rounded border bg-white p-4 text-white dark:border-[#374151] dark:bg-[#22272e]'>
       {title && (
-        <span className='rounded-md border border-background bg-foreground px-2 py-1 text-background'>
+        <div className='mb-1 inline-block rounded-md border border-background bg-foreground px-2 py-1 font-semibold text-background'>
           {title}
-        </span>
+        </div>
       )}
       <div className='group runner relative'>
         <SyntaxHighlighter

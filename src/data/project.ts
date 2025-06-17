@@ -15,7 +15,7 @@ export const Projects: ResumeProject[] = [
     start: '2024.12',
     end: 'ing',
     team: '1人 개인 프로젝트',
-    url: 'https://bobcost.kr',
+    url: 'https://www.bobcost.kr',
     summary: {
       title: '개발블로그 및 포트폴리오 반응형 웹사이트',
       point:
@@ -83,7 +83,7 @@ export const Projects: ResumeProject[] = [
 무엇보다 내가 원하는 스타일과 기능을 직접 구현해
 블로그와 포트폴리오를 완성했다는 점에서 큰 뿌듯함을 느꼈습니다.
 
-이 프로젝트는 제 기술적인 성장을 확인할 수 있었던 좋은 기회였습니다.`,
+이 프로젝트는 제 기술적인 성장을 계속 확인할 수 있는 좋은 기회가 될것같습니다.`,
   },
   // 오늘의 책님
   {
