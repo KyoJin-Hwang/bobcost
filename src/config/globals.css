@@ -68,6 +68,9 @@
 
   --zustand: #ffbd61;
   --zustand-foreground: var(--black);
+
+  --book: #db7504;
+  --book-foreground: var(--white);
 }
 
 .dark {

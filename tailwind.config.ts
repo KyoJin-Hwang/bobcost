@@ -86,6 +86,10 @@ export default {
           DEFAULT: 'var(--zustand)',
           foreground: 'var(--zustand-foreground)',
         },
+        book: {
+          DEFAULT: 'var(--book)',
+          foreground: 'var(--book-foreground)',
+        },
       },
       spacing: {
         header: '60px',
