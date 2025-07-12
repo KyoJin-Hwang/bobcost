@@ -2,6 +2,7 @@
 
 import { useContext, useState } from 'react';
 
+import Image from 'next/image';
 import Link from 'next/link';
 
 import Button from '../ui/Button';
@@ -14,7 +15,7 @@ import {
 import { ResumeProject } from '@/config/types';
 import { Resume as resume } from '@/data/resume';
 import { cn } from '@/lib/utils';
-import { BookOpenIcon, Image } from 'lucide-react';
+import { BookOpenIcon, Image as LucideImage } from 'lucide-react';
 
 interface Props {
   title: string;
@@ -103,7 +104,13 @@ export const AboutCarrer = () => {
       {/* Header */}
       <div className='flex flex-col gap-2'>
         <a target='_blank' href={el.link} className='flex cursor-pointer gap-2'>
-          <img src={el.logo} alt='회사로고' className='w-8 rounded-lg' />
+          <Image
+            src={el.logo}
+            alt='회사로고'
+            width={32}
+            height={32}
+            className='rounded-lg'
+          />
           <Text
             text={el.company}
             className='text-2xl font-bold transition-all duration-300 hover:bg-foreground hover:text-background'
@@ -265,7 +272,7 @@ export const AboutProject = () => {
                     onClick={() => projectClick(item, 'image')}
                     className='mt-4 flex gap-2 rounded-md border-2 p-2 font-bold transition-all duration-300 hover:bg-foreground hover:text-background'
                   >
-                    <Image />
+                    <LucideImage />
                     이미지
                   </button>
                 )}
