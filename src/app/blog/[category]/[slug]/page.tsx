@@ -42,7 +42,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 const PostDetail = async ({ params }: Props) => {
-  const { category, slug } = await params;
+  const { category, slug } = params;
   const post = await getPostDetail(category, slug);
   const toc = parseToc(post.content);
   return (
