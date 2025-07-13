@@ -91,16 +91,16 @@ export const getPostList = async (category?: string): Promise<Post[]> => {
   const postList = await Promise.all(
     postPaths.map((postPath) => parsePost(postPath))
   );
-  return postList;
+  const filtered = postList.filter(
+    (post) => post.look === 'on' || process.env.NODE_ENV !== 'production'
+  );
+  return filtered;
 };
 
 // 정렬한 postList를 반납
 export const getSortedPostList = async (category?: string) => {
   const postList = await getPostList(category);
-  const filtered = postList.filter(
-    (post) => post.look === 'on' || process.env.NODE_ENV !== 'production'
-  );
-  return sortPostList(filtered);
+  return sortPostList(postList);
 };
 
 // 사이트맵 함수
@@ -132,7 +132,6 @@ export const getCategoryDetailList = async () => {
     if (post.look === 'off' && process.env.NODE_ENV === 'production') {
       continue;
     }
-    console.log(process.env.NODE_ENV);
     const category = post.categoryPath;
 
     if (result[category]) {
