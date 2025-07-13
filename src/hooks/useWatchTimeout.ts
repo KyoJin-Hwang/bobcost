@@ -6,14 +6,14 @@ export default function useWatchTimeout(
   callback: () => void
 ) {
   useEffect(() => {
-    let timeOut: NodeJS.Timeout;
+    let timeOut: ReturnType<typeof setTimeout>;
 
     if (watch) {
       timeOut = setTimeout(callback, ms);
     }
 
     return () => {
-      timeOut && clearInterval(timeOut);
+      if (timeOut) clearTimeout(timeOut);
     };
   }, [callback, ms, watch]);
 }
