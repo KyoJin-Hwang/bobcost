@@ -35,7 +35,6 @@ export const useHeadingsObserver = (query: string) => {
     );
     const elements = document.querySelectorAll(query);
     elements.forEach((elem) => observer.current?.observe(elem));
-    console.log(elements);
 
     return () => observer.current?.disconnect();
   }, [query]);
