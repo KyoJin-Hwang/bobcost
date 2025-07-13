@@ -3,7 +3,7 @@ import type { Config } from 'tailwindcss';
 
 export default {
   darkMode: ['class'],
-  content: ['./src/**/*.{ts,tsx}'],
+  content: ['./src/**/*.{ts,tsx,mdx}'],
   prefix: '',
   theme: {
     extend: {
@@ -86,6 +86,10 @@ export default {
           DEFAULT: 'var(--zustand)',
           foreground: 'var(--zustand-foreground)',
         },
+        book: {
+          DEFAULT: 'var(--book)',
+          foreground: 'var(--book-foreground)',
+        },
       },
       spacing: {
         header: '60px',
@@ -100,8 +104,8 @@ export default {
               scrollMarginTop: '5rem',
             },
             p: {
-              marginTop: '2rem',
-              marginBottom: '2rem',
+              marginTop: '1.2rem',
+              marginBottom: '1.2rem',
             },
             '.callout-contents > p': {
               margin: 0,
@@ -175,6 +179,18 @@ export default {
               paddingRight: '1rem',
             },
 
+            '.runner > pre > code > span': {
+              padding: '0',
+            },
+            'ol[role="tree"] > li[role="treeitem"]': {
+              padding: '10px',
+              borderRadius: '6px',
+              backgroundColor: 'var(--foreground) !important',
+              border: '1px solid white',
+            },
+            'ol[role="tree"] > li[role="treeitem"] > div > span': {
+              color: 'var(--background) !important',
+            },
             'pre code span': {
               color: 'var(--shiki-light)',
             },
@@ -193,7 +209,13 @@ export default {
             '.project p,ul,li': {
               fontSize: 15,
             },
-
+            '.scrollbar-hide': {
+              scrollbarWidth: 'none' /* Firefox */,
+              msOverflowStyle: 'none' /* IE and Edge */,
+            },
+            '.scrollbar-hide::-webkit-scrollbar': {
+              display: 'none' /* Chrome, Safari, Opera */,
+            },
             u: {
               textUnderlineOffset: '4px',
               textDecorationThickness: 1,
