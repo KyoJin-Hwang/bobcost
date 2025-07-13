@@ -26,7 +26,6 @@ const TableOfContent = ({ toc }: Props) => {
 
     return link;
   };
-
   return (
     <aside className='not-prose absolute -top-[200px] left-full -mb-[100px] hidden h-[calc(100%+150px)] xl:block'>
       <div className='sticky bottom-0 top-[200px] z-10 ml-[5rem] mt-[200px] w-[220px]'>

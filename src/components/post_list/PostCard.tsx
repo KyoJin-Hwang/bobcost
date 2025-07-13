@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 
 import { Text } from '../ui/Text';
@@ -30,6 +31,7 @@ const PostCard = async ({ post }: Props) => {
     next: 'bg-next text-next-foreground',
     ts: 'bg-ts text-ts-foreground',
     zustand: 'bg-zustand text-zustand-foreground',
+    book: 'bg-book text-book-foreground',
   };
 
   const postClassGroup = (group: string) => {
@@ -38,10 +40,10 @@ const PostCard = async ({ post }: Props) => {
   };
   const postDateGroup = (status: string) => {
     return clsx(
-      'absolute right-2 bottom-2 rounded px-2 py-1 flex items-center gap-2',
+      'absolute right-2 bottom-2 rounded px-2 py-1 flex items-center gap-2 text-background',
       {
-        'bg-teal-500 ': status === 'New',
-        'bg-orange-500 ': status === 'Updated',
+        'bg-teal-500': status === 'New',
+        'bg-orange-500': status === 'Updated',
         hidden: status === 'hidden',
       }
     );
@@ -50,10 +52,13 @@ const PostCard = async ({ post }: Props) => {
     <Link href={post.url} className='group relative z-0'>
       <li className='flex h-full flex-col gap-3 overflow-hidden rounded-md border transition-all duration-300 hover:translate-y-[-20px] hover:shadow-xl dark:shadow-gray-500'>
         <div className='relative h-[250px] w-full overflow-hidden border-b'>
-          <img
+          <Image
             className='h-full w-full object-cover transition-all duration-100 group-hover:scale-[1.2]'
             src={post.thumbnail}
             alt={`thumbnail for ${post.title}`}
+            fill
+            sizes='100vw'
+            priority
           />
           <Text
             className={postClassGroup(lowerCase)}
@@ -71,12 +76,12 @@ const PostCard = async ({ post }: Props) => {
               {post.categoryPublicName}
             </div>
             <div className='mb-3 mt-2 flex flex-col gap-2'>
-              <h2 className='line-clamp-1 text-lg font-bold transition-colors duration-300 ease-in-out group-hover:text-[#a6a646] dark:group-hover:text-[#e6eb00] pc:text-xl'>
+              <h2 className='line-clamp-1 text-lg font-bold transition-colors duration-300 ease-in-out group-hover:text-[#9fb883] dark:group-hover:text-[#e6eb00] pc:text-xl'>
                 {post.title}
               </h2>
               <Text
                 text={post.desc}
-                className='line-clamp-2 text-sm transition-colors duration-300 ease-in-out group-hover:text-[#a6a646] dark:group-hover:text-[#e6eb00]'
+                className='line-clamp-2 text-sm transition-colors duration-300 ease-in-out group-hover:text-[#9fb883] dark:group-hover:text-[#e6eb00]'
               />
             </div>
           </div>
@@ -84,7 +89,7 @@ const PostCard = async ({ post }: Props) => {
           <div className='flex justify-between gap-3 text-sm text-gray-500 dark:text-gray-400'>
             <div className='flex items-center gap-1'>
               <CalendarDays className='w-3.5' />
-              <span>{post.dateString}</span>
+              <span>{post.createdDateString}</span>
             </div>
             <div className='flex items-center gap-1'>
               <Clock3 className='w-3.5' />

@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import Image from 'next/image';
 import Link from 'next/link';
 
 import {
@@ -45,10 +46,12 @@ const About = () => {
           하는 프론트엔드 개발자입니다.
         </p>
         <article className='flex flex-col items-center gap-4 pc:flex-row pc:items-start'>
-          <img
+          <Image
             src={resume.avatarUrl}
             alt='프로필이미지'
-            className='w-52 rounded-lg'
+            width={208}
+            height={208}
+            className='max-h-full max-w-full rounded-lg object-contain'
           />
           <ul className='flex flex-col items-center gap-[0.75rem] text-lg font-bold pc:items-start'>
             <AboutMy title={'이름'} desc={resume.name} />

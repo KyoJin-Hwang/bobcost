@@ -50,10 +50,20 @@ const parsePostDetail = async (postPath: string) => {
   const createdAt = dayjs(grayMatter.createdAt)
     .locale('ko')
     .format('YYYY년 MM월 DD일');
+  const updatedAt = dayjs(grayMatter.updatedAt)
+    .locale('ko')
+    .format('YYYY년 MM월 DD일');
 
-  const dateString = createdAt;
+  const createdDateString = createdAt;
+  const updatedDateString = updatedAt;
 
-  return { ...grayMatter, dateString, content, readingMinutes };
+  return {
+    ...grayMatter,
+    createdDateString,
+    updatedDateString,
+    content,
+    readingMinutes,
+  };
 };
 
 // MDX 파일 파싱 : abstract / detail 구분
@@ -87,8 +97,10 @@ export const getPostList = async (category?: string): Promise<Post[]> => {
 // 정렬한 postList를 반납
 export const getSortedPostList = async (category?: string) => {
   const postList = await getPostList(category);
-
-  return sortPostList(postList);
+  const filtered = postList.filter(
+    (post) => post.look === 'on' || process.env.NODE_ENV !== 'production'
+  );
+  return sortPostList(filtered);
 };
 
 // 사이트맵 함수
@@ -117,6 +129,10 @@ export const getCategoryDetailList = async () => {
   const postList = await getPostList();
   const result: { [key: string]: number } = {};
   for (const post of postList) {
+    if (post.look === 'off' && process.env.NODE_ENV === 'production') {
+      continue;
+    }
+    console.log(process.env.NODE_ENV);
     const category = post.categoryPath;
 
     if (result[category]) {

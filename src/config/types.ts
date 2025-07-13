@@ -3,9 +3,11 @@ export interface PostMatter {
   createdAt: Date;
   updatedAt?: Date;
   group: string;
-  dateString: string;
+  createdDateString: string;
+  updatedDateString: string;
   thumbnail: string;
   desc: string;
+  look: string;
 }
 
 export interface Post extends PostMatter {

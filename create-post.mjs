@@ -121,6 +121,7 @@ async function main() {
     'Next',
     'TS',
     'Zustand',
+    'Book',
   ];
   console.log('선택할 머리말 그룹명:');
   console.log(
@@ -130,6 +131,12 @@ async function main() {
     '\x1b[33m그룹번호를 선택하여 엔터를 눌러주세요 (또는 입력하지않고 엔터 누를시 직접입력): \x1b[0m'
   );
   const groupIndex = parseInt(groupIndexInput);
+
+  console.log('\nlook 설정:');
+  console.log('1. on');
+  console.log('2. off');
+  const lookInput = await ask('\x1b[33m번호 입력: \x1b[0m');
+  const look = lookInput === '1' ? 'on' : 'off';
 
   let group;
   if (groupIndexInput.trim() === '') {
@@ -152,6 +159,7 @@ desc: ${desc}
 createdAt: ${createdAt}
 thumbnail: ${thumbnail}
 group: ${group}
+look: ${look}
 ---
 
 `;

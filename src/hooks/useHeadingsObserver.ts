@@ -6,7 +6,7 @@ export const useHeadingsObserver = (query: string) => {
   const [tempId, setTempId] = useState('');
 
   useEffect(() => {
-    const scrollMarginOption = { rootMargin: '-32px 0px -80px 0px' };
+    const scrollMarginOption = { rootMargin: '0px 0px -80px 0px' };
 
     const handleObserver: IntersectionObserverCallback = (entries) => {
       entries.forEach((entry) => {
@@ -15,14 +15,15 @@ export const useHeadingsObserver = (query: string) => {
         const targetId = `#${emoji}${entry.target.id}`;
 
         if (entry.isIntersecting) {
-          setActiveIdList((prev) => [...prev, targetId]);
-          setTempId(() => '');
+          setActiveIdList((prev) => {
+            if (!prev.includes(targetId)) return [...prev, targetId];
+            return prev;
+          });
+          setTempId(targetId);
         } else {
           setActiveIdList((prev) => {
-            // giscus 떄문에 마지막에 남은게 필요했지만 현재 필요하지않음
-            // 마지막 값을 알야할 필요없음
-            // if (prev.length === 1) setTempId(targetId);
-            return prev.filter((elem) => elem !== targetId);
+            const newList = prev.filter((elem) => elem !== targetId);
+            return newList;
           });
         }
       });
@@ -32,11 +33,11 @@ export const useHeadingsObserver = (query: string) => {
       handleObserver,
       scrollMarginOption
     );
-
     const elements = document.querySelectorAll(query);
     elements.forEach((elem) => observer.current?.observe(elem));
+    console.log(elements);
 
     return () => observer.current?.disconnect();
   }, [query]);
-  return [...activeIdList, tempId];
+  return activeIdList.length > 0 ? activeIdList : [tempId];
 };

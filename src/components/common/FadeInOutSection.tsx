@@ -31,7 +31,7 @@ const FadeInOutSection = ({
             : [...prevArray, { title: aboutMeText, isVisible, top: aboutMeTop }]
       );
     }
-  }, [isVisible, setHeadArray]);
+  }, [isVisible, ref, setHeadArray]);
 
   return (
     <div

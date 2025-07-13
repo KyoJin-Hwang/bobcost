@@ -17,7 +17,7 @@ const useResize = (breakpoint: number) => {
     return () => {
       window.removeEventListener('resize', handleResize);
     };
-  }, []);
+  }, [breakpoint]);
 
   return isPc;
 };
