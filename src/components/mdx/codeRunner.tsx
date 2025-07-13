@@ -5,7 +5,6 @@ import { useState } from 'react';
 import { cn } from '@/lib/utils';
 import { ObjectInspector } from 'react-inspector';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 type LogEntry = unknown[];
 
@@ -68,7 +67,6 @@ export default function CodeRunner({
       <div className='group runner relative'>
         <SyntaxHighlighter
           language='javascript'
-          style={vscDarkPlus}
           showLineNumbers={showLineNumbers}
           customStyle={{
             marginBottom: '0.5rem',
