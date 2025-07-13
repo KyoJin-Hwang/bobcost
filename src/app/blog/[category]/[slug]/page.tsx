@@ -17,7 +17,7 @@ type Props = {
 export const dynamicParams = false;
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { category, slug } = params;
+  const { category, slug } = await params;
   const post = await getPostDetail(category, slug);
   const title = `${post.title}`;
   const imageURL = `${baseDomain}${post.thumbnail}`;
@@ -42,7 +42,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 const PostDetail = async ({ params }: Props) => {
-  const { category, slug } = params;
+  const { category, slug } = await params;
   const post = await getPostDetail(category, slug);
   const toc = parseToc(post.content);
   return (
