@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 
 import { Text } from '../ui/Text';
@@ -51,10 +52,13 @@ const PostCard = async ({ post }: Props) => {
     <Link href={post.url} className='group relative z-0'>
       <li className='flex h-full flex-col gap-3 overflow-hidden rounded-md border transition-all duration-300 hover:translate-y-[-20px] hover:shadow-xl dark:shadow-gray-500'>
         <div className='relative h-[250px] w-full overflow-hidden border-b'>
-          <img
+          <Image
             className='h-full w-full object-cover transition-all duration-100 group-hover:scale-[1.2]'
             src={post.thumbnail}
             alt={`thumbnail for ${post.title}`}
+            fill
+            sizes='100vw'
+            priority
           />
           <Text
             className={postClassGroup(lowerCase)}

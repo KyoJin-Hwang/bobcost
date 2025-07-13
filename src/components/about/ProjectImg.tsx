@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 import Button from '../ui/Button';
 import { ResumeProject } from '@/config/types';
 import { ArrowBigLeft, ArrowBigRight, TimerReset } from 'lucide-react';
@@ -26,17 +28,20 @@ const ProjectImg = ({
       <div
         className='flex w-full pc:h-[550px]'
         style={{
-          transform: `translateX(-${currentIndex * 100}%)`, // 인라인 스타일로 transform 적용
+          transform: `translateX(-${currentIndex * 100}%)`,
           transition: 'transform 0.3s ease-in-out',
         }}
       >
         {images.map((item, idx) => (
-          <img
-            key={item}
-            src={item}
-            alt={`프로젝트 이미지${idx + 1}`}
-            className='border-4 border-foreground'
-          />
+          <div key={item} className='relative w-full pc:h-[550px]'>
+            <Image
+              src={item}
+              alt={`프로젝트 이미지${idx + 1}`}
+              fill
+              className='border-4 border-foreground object-contain'
+              sizes='100vw'
+            />
+          </div>
         ))}
       </div>
       <div className='flex flex-col items-center gap-2 pt-4'>
