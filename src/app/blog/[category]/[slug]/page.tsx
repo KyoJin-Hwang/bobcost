@@ -17,7 +17,7 @@ type Props = {
 export const dynamicParams = false;
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { category, slug } = await params;
+  const { category, slug } = params;
   const post = await getPostDetail(category, slug);
   const title = `${post.title}`;
   const imageURL = `${baseDomain}${post.thumbnail}`;
