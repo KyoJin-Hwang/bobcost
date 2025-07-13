@@ -9,9 +9,12 @@ import TocSideBar from '@/components/post_detail/TableOfContentSidebar';
 import { baseDomain } from '@/config/const';
 import { getPostDetail, parseToc } from '@/lib/post';
 
-type Props = {
-  params: { category: string; slug: string };
-};
+interface Props {
+  params: Promise<{
+    category: string;
+    slug: string;
+  }>;
+}
 
 // 허용된 param 외 접근시 404
 export const dynamicParams = false;
