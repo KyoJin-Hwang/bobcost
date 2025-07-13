@@ -1,3 +1,3 @@
 declare module 'react-syntax-highlighter/dist/esm/styles/prism' {
-  export const vscDarkPlus: any;
+  export const vscDarkPlus: unknown;
 }
