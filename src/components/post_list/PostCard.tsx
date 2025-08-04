@@ -53,7 +53,7 @@ const PostCard = async ({ post }: Props) => {
       <li className='flex h-full flex-col gap-3 overflow-hidden rounded-md border transition-all duration-300 hover:translate-y-[-20px] hover:shadow-xl dark:shadow-gray-500'>
         <div className='relative h-[250px] w-full overflow-hidden border-b'>
           <Image
-            className='h-full w-full object-cover transition-all duration-100 group-hover:scale-[1.2]'
+            className='h-full w-full transition-all duration-100 group-hover:scale-[1.2]'
             src={post.thumbnail}
             alt={`thumbnail for ${post.title}`}
             fill
