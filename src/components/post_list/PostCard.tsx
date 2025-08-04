@@ -76,7 +76,7 @@ const PostCard = async ({ post }: Props) => {
               {post.categoryPublicName}
             </div>
             <div className='mb-3 mt-2 flex flex-col gap-2'>
-              <h2 className='line-clamp-1 text-lg font-bold transition-colors duration-300 ease-in-out group-hover:text-[#9fb883] dark:group-hover:text-[#e6eb00] pc:text-xl'>
+              <h2 className='line-clamp-2 text-lg font-bold transition-colors duration-300 ease-in-out group-hover:text-[#9fb883] dark:group-hover:text-[#e6eb00] pc:text-xl'>
                 {post.title}
               </h2>
               <Text
