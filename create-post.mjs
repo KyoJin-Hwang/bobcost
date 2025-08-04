@@ -74,36 +74,40 @@ async function main() {
   console.log(`${thumbDirs.length + 1}. 썸네일 폴더 만들기`);
 
   const bfSelected = await ask('\x1b[33m번호 입력: \x1b[0m');
-  let bfFolder;
-
-  if (parseInt(bfSelected) === thumbDirs.length + 1) {
+  let bfFolder = '';
+  if (bfSelected.trim() === '') {
+    bfFolder = '';
+  } else if (parseInt(bfSelected) === thumbDirs.length + 1) {
     bfFolder = await ask('\x1b[33m새로운 썸네일 폴더명: \x1b[0m');
     fs.mkdirSync(path.join(publicPostsDir, bfFolder), { recursive: true });
   } else {
     bfFolder = thumbDirs[parseInt(bfSelected) - 1];
   }
 
-  // 하위 폴더 선택
-  const subThumbDirPath = path.join(publicPostsDir, bfFolder);
-  const subThumbDirs = fs.readdirSync(subThumbDirPath).filter((f) => {
-    const fullPath = path.join(subThumbDirPath, f);
-    return fs.statSync(fullPath).isDirectory();
-  });
-
   let subFolder = '';
-  if (subThumbDirs.length > 0) {
-    console.log(`\n'${bfFolder}' 안에 있는 폴더를 선택해주세요:`);
-    subThumbDirs.forEach((dir, index) => {
-      console.log(`${index + 1}. ${dir}`);
+  if (bfFolder) {
+    const subThumbDirPath = path.join(publicPostsDir, bfFolder);
+    const subThumbDirs = fs.readdirSync(subThumbDirPath).filter((f) => {
+      const fullPath = path.join(subThumbDirPath, f);
+      return fs.statSync(fullPath).isDirectory();
     });
-    console.log(`${subThumbDirs.length + 1}. 새 폴더 만들기`);
-    const subSelected = await ask('\x1b[33m번호 입력: \x1b[0m');
 
-    if (parseInt(subSelected) === subThumbDirs.length + 1) {
-      subFolder = await ask('\x1b[33m새로운 하위 폴더명: \x1b[0m');
-      fs.mkdirSync(path.join(subThumbDirPath, subFolder), { recursive: true });
-    } else {
-      subFolder = subThumbDirs[parseInt(subSelected) - 1];
+    if (subThumbDirs.length > 0) {
+      console.log(`\n'${bfFolder}' 안에 있는 폴더를 선택해주세요:`);
+      subThumbDirs.forEach((dir, index) => {
+        console.log(`${index + 1}. ${dir}`);
+      });
+      console.log(`${subThumbDirs.length + 1}. 새 폴더 만들기`);
+      const subSelected = await ask('\x1b[33m번호 입력: \x1b[0m');
+
+      if (parseInt(subSelected) === subThumbDirs.length + 1) {
+        subFolder = await ask('\x1b[33m새로운 하위 폴더명: \x1b[0m');
+        fs.mkdirSync(path.join(subThumbDirPath, subFolder), {
+          recursive: true,
+        });
+      } else {
+        subFolder = subThumbDirs[parseInt(subSelected) - 1];
+      }
     }
   }
 
@@ -131,13 +135,6 @@ async function main() {
     '\x1b[33m그룹번호를 선택하여 엔터를 눌러주세요 (또는 입력하지않고 엔터 누를시 직접입력): \x1b[0m'
   );
   const groupIndex = parseInt(groupIndexInput);
-
-  console.log('\nlook 설정:');
-  console.log('1. on');
-  console.log('2. off');
-  const lookInput = await ask('\x1b[33m번호 입력: \x1b[0m');
-  const look = lookInput === '1' ? 'on' : 'off';
-
   let group;
   if (groupIndexInput.trim() === '') {
     group = await ask('\x1b[33m입력하실 그룹 이름: \x1b[0m');
@@ -147,11 +144,17 @@ async function main() {
   } else {
     group = 'null';
   }
+  console.log('\nlook 설정:');
+  console.log('1. on');
+  console.log('2. off');
+  const lookInput = await ask('\x1b[33m번호 입력: \x1b[0m');
+  const look = lookInput === '1' ? 'on' : 'off';
 
   const createdAt = getCurrentDateTime();
-  const thumbnailPathParts = [bfFolder];
+  const thumbnailPathParts = [];
+  if (bfFolder) thumbnailPathParts.push(bfFolder);
   if (subFolder) thumbnailPathParts.push(subFolder);
-  const thumbnail = `/posts/${thumbnailPathParts.join('/')}/${thumbnailName}.png`;
+  const thumbnail = `/posts/${thumbnailPathParts.join('/')}${thumbnailPathParts.length ? '/' : ''}${thumbnailName}.png`;
 
   const content = `---
 title: '${title}'
