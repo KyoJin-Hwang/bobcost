@@ -89,7 +89,7 @@ const PostCard = async ({ post }: Props) => {
           <div className='flex justify-between gap-3 text-sm text-gray-500 dark:text-gray-400'>
             <div className='flex items-center gap-1'>
               <CalendarDays className='w-3.5' />
-              <span>{post.createdDateString}</span>
+              <span>{post.updatedDateString || post.createdDateString}</span>
             </div>
             <div className='flex items-center gap-1'>
               <Clock3 className='w-3.5' />

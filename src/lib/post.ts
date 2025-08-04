@@ -47,18 +47,21 @@ const parsePostDetail = async (postPath: string) => {
   const grayMatter = data as PostMatter;
   // 글 예상 읽기 시간
   const readingMinutes = Math.ceil(readingTime(content).minutes);
-  const createdAt = dayjs(grayMatter.createdAt)
-    .locale('ko')
-    .format('YYYY년 MM월 DD일');
-  const updatedAt = dayjs(grayMatter.updatedAt)
-    .locale('ko')
-    .format('YYYY년 MM월 DD일');
-
-  const createdDateString = createdAt;
-  const updatedDateString = updatedAt;
+  
+  // Date 객체 유지 (시간 정보 포함)
+  const createdAt = grayMatter.createdAt;
+  const updatedAt = grayMatter.updatedAt;
+  
+  // 표시용 문자열 변환
+  const createdDateString = dayjs(createdAt).locale('ko').format('YYYY년 MM월 DD일');
+  const updatedDateString = updatedAt 
+    ? dayjs(updatedAt).locale('ko').format('YYYY년 MM월 DD일')
+    : '';
 
   return {
     ...grayMatter,
+    createdAt,
+    updatedAt,
     createdDateString,
     updatedDateString,
     content,
@@ -76,12 +79,12 @@ const parsePost = async (postPath: string): Promise<Post> => {
   };
 };
 
-// post를 날짜 최신순으로 정렬
+// post를 날짜 최신순으로 정렬 (시간까지 포함)
 const sortPostList = (PostList: Post[]) => {
   return PostList.sort((a, b) => {
-    const dateA = a.createdAt;
-    const dateB = b.createdAt;
-    return dateA > dateB ? -1 : 1; // 최신순 정렬
+    const dateA = new Date(a.createdAt).getTime();
+    const dateB = new Date(b.createdAt).getTime();
+    return dateB - dateA; // 최신순 정렬 (내림차순)
   });
 };
 
@@ -177,24 +180,42 @@ export const parseToc = (content: string): HeadingItem[] => {
   );
 };
 
-// 최근 생성글 및 수정글 url 반환함수
+// 최근 생성글 및 수정글 url 반환함수 (성능 최적화 및 동일 날짜 처리)
 export const findLatestDates = (data: Post[]) => {
-  const today = new Date().getTime();
+  if (data.length === 0) {
+    return { create: '/', update: '/' };
+  }
 
-  // 가장 가까운 updatedAt의 차이값 계산
-  const closestDiff = Math.min(
-    ...data
-      .filter((post) => post.updatedAt)
-      .map((post) => Math.abs(new Date(post.updatedAt!).getTime() - today))
-  );
-  const latestUpdated = data.filter(
-    (post) =>
-      post.updatedAt &&
-      Math.abs(new Date(post.updatedAt!).getTime() - today) === closestDiff
-  );
+  // 성능 최적화: 한 번의 순회로 최신 생성글과 수정글 모두 찾기
+  let latestCreated = data[0];
+  let latestUpdated: Post | null = null;
+  let minUpdateDiff = Infinity;
+
+  const now = new Date().getTime();
+
+  for (const post of data) {
+    // 최신 생성글 찾기 (시간까지 포함하여 정확한 비교)
+    const currentCreatedTime = new Date(post.createdAt).getTime();
+    const latestCreatedTime = new Date(latestCreated.createdAt).getTime();
+    
+    if (currentCreatedTime > latestCreatedTime) {
+      latestCreated = post;
+    }
+
+    // 최신 수정글 찾기 (updatedAt이 있는 경우만)
+    if (post.updatedAt) {
+      const updateTime = new Date(post.updatedAt).getTime();
+      const diff = Math.abs(updateTime - now);
+      
+      if (diff < minUpdateDiff) {
+        minUpdateDiff = diff;
+        latestUpdated = post;
+      }
+    }
+  }
 
   return {
-    create: data[0].url,
-    update: latestUpdated[0]?.url || '/',
+    create: latestCreated.url,
+    update: latestUpdated?.url || '/',
   };
 };
