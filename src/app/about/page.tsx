@@ -51,7 +51,7 @@ const About = () => {
             alt='프로필이미지'
             width={208}
             height={208}
-            className='max-h-full max-w-full rounded-lg object-contain'
+            className='rounded-lg object-contain'
           />
           <ul className='flex flex-col items-center gap-[0.75rem] text-lg font-bold pc:items-start'>
             <AboutMy title={'이름'} desc={resume.name} />

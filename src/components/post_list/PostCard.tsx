@@ -57,7 +57,7 @@ const PostCard = async ({ post }: Props) => {
             src={post.thumbnail}
             alt={`thumbnail for ${post.title}`}
             fill
-            sizes='100vw'
+            sizes='(max-width: 768px) 100vw, 768px'
             priority
           />
           <Text
