@@ -47,14 +47,16 @@ const parsePostDetail = async (postPath: string) => {
   const grayMatter = data as PostMatter;
   // 글 예상 읽기 시간
   const readingMinutes = Math.ceil(readingTime(content).minutes);
-  
+
   // Date 객체 유지 (시간 정보 포함)
   const createdAt = grayMatter.createdAt;
   const updatedAt = grayMatter.updatedAt;
-  
+
   // 표시용 문자열 변환
-  const createdDateString = dayjs(createdAt).locale('ko').format('YYYY년 MM월 DD일');
-  const updatedDateString = updatedAt 
+  const createdDateString = dayjs(createdAt)
+    .locale('ko')
+    .format('YYYY년 MM월 DD일');
+  const updatedDateString = updatedAt
     ? dayjs(updatedAt).locale('ko').format('YYYY년 MM월 DD일')
     : '';
 
@@ -197,7 +199,7 @@ export const findLatestDates = (data: Post[]) => {
     // 최신 생성글 찾기 (시간까지 포함하여 정확한 비교)
     const currentCreatedTime = new Date(post.createdAt).getTime();
     const latestCreatedTime = new Date(latestCreated.createdAt).getTime();
-    
+
     if (currentCreatedTime > latestCreatedTime) {
       latestCreated = post;
     }
@@ -206,7 +208,7 @@ export const findLatestDates = (data: Post[]) => {
     if (post.updatedAt) {
       const updateTime = new Date(post.updatedAt).getTime();
       const diff = Math.abs(updateTime - now);
-      
+
       if (diff < minUpdateDiff) {
         minUpdateDiff = diff;
         latestUpdated = post;
