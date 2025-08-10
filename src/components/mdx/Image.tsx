@@ -10,7 +10,7 @@ export const MdxImage = (props: React.ImgHTMLAttributes<HTMLImageElement>) => {
         width={Number(width)}
         height={Number(height)}
         className='mx-auto mb-0 mt-8 rounded-md object-contain'
-        sizes='100vw'
+        sizes='(max-width: 800px) 100vw, 800px'
         {...rest}
       />
       {alt !== '' && (
