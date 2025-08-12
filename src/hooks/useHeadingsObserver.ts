@@ -10,9 +10,8 @@ export const useHeadingsObserver = (query: string) => {
 
     const handleObserver: IntersectionObserverCallback = (entries) => {
       entries.forEach((entry) => {
-        const span = entry.target.querySelector('span');
-        const emoji = span?.textContent || '';
-        const targetId = `#${emoji}${entry.target.id}`;
+        // rehype-slug가 생성한 실제 heading id만 사용하여 TOC 링크와 1:1 매칭
+        const targetId = `#${entry.target.id}`;
 
         if (entry.isIntersecting) {
           setActiveIdList((prev) => {
