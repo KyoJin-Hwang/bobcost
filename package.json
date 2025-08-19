@@ -11,6 +11,7 @@
     "delete": "node delete-post.mjs"
   },
   "dependencies": {
+    "@codesandbox/sandpack-react": "2.20.0",
     "@fec/remark-a11y-emoji": "^4.0.2",
     "@mdx-js/loader": "^3.1.0",
     "@mdx-js/react": "^3.1.0",
@@ -33,7 +34,6 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-inspector": "^6.0.2",
-    "react-live": "^4.1.8",
     "react-syntax-highlighter": "^15.6.1",
     "reading-time": "^1.5.0",
     "rehype-pretty-code": "^0.14.0",

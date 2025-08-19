@@ -1,0 +1,53 @@
+{
+  "CodeRunner 예시": {
+    "prefix": "runner",
+    "body": [
+      "<CodeRunner",
+      "  code={`const x = '';",
+      "  console.log(x)`}",
+      "  showLineNumbers",
+      "  title=''",
+      "/>"
+    ],
+    "description": "CodeRunner 컴포넌트 예제"
+  },
+  "TsxPlayground 예시": {
+    "prefix": "tsxplay",
+    "body": [
+      "<TsxPlayground title=\"TSX 예제\">",
+      "{`",
+      "export default function App() {",
+      "  const [n, setN] = useState(0);",
+      "  return <button onClick={() => setN(n + 1)}>Count: {n}</button>;",
+      "}",
+      "`}",
+      "</TsxPlayground>"
+    ],
+    "description": "TsxPlayground 컴포넌트 예제 (훅만 사용해도 자동 import)"
+  },
+  "TsxPlayground 예시(스타일 포함)": {
+    "prefix": "tsxplay-style",
+    "body": [
+      "<TsxPlayground",
+      "  title=\"간단 스타일 예제\"",
+      "  previewPadding={0}",
+      "  previewBg=\"#\"",
+      "  previewCenter",
+      "  css={`",
+      "    .example-root {",
+      "    }",
+      "  `}",
+      ">",
+      "{`",
+      "export default function App() {",
+      "  const [n, setN] = useState(0);",
+      "  return <button onClick={() => setN(n + 1)}>Count: {n}</button>;",
+      "}",
+      "`}",
+      "</TsxPlayground>"
+    ],
+    "description": "TsxPlayground 컴포넌트 예제 (스타일 props 포함)"
+  }
+}
+
+
