@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
 import { cn } from '@/lib/utils';
 import { ObjectInspector } from 'react-inspector';
@@ -12,16 +12,44 @@ interface CodeRunnerProps {
   code: string;
   showLineNumbers?: boolean;
   title?: string;
+  codeFn?: () => void;
 }
 
 export default function CodeRunner({
   code,
   showLineNumbers = false,
   title = '',
+  codeFn,
 }: CodeRunnerProps) {
   const [copied, setCopied] = useState(false);
   const [output, setOutput] = useState<LogEntry[]>([]);
   const [showOutput, setShowOutput] = useState(false);
+
+  const extractArrowFunctionBody = (fn: () => void): string => {
+    const source = fn.toString();
+    // Try to extract body of an arrow function: () => { /* body */ }
+    const arrowMatch = source.match(/^\s*\(?\s*\)?\s*=>\s*\{([\s\S]*)\}\s*$/);
+    if (arrowMatch && arrowMatch[1]) {
+      return arrowMatch[1].trim();
+    }
+    // Fallback: try to extract classic function body: function name() { /* body */ }
+    const classicMatch = source.match(/^\s*function[\s\S]*?\{([\s\S]*)\}\s*$/);
+    if (classicMatch && classicMatch[1]) {
+      return classicMatch[1].trim();
+    }
+    return source;
+  };
+
+  const codeToDisplay = useMemo(() => {
+    if (codeFn) {
+      try {
+        return extractArrowFunctionBody(codeFn);
+      } catch {
+        return codeFn.toString();
+      }
+    }
+    return code;
+  }, [code, codeFn]);
 
   const runCode = () => {
     const logs: LogEntry[] = [];
@@ -31,7 +59,11 @@ export default function CodeRunner({
       originalLog(...args);
     };
     try {
-      new Function(code)();
+      if (codeFn) {
+        codeFn();
+      } else {
+        new Function(code)();
+      }
     } catch (err: unknown) {
       if (err instanceof Error) {
         logs.push(['Error: ' + err.message]);
@@ -49,7 +81,7 @@ export default function CodeRunner({
 
   const copyCode = async () => {
     try {
-      await navigator.clipboard.writeText(code);
+      await navigator.clipboard.writeText(codeToDisplay);
       setCopied(true);
       setTimeout(() => setCopied(false), 3000);
     } catch (err) {
@@ -79,7 +111,7 @@ export default function CodeRunner({
             overscrollBehavior: 'contain',
           }}
         >
-          {code}
+          {codeToDisplay}
         </SyntaxHighlighter>
 
         <button
