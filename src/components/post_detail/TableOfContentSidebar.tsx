@@ -51,9 +51,9 @@ const TableOfContent = ({ toc }: Props) => {
           </ul>
         </div>
         <div className='flex gap-2'>
-          <ScrollTop />
-          <ScrollToComment />
-          <CopyLinkButton />
+          <ScrollTop tooltip="맨 위로" />
+          <ScrollToComment tooltip="댓글" />
+          <CopyLinkButton tooltip="복사" />
         </div>
       </div>
     </aside>

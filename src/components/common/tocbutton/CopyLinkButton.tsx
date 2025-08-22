@@ -12,6 +12,7 @@ interface ButtonProps {
   className?: string;
   url?: string;
   variant?: 'outline' | 'default';
+  tooltip?: string;
 }
 
 const CopyLinkButton = ({
@@ -19,6 +20,7 @@ const CopyLinkButton = ({
   className,
   url,
   variant = 'outline',
+  tooltip,
 }: ButtonProps) => {
   const { toast } = useToast();
   const [copied, setCopied] = useState(false);
@@ -62,6 +64,7 @@ const CopyLinkButton = ({
       size='icon'
       onClick={handleCopy}
       className={className}
+      tooltip={tooltip}
     >
       <span className='sr-only'>Copy</span>
       {copied ? <Check size={size} /> : <Copy size={size} />}

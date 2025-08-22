@@ -6,9 +6,10 @@ import { ArrowUpToLine, MessageSquareText } from 'lucide-react';
 interface ButtonProps {
   size?: number;
   className?: string;
+  tooltip?: string;
 }
 
-export const ScrollTop = ({ size = 16, className }: ButtonProps) => {
+export const ScrollTop = ({ size = 16, className, tooltip }: ButtonProps) => {
   const scrollTop = () => {
     window.scrollTo({ top: 0 });
   };
@@ -18,13 +19,14 @@ export const ScrollTop = ({ size = 16, className }: ButtonProps) => {
       size='icon'
       onClick={scrollTop}
       className={className}
+      tooltip={tooltip}
     >
       <ArrowUpToLine size={size} />
     </Button>
   );
 };
 
-export const ScrollToComment = ({ size = 16, className }: ButtonProps) => {
+export const ScrollToComment = ({ size = 16, className, tooltip }: ButtonProps) => {
   const scrollToGiscus = () =>
     document.querySelector('.giscus')?.scrollIntoView();
   return (
@@ -33,6 +35,7 @@ export const ScrollToComment = ({ size = 16, className }: ButtonProps) => {
       size='icon'
       onClick={scrollToGiscus}
       className={className}
+      tooltip={tooltip}
     >
       <MessageSquareText size={size} />
     </Button>
