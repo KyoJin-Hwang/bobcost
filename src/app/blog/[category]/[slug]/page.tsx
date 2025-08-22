@@ -59,28 +59,30 @@ const PostDetail = async ({ params }: Props) => {
         <PostBody post={post} />
         <TocSideBar toc={toc} />
       </article>
-      <nav className='mt-10 grid gap-3 overflow-x-hidden sm:grid-cols-2'>
-        {prev && (
-          <Link
-            href={prev.url}
-            className='block min-w-0 rounded border p-4 text-sm hover:bg-accent'
-            aria-label={`이전글: ${prev.title}`}
-          >
-            <div className='mb-1 text-xs text-muted-foreground'>이전글</div>
-            <div className='truncate font-medium'>← {prev.title}</div>
-          </Link>
-        )}
-        {next && (
-          <Link
-            href={next.url}
-            className='block min-w-0 rounded border p-4 text-sm hover:bg-accent'
-            aria-label={`다음글: ${next.title}`}
-          >
-            <div className='mb-1 text-xs text-muted-foreground text-right sm:text-left'>다음글</div>
-            <div className='truncate text-right sm:text-left font-medium'>{next.title} →</div>
-          </Link>
-        )}
-      </nav>
+      {(prev || next) && (
+        <nav className='mt-10 grid gap-3 overflow-x-hidden sm:grid-cols-2'>
+          {prev && (
+            <Link
+              href={prev.url}
+              className='block min-w-0 rounded border p-4 text-sm hover:bg-accent'
+              aria-label={`이전글: ${prev.title}`}
+            >
+              <div className='mb-1 text-xs text-muted-foreground'>이전글</div>
+              <div className='truncate font-medium'>← {prev.title}</div>
+            </Link>
+          )}
+          {next && (
+            <Link
+              href={next.url}
+              className='block min-w-0 rounded border p-4 text-sm hover:bg-accent'
+              aria-label={`다음글: ${next.title}`}
+            >
+              <div className='mb-1 text-xs text-muted-foreground text-right sm:text-left'>다음글</div>
+              <div className='truncate text-right sm:text-left font-medium'>{next.title} →</div>
+            </Link>
+          )}
+        </nav>
+      )}
       <hr />
       <Giscus />
       <FloatingButton />

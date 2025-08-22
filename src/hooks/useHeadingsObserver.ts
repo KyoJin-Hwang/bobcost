@@ -1,41 +1,74 @@
 import { useEffect, useRef, useState } from 'react';
 
 export const useHeadingsObserver = (query: string) => {
-  const observer = useRef<IntersectionObserver>();
   const [activeIdList, setActiveIdList] = useState<string[]>([]);
   const [tempId, setTempId] = useState('');
+  const sectionRefs = useRef<Map<string, HTMLElement>>(new Map());
 
   useEffect(() => {
-    const scrollMarginOption = { rootMargin: '0px 0px -80px 0px' };
-
     const handleObserver: IntersectionObserverCallback = (entries) => {
       entries.forEach((entry) => {
-        // rehype-slug가 생성한 실제 heading id만 사용하여 TOC 링크와 1:1 매칭
         const targetId = `#${entry.target.id}`;
 
         if (entry.isIntersecting) {
+          // 섹션에 도착하면 배열에 추가
           setActiveIdList((prev) => {
             if (!prev.includes(targetId)) return [...prev, targetId];
             return prev;
           });
           setTempId(targetId);
         } else {
+          // 섹션을 벗어나면 배열에서 제거
           setActiveIdList((prev) => {
-            const newList = prev.filter((elem) => elem !== targetId);
-            return newList;
+            return prev.filter((elem) => elem !== targetId);
           });
         }
       });
     };
 
-    observer.current = new IntersectionObserver(
-      handleObserver,
-      scrollMarginOption
-    );
-    const elements = document.querySelectorAll(query);
-    elements.forEach((elem) => observer.current?.observe(elem));
+    // h2, h3 섹션들을 observer로 관찰
+    const sections = document.querySelectorAll('[data-heading-section="true"]');
+    console.log('Found sections:', sections.length);
 
-    return () => observer.current?.disconnect();
+    sections.forEach((section, index) => {
+      const sectionElement = section as HTMLElement;
+      console.log(`Section ${index}:`, {
+        id: sectionElement.id,
+        tagName: sectionElement.tagName,
+        text: sectionElement.textContent?.slice(0, 50),
+      });
+
+      const rect = sectionElement.getBoundingClientRect();
+
+      // section의 실제 크기에 따라 동적으로 rootMargin 설정
+      const topMargin = Math.max(80, Math.floor(rect.height * 0.1)); // 최소 80px, section 높이의 10%
+      const bottomMargin = Math.max(60, Math.floor(rect.height * 0.15)); // 최소 60px, section 높이의 15%
+
+      const scrollMarginOption = {
+        rootMargin: "-58px 0px 0px 0px", // Header 높이(58px)를 고려해서 아래쪽에서 더 일찍 감지
+        threshold: 0, // 조금이라도 보이면 바로 감지
+      };
+
+      // 각 section마다 개별 observer 생성
+      const sectionObserver = new IntersectionObserver(
+        handleObserver,
+        scrollMarginOption
+      );
+      sectionObserver.observe(section);
+
+      // ref에 저장
+      sectionRefs.current.set(sectionElement.id, sectionElement);
+    });
+
+    return () => {
+      // 모든 observer 정리
+      sectionRefs.current.forEach((section) => {
+        const sectionObserver = new IntersectionObserver(handleObserver);
+        sectionObserver.disconnect();
+      });
+      sectionRefs.current.clear();
+    };
   }, [query]);
+
   return activeIdList.length > 0 ? activeIdList : [tempId];
 };
