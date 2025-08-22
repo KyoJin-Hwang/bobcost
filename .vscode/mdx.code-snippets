@@ -1,3 +1,4 @@
+
 {
   "CodeRunner 예시": {
     "prefix": "runner",
@@ -59,6 +60,38 @@
       "</TsxPlayground>"
     ],
     "description": "TsxPlayground 컴포넌트 예제 (스타일 props 포함)"
+  },
+  "call-info": {
+    "scope": "mdx,markdown",
+    "prefix": "call-info",
+    "body": [
+      "<Callout type=\"info\">$1</Callout>"
+    ],
+    "description": "MDX Callout (info)"
+  },
+  "call-warn": {
+    "scope": "mdx,markdown",
+    "prefix": "call-warn",
+    "body": [
+      "<Callout type=\"warn\">$1</Callout>"
+    ],
+    "description": "MDX Callout (warn)"
+  },
+  "call-danger": {
+    "scope": "mdx,markdown",
+    "prefix": "call-danger",
+    "body": [
+      "<Callout type=\"danger\">$1</Callout>"
+    ],
+    "description": "MDX Callout (danger)"
+  },
+  "call-normal": {
+    "scope": "mdx,markdown",
+    "prefix": "call-normal",
+    "body": [
+      "<Callout type=\"normal\">$1</Callout>"
+    ],
+    "description": "MDX Callout (normal)"
   }
 }
 
