@@ -1,7 +1,7 @@
 import { CategoryDetail, HeadingItem, Post, PostMatter } from '@/config/types';
-import GithubSlugger from 'github-slugger';
 import dayjs from 'dayjs';
 import fs from 'fs';
+import GithubSlugger from 'github-slugger';
 import { sync } from 'glob';
 import matter from 'gray-matter';
 import path from 'path';
@@ -162,6 +162,32 @@ export const getPostDetail = async (category: string, slug: string) => {
   const filePath = `${POSTS_PATH}/${category}/${slug}/content.mdx`;
   const detail = await parsePost(filePath);
   return detail;
+};
+
+// 동일 categoryPath(시리즈) 내 이전/다음 글 찾기
+export const getPrevNextInSeries = async (
+  categoryPath: string,
+  slug: string
+) => {
+  const posts = await getPostList();
+  // 동일 시리즈만 필터 + 프로덕션 가시성 반영
+  const sameSeries = posts.filter((p) => p.categoryPath === categoryPath);
+  console.log(sameSeries);
+  // createdAt 기준 오름차순 정렬(1장 -> 2장 순서)
+  sameSeries.sort((a, b) => {
+    const aTime = new Date(a.createdAt).getTime();
+    const bTime = new Date(b.createdAt).getTime();
+    return aTime - bTime;
+  });
+
+  const index = sameSeries.findIndex((p) => p.slug === slug);
+  const prev = index > 0 ? sameSeries[index - 1] : undefined;
+  const next =
+    index >= 0 && index < sameSeries.length - 1
+      ? sameSeries[index + 1]
+      : undefined;
+
+  return { prev, next, siblings: sameSeries };
 };
 
 export const parseToc = (content: string): HeadingItem[] => {

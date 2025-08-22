@@ -1,7 +1,7 @@
 import { Callout } from './Callout';
 import { MdxImage } from './Image';
 import { ExternalLink } from './Link';
-import CodeRunner from './codeRunner';
+import CodeRunner from './codeRunnerWrapper';
 import TsxPlayground from './tsxPlayground';
 import { MDXComponents } from 'mdx/types';
 
