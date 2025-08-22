@@ -38,14 +38,8 @@ export const useHeadingsObserver = (query: string) => {
         text: sectionElement.textContent?.slice(0, 50),
       });
 
-      const rect = sectionElement.getBoundingClientRect();
-
-      // section의 실제 크기에 따라 동적으로 rootMargin 설정
-      const topMargin = Math.max(80, Math.floor(rect.height * 0.1)); // 최소 80px, section 높이의 10%
-      const bottomMargin = Math.max(60, Math.floor(rect.height * 0.15)); // 최소 60px, section 높이의 15%
-
       const scrollMarginOption = {
-        rootMargin: "-58px 0px 0px 0px", // Header 높이(58px)를 고려해서 아래쪽에서 더 일찍 감지
+        rootMargin: '-58px 0px 0px 0px', // Header 높이(58px)를 고려해서 아래쪽에서 더 일찍 감지
         threshold: 0, // 조금이라도 보이면 바로 감지
       };
 
@@ -62,7 +56,7 @@ export const useHeadingsObserver = (query: string) => {
 
     return () => {
       // 모든 observer 정리
-      sectionRefs.current.forEach((section) => {
+      sectionRefs.current.forEach(() => {
         const sectionObserver = new IntersectionObserver(handleObserver);
         sectionObserver.disconnect();
       });
