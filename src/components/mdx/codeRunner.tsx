@@ -13,6 +13,7 @@ interface CodeRunnerProps {
   showLineNumbers?: boolean;
   title?: string;
   codeFn?: () => void;
+  rawDisplay?: string;
 }
 
 export default function CodeRunner({
@@ -20,6 +21,7 @@ export default function CodeRunner({
   showLineNumbers = false,
   title = '',
   codeFn,
+  rawDisplay,
 }: CodeRunnerProps) {
   const [copied, setCopied] = useState(false);
   const [output, setOutput] = useState<LogEntry[]>([]);
@@ -27,20 +29,19 @@ export default function CodeRunner({
 
   const extractArrowFunctionBody = (fn: () => void): string => {
     const source = fn.toString();
-    // Try to extract body of an arrow function: () => { /* body */ }
     const arrowMatch = source.match(/^\s*\(?\s*\)?\s*=>\s*\{([\s\S]*)\}\s*$/);
     if (arrowMatch && arrowMatch[1]) {
-      return arrowMatch[1].trim();
+      return arrowMatch[1];
     }
-    // Fallback: try to extract classic function body: function name() { /* body */ }
     const classicMatch = source.match(/^\s*function[\s\S]*?\{([\s\S]*)\}\s*$/);
     if (classicMatch && classicMatch[1]) {
-      return classicMatch[1].trim();
+      return classicMatch[1];
     }
     return source;
   };
 
   const codeToDisplay = useMemo(() => {
+    if (typeof rawDisplay === 'string') return rawDisplay;
     if (codeFn) {
       try {
         return extractArrowFunctionBody(codeFn);
@@ -49,7 +50,32 @@ export default function CodeRunner({
       }
     }
     return code;
-  }, [code, codeFn]);
+  }, [code, codeFn, rawDisplay]);
+
+  const normalizeIndentation = (raw: string): string => {
+    const normalized = raw.replace(/\r\n?/g, '\n');
+    const lines = normalized.split('\n');
+    if (lines.length === 0) return '';
+    const indentLengths = lines
+      .filter((line) => line.trim().length > 0)
+      .map((line) => line.match(/^[\t ]*/)?.[0].length ?? 0);
+    // smallest POSITIVE indent among non-empty lines
+    const positiveIndents = indentLengths.filter((n) => n > 0);
+    const minIndent = positiveIndents.length > 0 ? Math.min(...positiveIndents) : 0;
+    if (minIndent === 0) return lines.join('\n');
+    return lines
+      .map((line) => {
+        const leading = line.match(/^[\t ]*/)?.[0].length ?? 0;
+        const trimBy = Math.min(minIndent, leading);
+        return trimBy > 0 ? line.slice(trimBy) : line;
+      })
+      .join('\n');
+  };
+
+  const displayCode = useMemo(
+    () => normalizeIndentation(codeToDisplay),
+    [codeToDisplay]
+  );
 
   const runCode = () => {
     const logs: LogEntry[] = [];
@@ -81,7 +107,7 @@ export default function CodeRunner({
 
   const copyCode = async () => {
     try {
-      await navigator.clipboard.writeText(codeToDisplay);
+      await navigator.clipboard.writeText(displayCode);
       setCopied(true);
       setTimeout(() => setCopied(false), 3000);
     } catch (err) {
@@ -111,7 +137,7 @@ export default function CodeRunner({
             overscrollBehavior: 'contain',
           }}
         >
-          {codeToDisplay}
+          {displayCode}
         </SyntaxHighlighter>
 
         <button
