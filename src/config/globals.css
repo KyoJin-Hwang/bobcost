@@ -104,3 +104,13 @@
 body {
   font-weight: 500;
 }
+
+::selection {
+  background: #fde047; /* yellow */
+  color: var(--black);
+}
+
+::-moz-selection {
+  background: #fde047; /* yellow */
+  color: var(--black);
+}
