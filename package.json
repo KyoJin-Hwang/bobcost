@@ -38,6 +38,7 @@
     "reading-time": "^1.5.0",
     "rehype-pretty-code": "^0.14.0",
     "remark-code-title": "^0.2.5",
+    "shiki": "^1.29.2",
     "tailwind-merge": "^2.6.0"
   },
   "devDependencies": {
