@@ -127,7 +127,6 @@ export const getAllPostCount = async () => (await getPostList()).length;
 export const getCategoryList = () => {
   const cgPaths: string[] = sync(`${POSTS_PATH}/*`);
   const cgList = cgPaths.map((p) => p.split(path.sep).slice(-1)?.[0]);
-  console.log(cgList);
   return cgList;
 };
 
@@ -172,7 +171,6 @@ export const getPrevNextInSeries = async (
   const posts = await getPostList();
   // 동일 시리즈만 필터 + 프로덕션 가시성 반영
   const sameSeries = posts.filter((p) => p.categoryPath === categoryPath);
-  console.log(sameSeries);
   // createdAt 기준 오름차순 정렬(1장 -> 2장 순서)
   sameSeries.sort((a, b) => {
     const aTime = new Date(a.createdAt).getTime();
