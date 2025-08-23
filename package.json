@@ -11,6 +11,7 @@
     "delete": "node delete-post.mjs"
   },
   "dependencies": {
+    "@codesandbox/sandpack-react": "2.20.0",
     "@fec/remark-a11y-emoji": "^4.0.2",
     "@mdx-js/loader": "^3.1.0",
     "@mdx-js/react": "^3.1.0",
@@ -23,6 +24,7 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "dayjs": "^1.11.13",
+    "github-slugger": "^2.0.0",
     "gray-matter": "^4.0.3",
     "lucide-react": "^0.469.0",
     "next": "15.1.2",
@@ -32,11 +34,11 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-inspector": "^6.0.2",
-    "react-live": "^4.1.8",
     "react-syntax-highlighter": "^15.6.1",
     "reading-time": "^1.5.0",
     "rehype-pretty-code": "^0.14.0",
     "remark-code-title": "^0.2.5",
+    "shiki": "^1.29.2",
     "tailwind-merge": "^2.6.0"
   },
   "devDependencies": {

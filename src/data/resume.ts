@@ -7,8 +7,8 @@ export const Resume = {
   company: 'X',
   goal: '블로그 이전 작업 완료하기',
   book: {
-    url: 'https://product.kyobobook.co.kr/detail/S000213641007',
-    name: '코딩 테스트 합격자 되기 : 자바스크립트 편',
+    url: 'https://www.yes24.com/product/goods/123161563',
+    name: '모던 리액트 Deep Dive',
   },
   github: {
     name: 'GitHub',

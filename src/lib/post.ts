@@ -1,6 +1,7 @@
 import { CategoryDetail, HeadingItem, Post, PostMatter } from '@/config/types';
 import dayjs from 'dayjs';
 import fs from 'fs';
+import GithubSlugger from 'github-slugger';
 import { sync } from 'glob';
 import matter from 'gray-matter';
 import path from 'path';
@@ -163,23 +164,48 @@ export const getPostDetail = async (category: string, slug: string) => {
   return detail;
 };
 
+// 동일 categoryPath(시리즈) 내 이전/다음 글 찾기
+export const getPrevNextInSeries = async (
+  categoryPath: string,
+  slug: string
+) => {
+  const posts = await getPostList();
+  // 동일 시리즈만 필터 + 프로덕션 가시성 반영
+  const sameSeries = posts.filter((p) => p.categoryPath === categoryPath);
+  console.log(sameSeries);
+  // createdAt 기준 오름차순 정렬(1장 -> 2장 순서)
+  sameSeries.sort((a, b) => {
+    const aTime = new Date(a.createdAt).getTime();
+    const bTime = new Date(b.createdAt).getTime();
+    return aTime - bTime;
+  });
+
+  const index = sameSeries.findIndex((p) => p.slug === slug);
+  const prev = index > 0 ? sameSeries[index - 1] : undefined;
+  const next =
+    index >= 0 && index < sameSeries.length - 1
+      ? sameSeries[index + 1]
+      : undefined;
+
+  return { prev, next, siblings: sameSeries };
+};
+
 export const parseToc = (content: string): HeadingItem[] => {
-  const regex = /^(##|###) (.*$)/gim;
+  const regex = /^(##|###)\s+(.*)$/gim;
   const headingList = content.match(regex);
+  const slugger = new GithubSlugger();
+
   return (
-    headingList?.map((heading: string) => ({
-      text: heading.replace('##', '').replace('#', ''),
-      link:
-        '#' +
-        heading
-          .replace('# ', '')
-          .replace('#', '')
-          .replace(/[\[\]:!@#$/%^&*()+=,.]/g, '')
-          .replace(/ /g, '-')
-          .toLowerCase()
-          .replace('?', ''),
-      indent: (heading.match(/#/g)?.length || 2) - 2,
-    })) || []
+    headingList?.map((headingLine: string) => {
+      const indent = (headingLine.match(/#/g)?.length || 2) - 2;
+      const text = headingLine.replace(/^(##|###)\s+/, '');
+      const slug = slugger.slug(text);
+      return {
+        text,
+        link: `#${slug}`,
+        indent,
+      } as HeadingItem;
+    }) || []
   );
 };
 
