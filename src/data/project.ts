@@ -13,7 +13,7 @@ export const Projects: ResumeProject[] = [
     type: 1,
     title: '개인블로그 및 포트폴리오',
     start: '2024.12',
-    end: 'ing',
+    end: '2025.05',
     team: '1人 개인 프로젝트',
     url: 'https://www.bobcost.kr',
     summary: {
