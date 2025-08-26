@@ -28,15 +28,9 @@ export const useHeadingsObserver = (query: string) => {
 
     // h2, h3 섹션들을 observer로 관찰
     const sections = document.querySelectorAll('[data-heading-section="true"]');
-    console.log('Found sections:', sections.length);
 
-    sections.forEach((section, index) => {
+    sections.forEach((section) => {
       const sectionElement = section as HTMLElement;
-      console.log(`Section ${index}:`, {
-        id: sectionElement.id,
-        tagName: sectionElement.tagName,
-        text: sectionElement.textContent?.slice(0, 50),
-      });
 
       const scrollMarginOption = {
         rootMargin: '-58px 0px 0px 0px', // Header 높이(58px)를 고려해서 아래쪽에서 더 일찍 감지
