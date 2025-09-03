@@ -7,6 +7,7 @@ import Footer from '@/layouts/Footer';
 import Header from '@/layouts/Header';
 import { ThemeProvider } from '@/layouts/theme/Provider';
 import { findLatestDates, getSortedPostList } from '@/lib/post';
+import { GoogleAnalytics, GoogleTagManager } from '@next/third-parties/google';
 
 export const metadata: Metadata = {
   title: blogName,
@@ -39,6 +40,8 @@ export default async function RootLayout({
           <Footer />
           <Toaster />
         </ThemeProvider>
+        <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GA_ID || ''} />
+        <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID || ''} />
       </body>
     </html>
   );
