@@ -33,10 +33,8 @@ const rehypeHeadingSections = () => {
             sections.push(currentSection);
           }
 
-          // 새로운 section 시작 (ID가 있으면 사용, 없으면 생성)
-          const id =
-            (node.properties?.id as string) ||
-            `${node.tagName}-${Date.now()}-${Math.random()}`;
+          // 새로운 section 시작 (rehype-slug에서 생성된 id만 사용)
+          const id = node.properties?.id as string;
           currentSection = {
             type: 'element',
             tagName: 'section',
