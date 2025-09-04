@@ -10,13 +10,13 @@ import remarkCodeTitle from 'remark-code-title';
 import remarkGfm from 'remark-gfm';
 
 // AST 노드 타입 정의
-interface ASTNode {
-  type: string;
-  tagName?: string;
-  properties?: Record<string, unknown>;
-  children?: ASTNode[];
-  value?: string;
-}
+// interface ASTNode {
+//   type: string;
+//   tagName?: string;
+//   properties?: Record<string, unknown>;
+//   children?: ASTNode[];
+//   value?: string;
+// }
 
 // MDX를 section으로 자동으로 묶는 플러그인
 // const rehypeHeadingSections = () => {
