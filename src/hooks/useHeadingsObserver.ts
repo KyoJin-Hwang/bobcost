@@ -3,9 +3,12 @@ import { useEffect, useRef, useState } from 'react';
 export const useHeadingsObserver = (query: string) => {
   const [activeIdList, setActiveIdList] = useState<string[]>([]);
   const [tempId, setTempId] = useState('');
-  const sectionRefs = useRef<Map<string, HTMLElement>>(new Map());
+  const sectionRefs = useRef<
+    Map<string, { element: HTMLElement; observer: IntersectionObserver }>
+  >(new Map());
 
   useEffect(() => {
+    const currentSectionRefs = sectionRefs.current;
     const handleObserver: IntersectionObserverCallback = (entries) => {
       entries.forEach((entry) => {
         const targetId = `#${entry.target.id}`;
@@ -45,16 +48,18 @@ export const useHeadingsObserver = (query: string) => {
       sectionObserver.observe(section);
 
       // ref에 저장
-      sectionRefs.current.set(sectionElement.id, sectionElement);
+      sectionRefs.current.set(sectionElement.id, {
+        element: sectionElement,
+        observer: sectionObserver,
+      });
     });
 
     return () => {
       // 모든 observer 정리
-      sectionRefs.current.forEach(() => {
-        const sectionObserver = new IntersectionObserver(handleObserver);
-        sectionObserver.disconnect();
+      currentSectionRefs.forEach(({ observer }) => {
+        observer.disconnect();
       });
-      sectionRefs.current.clear();
+      currentSectionRefs.clear();
     };
   }, [query]);
 
