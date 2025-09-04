@@ -35,7 +35,7 @@ export async function generateMetadata({
 
 const CategoryPage = async ({ params }: { params: Props }) => {
   const { category } = await params;
-  getCategoryList();
+  await getCategoryList();
   return <PostListPage category={category} />;
 };
 
