@@ -93,14 +93,27 @@ const sortPostList = (PostList: Post[]) => {
 
 // 모든 포스트 목록 조회. 블로그 메인 페이지에서 사용
 export const getPostList = async (category?: string): Promise<Post[]> => {
-  const postPaths = getPostPaths(category);
-  const postList = await Promise.all(
-    postPaths.map((postPath) => parsePost(postPath))
-  );
-  const filtered = postList.filter(
-    (post) => post.look === 'on' || process.env.NODE_ENV !== 'production'
-  );
-  return filtered;
+  if (process.env.NODE_ENV === 'production' && fs.existsSync(path.join(process.cwd(), 'src', 'data', 'posts.json'))) {
+    // In production, read from pre-generated JSON
+    const postsJson = fs.readFileSync(path.join(process.cwd(), 'src', 'data', 'posts.json'), 'utf8');
+    const allPosts: Post[] = JSON.parse(postsJson);
+    if (category) {
+      return allPosts.filter(post => post.categoryPath === category);
+    }
+    return allPosts.filter(
+      (post) => post.look === 'on' || process.env.NODE_ENV !== 'production'
+    );
+  } else {
+    // In development or if JSON not found, read from file system
+    const postPaths = getPostPaths(category);
+    const postList = await Promise.all(
+      postPaths.map((postPath) => parsePost(postPath))
+    );
+    const filtered = postList.filter(
+      (post) => post.look === 'on' || process.env.NODE_ENV !== 'production'
+    );
+    return filtered;
+  }
 };
 
 // 정렬한 postList를 반납
@@ -124,10 +137,15 @@ export const getSitemapPostList = async () => {
 export const getAllPostCount = async () => (await getPostList()).length;
 
 // 카테고리 리스트
-export const getCategoryList = () => {
-  const cgPaths: string[] = sync(`${POSTS_PATH}/*`);
-  const cgList = cgPaths.map((p) => p.split(path.sep).slice(-1)?.[0]);
-  return cgList;
+export const getCategoryList = async (): Promise<string[]> => {
+  if (process.env.NODE_ENV === 'production' && fs.existsSync(path.join(process.cwd(), 'src', 'data', 'categories.json'))) {
+    const categoriesJson = fs.readFileSync(path.join(process.cwd(), 'src', 'data', 'categories.json'), 'utf8');
+    return JSON.parse(categoriesJson);
+  } else {
+    const cgPaths: string[] = sync(`${POSTS_PATH}/*`);
+    const cgList = cgPaths.map((p) => p.split(path.sep).slice(-1)?.[0]);
+    return cgList;
+  }
 };
 
 // 카테고리 글 전체 갯수
