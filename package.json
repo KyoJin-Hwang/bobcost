@@ -8,8 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "post": "node create-post.mjs",
-    "delete": "node delete-post.mjs",
-    "prebuild": "node scripts/generate-post-data.mjs"
+    "delete": "node delete-post.mjs"
   },
   "dependencies": {
     "@codesandbox/sandpack-react": "2.20.0",
