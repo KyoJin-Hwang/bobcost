@@ -21,7 +21,7 @@ export default async function RootLayout({
 }>) {
   const posts = await getSortedPostList();
 
-  const result = findLatestDates(posts);
+  const result = await findLatestDates(posts);
   return (
     <html
       lang='en'

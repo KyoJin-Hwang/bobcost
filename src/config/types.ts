@@ -17,6 +17,7 @@ export interface Post extends PostMatter {
   content: string;
   readingMinutes: number;
   categoryPublicName: string;
+  toc?: HeadingItem[];
 }
 
 export interface CategoryDetail {
