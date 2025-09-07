@@ -9,7 +9,7 @@ import { PostHeader } from '@/components/post_detail/PostHeader';
 import TocSideBar from '@/components/post_detail/TableOfContentSidebar';
 import { baseDomain } from '@/config/const';
 import { Post } from '@/config/types';
-import { getCachedPostDetail, getCachedPostList } from '@/lib/post';
+import { getPostDetail, getPostList } from '@/lib/post';
 
 interface Props {
   params: Promise<{
@@ -24,7 +24,7 @@ export const revalidate = 3600; // 1시간 캐시
 
 // 인기 글만 빌드 시 생성
 export async function generateStaticParams() {
-  const posts = await getCachedPostList();
+  const posts = await getPostList();
   // 최신 5개 글만 빌드 시 생성 (나머지는 on-demand)
   return posts.slice(0, 5).map((post) => ({
     category: post.categoryPath,
@@ -37,7 +37,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { category, slug } = await params;
 
   try {
-    const post = await getCachedPostDetail(category, slug);
+    const post = await getPostDetail(category, slug);
     const title = `${post.title}`;
     const imageURL = `${baseDomain}${post.thumbnail}`;
 
@@ -94,8 +94,8 @@ const PostDetail = async ({ params }: Props) => {
 
   // 병렬로 필요한 데이터 한번에 로딩
   const [post, allPosts] = await Promise.all([
-    getCachedPostDetail(category, slug),
-    getCachedPostList(), // 이미 캐싱됨
+    getPostDetail(category, slug),
+    getPostList(), // 이미 캐싱됨
   ]);
 
   // TOC는 이제 post 객체에 미리 포함됨 (1단계에서 개선)
