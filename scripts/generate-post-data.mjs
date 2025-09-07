@@ -1,4 +1,4 @@
-import { getPostList, getCategoryList } from './src/lib/post.ts';
+import { getCategoryList, getPostList } from '../src/lib/post.ts';
 import fs from 'fs';
 import path from 'path';
 
@@ -9,7 +9,12 @@ async function generatePostData() {
   console.log('Generated posts.json');
 
   const categories = getCategoryList();
-  const categoryDataPath = path.join(process.cwd(), 'src', 'data', 'categories.json');
+  const categoryDataPath = path.join(
+    process.cwd(),
+    'src',
+    'data',
+    'categories.json'
+  );
   fs.writeFileSync(categoryDataPath, JSON.stringify(categories, null, 2));
   console.log('Generated categories.json');
 }
