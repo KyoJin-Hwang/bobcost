@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 
 import PostListPage from '@/components/post_list/PostListPage';
 import { baseDomain, blogName, blogThumbnailURL } from '@/config/const';
-import { getCategoryList, getCategoryPublicName } from '@/lib/post';
+import { getCategoryPublicName } from '@/lib/post';
 
 type Props = Promise<{ category: string }>;
 
@@ -35,7 +35,7 @@ export async function generateMetadata({
 
 const CategoryPage = async ({ params }: { params: Props }) => {
   const { category } = await params;
-  await getCategoryList();
+  console.log(category);
   return <PostListPage category={category} />;
 };
 

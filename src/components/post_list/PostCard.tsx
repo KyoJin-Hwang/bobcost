@@ -58,7 +58,6 @@ const PostCard = async ({ post }: Props) => {
             alt={`thumbnail for ${post.title}`}
             fill
             sizes='(max-width: 768px) 100vw, 768px'
-            priority
           />
           <Text
             className={postClassGroup(lowerCase)}
