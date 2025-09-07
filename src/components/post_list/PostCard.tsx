@@ -13,7 +13,7 @@ interface Props {
 
 const PostCard = async ({ post }: Props) => {
   const posts = await getSortedPostList();
-  const result = findLatestDates(posts);
+  const result = await findLatestDates(posts);
 
   const dateStatus = () => {
     if (result.create === post.url) return 'New';
