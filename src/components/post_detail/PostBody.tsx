@@ -120,7 +120,6 @@ export const PostBody = ({ post }: Props) => {
         }}
         components={MdxComponents}
       />
-      {/* Prev / Next navigation will be rendered in page */}
     </>
   );
 };
