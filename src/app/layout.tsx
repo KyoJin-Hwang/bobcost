@@ -8,6 +8,7 @@ import Header from '@/layouts/Header';
 import { ThemeProvider } from '@/layouts/theme/Provider';
 import { findLatestDates, getSortedPostList } from '@/lib/post';
 import { GoogleAnalytics, GoogleTagManager } from '@next/third-parties/google';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 export const metadata: Metadata = {
   title: blogName,
@@ -40,6 +41,7 @@ export default async function RootLayout({
           <Footer />
           <Toaster />
         </ThemeProvider>
+        <SpeedInsights />
         <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GA_ID || ''} />
         <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID || ''} />
       </body>
