@@ -1,0 +1,509 @@
+---
+title: 'JS 알고리즘 1편 (Method, 자료구조)'
+desc: 자바스크립트 메소드 및 자료구조를 먼저 알아야 효율적으로 문제를 풀 수 있기 때문에 1편은 Method를 정리하게 되었다.
+createdAt: 2025-09-09 14:09
+thumbnail: /posts/frontend/javascript/algorithmTip.gif
+group: JS
+look: off
+---
+
+## 이 글을 정리하게 된 계기
+
+Javascript로 코딩테스트를 준비하면서 가장 크게 느낀 어려움은 기초 지식 부족과 기억의 단절이었습니다.
+- 배열, 문자열, 객체 관련 기본 메소드 활용법을 잘 기억하지 못해 매번 효율적인 코드 작성이 힘들었습니다.
+- 피보나치 수열, 유클리드 호제법처럼 자주 등장하는 기본 알고리즘조차 구현할 때 잊어버리는 경우가 많았습니다.
+- 반복적으로 등장하는 규칙과 패턴을 숙지하지 못하다 보니 문제 해결 속도도 늦어졌습니다.
+
+이런 경험을 통해 단순히 문제 풀이 연습만 하는 것이 아니라, 자주 쓰이는 메소드와 알고리즘을 체계적으로 정리해두는 것이 필요하다고 느꼈습니다. 이 글의 목적은 기억을 강화하고, 실전 코딩테스트에서 바로 활용할 수 있는 유용한 팁과 메소드를 정리하는 데 있습니다.
+
+## 1편 글 구성
+
+이번 1편에서는 알고리즘 문제 풀이 과정에서 가장 자주 활용되는 JavaScript 기본 Method를 정리합니다.
+- Array, String, Object, Math 관련 메소드들의 기본 사용법
+- 각 메소드를 실전에서 더 효율적으로 활용할 수 있는 팁과 패턴
+- 추가로, Map과 Set의 특징과 이를 이용한 알고리즘 풀이 방식
+
+이 글은 단순히 메소드를 나열하는 데 그치지 않고, 기초를 확실히 다지는 동시에 실전 코딩테스트 상황에서도 빠르게 떠올릴 수 있도록 정리하는 것을 목표로 합니다.
+
+
+## String Method
+### 💡 split
+
+[MDN 참고링크](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/String/split)
+> 📊 사용도: 상
+> 👉 문자열 처리 문제에서 거의 필수적으로 쓰임
+
+🔹 어떤 알고리즘 문제에 사용되는지
+- 공백/쉼표/특수문자 기준으로 문자열을 나눠야 하는 문제
+    - CSV, 공백 구분 단어, 로그 파일 처리 등
+- 문자열을 배열로 변환해서 순회해야 하는 문제
+    - 각 단어/문자 단위로 반복문, 조건문, 계산 수행
+- 단어 개수 세기, 토큰화 기반 문제
+    - 문장에서 단어 개수 세기, 특정 단어 존재 여부 확인
+
+🔹 사용하는 이유
+- 문자열을 배열 단위로 쪼개면 반복문, 정렬, 해시맵 등에 활용 가능
+- 데이터 전처리가 필요한 경우에 필수
+
+
+```javascript title='사용방법' showLineNumbers
+// 1) 공백 기준으로 문자열 나누기
+const str1 = "apple banana orange";
+const arr1 = str1.split(" "); 
+console.log(arr1); // ["apple", "banana", "orange"]
+
+// 2) 쉼표 기준으로 문자열 나누기
+const str2 = "red,green,blue";
+const arr2 = str2.split(",");
+console.log(arr2); // ["red","green","blue"]
+```
+
+### ⚙️ 실전 알고리즘 예시
+```javascript title='📚 단어 개수 세기' showLineNumbers
+function countWords(sentence) {
+  const words = sentence.split(" "); // 공백 기준 배열 생성
+  return words.length;
+}
+
+console.log(countWords("I love coding in JavaScript")); // 5
+```
+
+```javascript title='📚 CSV 문자열 👉 배열 변환' showLineNumbers
+function parseCSV(csv) {
+  return csv.split(",").map(item => item.trim()); // 배열로 변환 + 공백 제거
+}
+
+console.log(parseCSV("apple, banana, orange")); 
+// ["apple", "banana", "orange"]
+```
+
+---
+
+### 💡 substring
+> 📊 사용도: 중
+> 👉 문자열의 일부를 잘라내는 데 자주 사용되며, 특히 부분 문자열 비교/검사 문제에서 유용
+
+🔹 어떤 알고리즘 문제에 사용되는지
+- 부분 문자열 추출이 필요한 문제
+    - 특정 인덱스 구간의 문자열만 필요할 때
+- 문자열 안에서 고정 길이 부분 문자열을 비교하거나 검사할 때
+    - 문자열 안에서 고정 길이 부분 문자열을 비교하거나 검사할 때
+- 접두사/접미사 관련 문제
+    - 문자열이 특정 단어로 시작/끝나는지 검사할 때
+
+🔹 사용 이유
+- 원하는 시작 인덱스와 끝 인덱스를 지정해 문자열을 잘라낼 수 있음
+- slice와 유사하지만, 음수 인덱스를 허용하지 않아 더 직관적일 때가 있음
+
+```javascript title='사용방법' showLineNumbers
+// 1) 시작~끝 인덱스까지 문자열 자르기
+const str = "JavaScript";
+console.log(str.substring(0, 4)); // "Java"
+
+// 2) 한쪽만 넣으면 해당 인덱스부터 끝까지
+console.log(str.substring(4)); // "Script"
+```
+
+### ⚙️ 실전 알고리즘 예시
+```javascript title='📚 부분 문자열비교 (슬라이딩 윈도우)' showLineNumbers
+function findSubstring(text, target) {
+  for (let i = 0; i <= text.length - target.length; i++) {
+    if (text.substring(i, i + target.length) === target) {
+      return i; // 위치 반환
+    }
+  }
+  return -1;
+}
+
+console.log(findSubstring("hellojavascript", "java")); 
+// 5
+```
+```javascript title='📚 접두사 검사' showLineNumbers
+function hasPrefix(word, prefix) {
+  return word.substring(0, prefix.length) === prefix;
+}
+
+console.log(hasPrefix("javascript", "java")); // true
+console.log(hasPrefix("javascript", "script")); // false
+```
+```javascript title='📚 접미사 검사' showLineNumbers
+function hasSuffix(word, suffix) {
+  return word.substring(word.length - suffix.length) === suffix;
+}
+
+console.log(hasSuffix("javascript", "script")); // true
+console.log(hasSuffix("javascript", "java"));   // false
+```
+
+---
+
+### 💡 includes
+> 📊 사용도: 상
+> 👉 문자열이나 배열에서 특정 값의 포함 여부를 확인할 때 자주 사용됨
+
+🔹 어떤 알고리즘 문제에 사용되는지  
+- 문자열/배열 안에 특정 값이 존재하는지 확인해야 하는 문제  
+- 조건 분기 문제에서 YES/NO 판단이 필요할 때  
+- 중복 체크, 금지 단어 필터링 등  
+
+🔹 사용 이유  
+- `indexOf`보다 직관적이며 가독성이 좋음  
+- 문자열/배열 포함 여부를 빠르게 확인 가능  
+
+```javascript title='사용방법' showLineNumbers
+// 문자열 포함 여부
+const str = "javascript";
+console.log(str.includes("java")); // true
+
+// 배열 포함 여부
+const arr = [1, 2, 3, 4];
+console.log(arr.includes(3)); // true
+```
+
+### ⚙️ 실전 알고리즘 예시
+```javascript title='📚 금지 단어 체크' showLineNumbers
+function hasForbiddenWord(text, forbidden) {
+  for (let word of forbidden) {
+    if (text.includes(word)) return true;
+  }
+  return false;
+}
+```
+
+```javascript title='📚 배열 중복 체크' showLineNumbers
+// 2. 
+function hasDuplicate(nums) {
+  let seen = [];
+  for (let num of nums) {
+    if (seen.includes(num)) return true;
+    seen.push(num);
+  }
+  return false;
+}
+```
+
+---
+
+### 💡 indexOf / lastIndexOf
+> 📊 사용도: 상
+> 👉 문자열이나 배열에서 특정 값의 위치를 찾을 때 자주 사용됨
+
+🔹 어떤 알고리즘 문제에 사용되는지  
+- 특정 문자의 첫 위치 또는 마지막 위치 확인  
+- 문자열 검색 및 패턴 매칭  
+- 배열 내 특정 요소의 인덱스 찾기  
+
+🔹 사용 이유  
+- 문자열/배열에서 값의 위치를 빠르게 확인 가능  
+- 포함 여부 확인 + 위치 반환을 동시에 수행 가능  
+
+```javascript title='사용방법' showLineNumbers
+// indexOf: 처음 나오는 위치 반환, 없으면 -1
+const str = "javascript";
+console.log(str.indexOf("a")); // 1
+
+// lastIndexOf: 마지막 나오는 위치 반환, 없으면 -1
+console.log(str.lastIndexOf("a")); // 3
+
+// 배열에서도 사용 가능
+const arr = [1, 2, 3, 2];
+console.log(arr.indexOf(2)); // 1
+console.log(arr.lastIndexOf(2)); // 3
+```
+
+### ⚙️ 실전 알고리즘 예시
+```javascript title='📚 첫 번째 문자 위치 찾기' showLineNumbers
+function firstOccurrence(str, char) {
+  return str.indexOf(char);
+}
+
+console.log(firstOccurrence("hello world", "o")); // 4
+```
+```javascript title='📚 마지막 문자 위치 찾기' showLineNumbers
+function lastOccurrence(str, char) {
+  return str.lastIndexOf(char);
+}
+
+console.log(lastOccurrence("hello world", "l")); // 9
+```
+```javascript title='📚 배열 내 특정 값 위치 찾기' showLineNumbers
+function findIndex(arr, value) {
+  return arr.indexOf(value);
+}
+
+console.log(findIndex([1,2,3,2], 2)); // 1
+```
+
+---
+
+### 💡 replace / replaceAll
+> 📊 사용도: 상
+> 👉 문자열 내 특정 문자를 다른 문자로 바꾸거나 치환할 때 자주 사용됨
+
+🔹 어떤 알고리즘 문제에 사용되는지  
+- 문자열 내 특정 패턴을 다른 문자로 변환해야 하는 문제  
+- 공백, 특수문자 제거 및 교체  
+- 문자열 포맷 변환  
+
+🔹 사용 이유  
+- `replace`: 첫 번째 일치하는 문자/패턴만 치환  
+- `replaceAll`: 모든 일치하는 문자/패턴 치환  
+- 정규식 없이도 간단하게 치환 가능  
+
+```javascript title='사용방법' showLineNumbers
+const str = "hello world hello";
+
+// replace: 첫 번째 일치만 변경
+console.log(str.replace("hello", "hi")); // "hi world hello"
+
+// replaceAll: 모든 일치 변경
+console.log(str.replaceAll("hello", "hi")); // "hi world hi"
+
+// 배열 내 문자열 치환
+const arr = ["apple", "banana"];
+console.log(arr.map(x => x.replace("a", "@"))); // ["@pple", "b@nana"]
+```
+
+### ⚙️ 실전 알고리즘 예시
+```javascript title='📚 공백 제거' showLineNumbers
+function removeSpaces(str) {
+  return str.replaceAll(" ", "");
+}
+
+console.log(removeSpaces("a b c d")); // "abcd"
+```
+```javascript title='📚 특정 단어 치환' showLineNumbers
+function maskWord(str, word) {
+  return str.replaceAll(word, "*".repeat(word.length));
+}
+
+console.log(maskWord("hello world", "world")); // "hello *****"
+```
+```javascript title='📚 첫 번째 단어만 치환' showLineNumbers
+function replaceFirst(str, oldWord, newWord) {
+  return str.replace(oldWord, newWord);
+}
+
+console.log(replaceFirst("hello world hello", "hello", "hi")); // "hi world hello"
+```
+
+---
+
+### 💡 padStart / padEnd
+> 📊 사용도: 중
+> 👉 문자열의 길이를 맞추거나 특정 길이에 맞춰 앞/뒤를 채워야 할 때 자주 사용됨
+
+🔹 어떤 알고리즘 문제에 사용되는지  
+- 숫자, 문자열을 고정 길이로 맞춰야 하는 문제  
+- 특정 포맷(날짜, 시간, 번호) 맞춤  
+- 공백이나 특정 문자로 문자열 채우기  
+
+🔹 사용 이유  
+- 문자열 길이를 지정하고 남는 부분을 원하는 문자로 채울 수 있음  
+- 포맷 통일 및 정렬에 용이  
+
+```javascript title='사용방법' showLineNumbers
+const str = "5";
+
+// padStart: 앞쪽에 문자 추가
+console.log(str.padStart(3, "0")); // "005"
+
+// padEnd: 뒤쪽에 문자 추가
+console.log(str.padEnd(3, "0"));   // "500"
+
+// 길이가 이미 길면 변경 없음
+console.log("12345".padStart(3, "0")); // "12345"
+```
+### ⚙️ 실전 알고리즘 예시
+```javascript title='📚 번호 포맷 맞추기' showLineNumbers
+function formatNumber(num) {
+  return num.toString().padStart(4, "0");
+}
+
+console.log(formatNumber(7));   // "0007"
+console.log(formatNumber(123)); // "0123"
+```
+```javascript title='📚 시간 문자열 맞추기' showLineNumbers
+function formatTime(hour, min) {
+  return hour.toString().padStart(2, "0") + ":" + min.toString().padStart(2, "0");
+}
+
+console.log(formatTime(9, 5)); // "09:05"
+console.log(formatTime(12, 30)); // "12:30"
+```
+```javascript title='📚 문자열 뒤쪽 채우기' showLineNumbers
+function fillRight(str, length) {
+  return str.padEnd(length, ".");
+}
+
+console.log(fillRight("hi", 5)); // "hi..."
+```
+
+---
+### 💡 toLowerCase / toUpperCase
+> 📊 사용도: 상  
+> 👉 문자열의 대소문자를 통일해야 할 때 자주 사용됨
+
+🔹 어떤 알고리즘 문제에 사용되는지  
+- 대소문자를 구분하지 않고 문자열 비교해야 할 때  
+- 문자열 정렬, 검색, 필터링  
+- 입력값 표준화  
+
+🔹 사용 이유  
+- 대소문자 구분 없이 비교 가능  
+- 문자열을 일관된 형식으로 변환하여 오류 방지  
+
+```javascript title='사용방법' showLineNumbers
+const str = "JavaScript";
+
+// toLowerCase: 소문자로 변환
+console.log(str.toLowerCase()); // "javascript"
+
+// toUpperCase: 대문자로 변환
+console.log(str.toUpperCase()); // "JAVASCRIPT"
+
+// 문자열 비교 시 활용
+console.log(str.toLowerCase() === "javascript"); // true
+```
+### ⚙️ 실전 알고리즘 예시
+```javascript title='📚 대소문자 구분 없이 검색' showLineNumbers
+function containsWordIgnoreCase(sentence, word) {
+  return sentence.toLowerCase().includes(word.toLowerCase());
+}
+
+console.log(containsWordIgnoreCase("Hello World", "hello")); // true
+console.log(containsWordIgnoreCase("JavaScript", "SCRIPT")); // true
+```
+```javascript title='📚 이름 표준화' showLineNumbers
+function normalizeName(name) {
+  return name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
+}
+
+console.log(normalizeName("jOhN")); // "John"
+console.log(normalizeName("ALICE")); // "Alice"
+```
+```javascript title='📚 문자열 비교' showLineNumbers
+function isEqualIgnoreCase(str1, str2) {
+  return str1.toLowerCase() === str2.toLowerCase();
+}
+
+console.log(isEqualIgnoreCase("abc", "ABC")); // true
+console.log(isEqualIgnoreCase("Hello", "HELLO")); // true
+```
+---
+### 💡 trim
+> 📊 사용도: 상  
+> 👉 문자열 양쪽 끝의 공백을 제거할 때 자주 사용됨
+
+🔹 어떤 알고리즘 문제에 사용되는지  
+- 입력값 전처리 문제 (공백 제거)  
+- 문자열 비교, 정렬, 검색  
+- 사용자 입력 데이터 처리  
+
+🔹 사용 이유  
+- 문자열 시작과 끝의 불필요한 공백 제거  
+- 비교 및 처리 과정에서 오류 방지  
+
+```javascript title='사용방법' showLineNumbers
+const str = "   JavaScript   ";
+
+// 양쪽 공백 제거
+console.log(str.trim()); // "JavaScript"
+
+// 문자열 비교 시 활용
+console.log(str.trim() === "JavaScript"); // true
+
+// 다른 문자열과 연결
+console.log("Hello " + str.trim() + "!"); // "Hello JavaScript!"
+```
+
+### ⚙️ 실전 알고리즘 예시
+```javascript title='📚 입력 공백 제거' showLineNumbers
+function cleanInput(input) {
+  return input.trim();
+}
+
+console.log(cleanInput("  hello world  ")); // "hello world"
+```
+```javascript title='📚 여러 문자열 공백 제거' showLineNumbers
+function trimAll(strings) {
+  return strings.map(s => s.trim());
+}
+
+console.log(trimAll(["  a ", " b  ", " c "])); // ["a", "b", "c"]
+```
+```javascript title='📚 비교 문자열 표준화' showLineNumbers
+function isEqualTrimmed(str1, str2) {
+  return str1.trim() === str2.trim();
+}
+
+console.log(isEqualTrimmed(" abc ", "abc")); // true
+```
+
+---
+### 💡 match
+> 📊 사용도: 중  
+> 👉 문자열에서 특정 패턴과 일치하는 부분을 찾을 때 사용됨
+
+🔹 어떤 알고리즘 문제에 사용되는지  
+- 특정 문자나 단어가 문자열에 몇 번 등장하는지 확인  
+- 패턴 매칭, 조건 검사  
+- 문자열 분석, 카운팅  
+
+🔹 사용 이유  
+- 정규식을 활용하면 반복되는 패턴을 한 번에 추출 가능  
+- 배열로 결과 반환, 개수 확인에 용이  
+
+```javascript title='사용방법' showLineNumbers
+const str = "hello world hello";
+
+// 단어 'hello' 모두 찾기
+console.log(str.match(/hello/g)); // ["hello", "hello"]
+
+// 특정 문자 찾기
+console.log(str.match(/o/g)); // ["o", "o"]
+
+// 일치하는 패턴이 없으면 null 반환
+console.log(str.match(/bye/g)); // null
+```
+
+### ⚙️ 실전 알고리즘 예시
+```javascript title='📚 특정 단어 개수' showLineNumbers
+function countWord(str, word) {
+  const matches = str.match(new RegExp(word, "g"));
+  return matches ? matches.length : 0;
+}
+
+console.log(countWord("hello world hello", "hello")); // 2
+```
+```javascript title='📚 모음 개수' showLineNumbers
+function countVowels(str) {
+  const matches = str.match(/[aeiou]/gi);
+  return matches ? matches.length : 0;
+}
+
+console.log(countVowels("hello world")); // 3
+```
+```javascript title='📚 특정 문자 확인' showLineNumbers
+function hasChar(str, char) {
+  return str.match(new RegExp(char)) !== null;
+}
+
+console.log(hasChar("javascript", "s")); // true
+console.log(hasChar("javascript", "z")); // false
+```
+---
+
+
+## Math Method
+
+## Array Method
+
+## Object Method
+
+## Map, Set, Obeject
+
+## 실전 Map, Set 알고리즘 풀이방식
+
+<Callout type='info'>참고 자료</Callout>
+1. https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects [MDN]
