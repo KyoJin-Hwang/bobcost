@@ -1,8 +1,8 @@
 ---
-title: 'JS 알고리즘 1편 (Method, 자료구조)'
-desc: (작성중) 자바스크립트 메소드 및 자료구조를 먼저 알아야 효율적으로 문제를 풀 수 있기 때문에 1편은 Method를 정리하게 되었다.
+title: 'JS 알고리즘 1편 (Method)'
+desc: 자바스크립트 Method를 먼저 알아야 효율적으로 문제를 풀 수 있기 때문에 1편은 Method를 정리하게 되었다.
 createdAt: 2025-09-09 14:09
-thumbnail: /posts/frontend/javascript/algorithmTip.gif
+thumbnail: /posts/frontend/javascript/learnAlgorithm.png
 group: JS
 look: on
 ---
@@ -21,7 +21,6 @@ Javascript로 코딩테스트를 준비하면서 가장 크게 느낀 어려움�
 이번 1편에서는 알고리즘 문제 풀이 과정에서 가장 자주 활용되는 JavaScript 기본 Method를 정리합니다.
 - Array, String, Object, Math 관련 메소드들의 기본 사용법
 - 각 메소드를 실전에서 더 효율적으로 활용할 수 있는 팁과 패턴
-- 추가로, Map과 Set의 특징과 이를 이용한 알고리즘 풀이 방식
 
 이 글은 단순히 메소드를 나열하는 데 그치지 않고, 기초를 확실히 다지는 동시에 실전 코딩테스트 상황에서도 빠르게 떠올릴 수 있도록 정리하는 것을 목표로 합니다.
 
@@ -495,15 +494,448 @@ console.log(hasChar("javascript", "z")); // false
 ---
 
 
-## Math Method
+## Math, Number Method
+
+### 💡 Math.max / Math.min
+> 📊 사용도: 상  
+> 👉 배열/값들 중 최댓값, 최솟값을 구할 때 사용  
+
+🔹 어떤 알고리즘 문제에 사용되는지  
+- 주어진 수 중 최대/최소 찾기  
+- 배열에서 최댓값과 최솟값 비교  
+- 조건에 따라 범위 확인  
+
+🔹 사용 이유  
+- 반복문 없이 빠르게 최댓값/최솟값 도출 가능  
+- 스프레드 연산자와 같이 쓰면 배열에도 활용 가능  
+
+```javascript title='사용방법' showLineNumbers
+console.log(Math.max(3, 7, 2)); // 7
+console.log(Math.min(3, 7, 2)); // 2
+
+const arr = [3, 7, 2];
+console.log(Math.max(...arr)); // 7
+console.log(Math.min(...arr)); // 2
+```
+
+### ⚙️ 실전 알고리즘 예시
+```javascript title='📚 배열 최댓값/최솟값 찾기' showLineNumbers
+function findMaxMin(arr) {
+  return [Math.max(...arr), Math.min(...arr)];
+}
+console.log(findMaxMin([1, 5, 3, 9, 2])); // [9, 1]
+```
+```javascript title='📚 점수 차이 계산' showLineNumbers
+function scoreDiff(scores) {
+  return Math.max(...scores) - Math.min(...scores);
+}
+console.log(scoreDiff([70, 85, 90, 60])); // 30
+```
+```javascript title='📚 삼각형 조건 확인' showLineNumbers
+function canFormTriangle(a, b, c) {
+  const maxSide = Math.max(a, b, c);
+  return maxSide < a + b + c - maxSide;
+}
+console.log(canFormTriangle(3, 4, 5)); // true
+```
+### 💡 Math.abs
+> 📊 사용도: 상  
+> 👉 어떤 수의 절댓값(부호 제거)을 구할 때 사용  
+
+🔹 어떤 알고리즘 문제에 사용되는지  
+- 두 값의 차이 계산 (거리, 오차, 차이 절댓값)  
+- 좌표 거리 구하기 (맨해튼 거리 등)  
+- 조건 비교 시 음수를 없애고 싶을 때  
+
+🔹 사용 이유  
+- `if` 조건문 없이 절댓값 바로 구할 수 있어 가독성, 효율성 ↑  
+- 정렬, 거리 계산, 수학적 계산에 필수적  
+
+```javascript title='사용방법' showLineNumbers
+console.log(Math.abs(-10)); // 10
+console.log(Math.abs(7));   // 7
+
+// 두 수 차이 절댓값
+const diff = Math.abs(5 - 12);
+console.log(diff); // 7
+```
+### ⚙️ 실전 알고리즘 예시
+```javascript title='📚 두 점의 거리(1차원)' showLineNumbers
+function distance(a, b) {
+  return Math.abs(a - b);
+}
+console.log(distance(10, 3)); // 7
+```
+
+```javascript title='📚 좌표거리 (맨해튼 거리)' showLineNumbers
+function manhattan(x1, y1, x2, y2) {
+  return Math.abs(x1 - x2) + Math.abs(y1 - y2);
+}
+console.log(manhattan(1, 2, 4, 6)); // 7
+```
+
+```javascript title='📚 가까운 수 찾기' showLineNumbers
+function findClosest(arr, target) {
+  return arr.reduce((a, b) =>
+    Math.abs(b - target) < Math.abs(a - target) ? b : a
+  );
+}
+console.log(findClosest([3, 8, 10, 15], 9)); // 8
+```
+
+### 💡 Math.floor / Math.ceil / Math.round / Math.trunc
+> 📊 사용도: 상  
+> 👉 소수점을 처리할 때 내림, 올림, 반올림, 정수화가 필요할 때 사용  
+
+🔹 어떤 알고리즘 문제에 사용되는지  
+- 점수/평균값 계산 후 반올림, 내림, 올림 처리  
+- 몫 계산 (특히 정수 나눗셈)  
+- 좌표/그리드 단위 계산 (격자 문제)  
+- 소수점 이하 버리기  
+
+🔹 사용 이유  
+- 나눗셈 이후 정확한 정수값이 필요할 때 필수  
+- 단순 `parseInt` 대신 의도에 맞는 메서드 사용 가능  
+
+```javascript title='사용방법' showLineNumbers
+console.log(Math.floor(3.9)); // 3  (내림)
+console.log(Math.ceil(3.1));  // 4  (올림)
+console.log(Math.round(3.5)); // 4  (반올림)
+console.log(Math.trunc(3.9)); // 3  (소수점 절삭)
+```
+
+### ⚙️ 실전 알고리즘 예시
+```javascript title='📚 정수 나눗셈' showLineNumbers
+function divide(a, b) {
+  return Math.floor(a / b);
+}
+console.log(divide(7, 3)); // 2
+```
+```javascript title='📚 시험점수 반올림 처리' showLineNumbers
+function roundScore(score) {
+  return Math.round(score / 5) * 5;
+}
+console.log(roundScore(83)); // 85
+```
+```javascript title='📚 좌표 격자 위치 찾기' showLineNumbers
+function gridIndex(x, size) {
+  return Math.trunc(x / size);
+}
+console.log(gridIndex(17, 5)); // 3
+```
+
+### 💡 Math.pow / Math.sqrt
+> 📊 사용도: 상  
+> 👉 제곱, 제곱근 계산이 필요한 경우에 사용  
+
+🔹 어떤 알고리즘 문제에 사용되는지  
+- 제곱, 제곱근을 이용한 수학 계산  
+- 거리 계산 (유클리드 거리)  
+- 피타고라스 정리 문제  
+
+🔹 사용 이유  
+- `**` 연산자 대신 Math 메서드를 사용하면 가독성 ↑  
+- 제곱근 계산 시 Math.sqrt로 간편하게 처리 가능  
+
+```javascript title='사용방법' showLineNumbers
+// 제곱
+console.log(Math.pow(3, 2)); // 9
+console.log(2 ** 3);         // 8 (같은 결과, ** 연산자)
+
+// 제곱근
+console.log(Math.sqrt(16));  // 4
+console.log(Math.sqrt(2));   // 1.4142135623730951
+```
+### ⚙️ 실전 알고리즘 예시
+```javascript title='📚 제곱 계산' showLineNumbers
+function square(num) {
+  return Math.pow(num, 2);
+}
+console.log(square(5)); // 25
+```
+```javascript title='📚 제곱근 활용 조건 확인' showLineNumbers
+function isPerfectSquare(num) {
+  const root = Math.sqrt(num);
+  return root === Math.floor(root);
+}
+console.log(isPerfectSquare(16)); // true
+console.log(isPerfectSquare(20)); // false
+```
+
+### 💡 Math.random
+> 📊 사용도: 상  
+> 👉 난수 생성이 필요한 문제에서 사용  
+
+🔹 어떤 알고리즘 문제에 사용되는지  
+- 랜덤 샘플링, 섞기 (shuffle)  
+- 임의의 값 생성 (게임, 시뮬레이션, 테스트 케이스)  
+- 확률 기반 알고리즘 구현  
+
+🔹 사용 이유  
+- 0 이상 1 미만의 난수를 쉽게 생성 가능  
+- 범위 변환과 조합하면 다양한 난수 생성 가능  
+
+```javascript title='사용방법' showLineNumbers
+console.log(Math.random()); // 0 이상 1 미만 난수 예: 0.234567
+console.log(Math.floor(Math.random() * 10)); // 0~9 사이 정수
+console.log(Math.floor(Math.random() * 6) + 1); // 1~6 사이 정수 (주사위)
+```
+
+### ⚙️ 실전 알고리즘 예시
+```javascript title='📚 배열 랜덤 섞기' showLineNumbers
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+console.log(shuffle([1,2,3,4,5]));
+```
+```javascript title='📚 난수 기반 시뮬레이션' showLineNumbers
+function simulateDiceRolls(n) {
+  const results = [];
+  for (let i = 0; i < n; i++) {
+    results.push(Math.floor(Math.random() * 6) + 1);
+  }
+  return results;
+}
+
+console.log(simulateDiceRolls(10)); // 예: [3,1,6,4,...]
+```
+```javascript title='📚 범위 내 랜덤 정수 생성' showLineNumbers
+function randomScore(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+console.log(randomScore(50, 100)); // 50~100 사이 점수
+```
+
+### 💡 Math.sign
+> 📊 사용도: 중  
+> 👉 수의 부호를 확인할 때 사용  
+
+🔹 어떤 알고리즘 문제에 사용되는지  
+- 수가 양수인지, 음수인지, 0인지 구분할 때  
+- 절댓값이나 부호에 따라 다른 처리 수행  
+- 배열, 좌표, 변화량 계산  
+
+🔹 사용 이유  
+- 부호 확인을 간단히 할 수 있어 조건문 단순화  
+- 수 비교 및 방향 결정 문제에 유용  
+
+```javascript title='사용방법' showLineNumbers
+console.log(Math.sign(10));  // 1
+console.log(Math.sign(-5));  // -1
+console.log(Math.sign(0));   // 0
+
+// 부호 활용 예시
+const arr = [-3, 2, 0, -1];
+const signs = arr.map(x => Math.sign(x));
+console.log(signs); // [-1, 1, 0, -1]
+```
+
+### ⚙️ 실전 알고리즘 예시
+```javascript title='📚 수 배열 부호 변경' showLineNumbers
+function flipSigns(arr) {
+  return arr.map(x => -Math.sign(x) * Math.abs(x));
+}
+console.log(flipSigns([-2, 3, -5, 0])); // [2, -3, 5, 0]
+```
+```javascript title='📚 양수 음구 구분' showLineNumbers
+function countPosNeg(arr) {
+  let pos = 0, neg = 0;
+  arr.forEach(x => {
+    if (Math.sign(x) === 1) pos++;
+    if (Math.sign(x) === -1) neg++;
+  });
+  return {pos, neg};
+}
+console.log(countPosNeg([-1, 2, 0, 3, -4])); // {pos: 2, neg: 2}
+```
+```javascript title='📚 수열 변화 방향 판별' showLineNumbers
+function getSequenceTrend(arr) {
+  // 연속된 수의 증가/감소/유지 여부를 배열로 반환
+  // 1 → 증가, -1 → 감소, 0 → 동일
+  const trends = [];
+  for (let i = 1; i < arr.length; i++) {
+    const diff = arr[i] - arr[i - 1];
+    trends.push(Math.sign(diff));
+  }
+  return trends;
+}
+
+console.log(getSequenceTrend([3, 5, 2, 2, 6])); 
+// [1, -1, 0, 1]
+// 설명: 3→5 증가(1), 5→2 감소(-1), 2→2 유지(0), 2→6 증가(1)
+```
+
+### 💡 Number.prototype.toFixed
+> 📊 사용도: 중  
+> 👉 소수점 자리수를 고정하고 반올림할 때 사용  
+
+🔹 어떤 알고리즘 문제에 사용되는지  
+- 평균, 확률, 비율 계산 후 소수점 자리 고정  
+- 소수점 비교, 출력 형식 맞추기  
+- 통계, 금융 계산, 확률 기반 문제  
+
+🔹 사용 이유  
+- 소수점 처리를 간단하게 하고 계산 정확도 유지  
+- 출력과 계산을 동시에 처리 가능  
+
+```javascript title='사용방법' showLineNumbers
+const num = 3.14159;
+console.log(num.toFixed(2)); // "3.14"
+console.log(num.toFixed(0)); // "3"
+
+// 계산 후 숫자로 사용 가능
+const avg = (10 + 15 + 20) / 3;
+console.log(Number(avg.toFixed(1))); // 15.0
+```
+
+### ⚙️ 실전 알고리즘 예시
+```javascript title='📚 점수 평균' showLineNumbers
+function averageScore(scores) {
+  const avg = scores.reduce((a,b)=>a+b,0)/scores.length;
+  // 소수점 둘째 자리까지 반올림
+  return Number(avg.toFixed(2));
+}
+
+console.log(averageScore([70, 85, 90])); // 81.67
+```
+```javascript title='📚 확률 계산' showLineNumbers
+function winProbability(wins, total) {
+  // 소수점 넷째 자리까지 고정
+  return (wins / total).toFixed(4);
+}
+
+console.log(winProbability(7, 12)); // "0.5833"
+```
+```javascript title='📚 이자 계산 시 누적 반올림' showLineNumbers
+function compoundInterest(principal, rate, years) {
+  let amount = principal;
+  for(let i=0; i<years; i++){
+    amount += amount * rate;
+    // 매년 소수점 두 자리 반올림
+    amount = Number(amount.toFixed(2));
+  }
+  return amount;
+}
+
+console.log(compoundInterest(1000, 0.057, 5)); // 1322.92
+```
+
+### 💡 Number.parseInt
+> 📊 사용도: 상  
+> 👉 문자열을 정수로 변환할 때 사용  
+
+🔹 어떤 알고리즘 문제에 사용되는지  
+- 문자열 입력값을 숫자로 변환해야 하는 문제  
+- 계산, 인덱스, 자리수 계산, 토큰 처리 등  
+- 문자열 내 숫자만 추출할 때  
+
+🔹 사용 이유  
+- parseInt로 문자열 내 숫자 추출 가능  
+- NaN 방지, 계산 전 변환 필수  
+
+```javascript title='사용방법' showLineNumbers
+console.log(Number.parseInt("42px")); // 42
+console.log(Number.parseInt("007"));  // 7
+console.log(Number.parseInt("3.14")); // 3
+```
+
+### ⚙️ 실전 알고리즘 예시
+```javascript title='📚 문자열 내 숫자 합' showLineNumbers
+function sumNumbers(str) {
+  return str.split('').reduce((sum, ch) => {
+    const n = Number.parseInt(ch);
+    return sum + (Number.isInteger(n) ? n : 0);
+  }, 0);
+}
+
+console.log(sumNumbers("a1b2c3")); // 6
+```
+```javascript title='📚 문자열 속 연속 숫자 추출 후 합계' showLineNumbers
+function sumAllNumbers(str) {
+  let numStr = '';
+  let sum = 0;
+  for (let ch of str) {
+    if (!isNaN(ch) && ch !== ' ') {
+      numStr += ch;
+    } else if (numStr) {
+      sum += Number.parseInt(numStr);
+      numStr = '';
+    }
+  }
+  if (numStr) sum += Number.parseInt(numStr);
+  return sum;
+}
+
+console.log(sumAllNumbers("abc12de3f45")); // 60 (12+3+45)
+```
+
+### 💡 Number.isInteger
+> 📊 사용도: 중  
+> 👉 값이 정수인지 확인할 때 사용  
+
+🔹 어떤 알고리즘 문제에 사용되는지  
+- 수열, 나눗셈, 몫 계산  
+- 조건문 분기, 정수 여부 확인  
+- 부동소수점 계산 문제 처리  
+
+🔹 사용 이유  
+- 소수와 정수 구분 간편  
+- 계산 정확도 및 조건 처리에 도움  
+
+```javascript title='사용방법' showLineNumbers
+console.log(Number.isInteger(5));    // true
+console.log(Number.isInteger(3.14)); // false
+
+// 배열 필터링 예시
+const arr = [1, 2.5, 3, 4.1];
+const integers = arr.filter(Number.isInteger);
+console.log(integers); // [1, 3]
+```
+
+### ⚙️ 실전 알고리즘 예시
+```javascript title='📚 정수만 합계' showLineNumbers
+function sumIntegers(arr) {
+  return arr.filter(Number.isInteger).reduce((a,b)=>a+b,0);
+}
+console.log(sumIntegers([1, 2.5, 3, 4.1])); // 4
+```
+```javascript title='📚 소수 제거 후 평균' showLineNumbers
+function averageIntegers(arr) {
+  const ints = arr.filter(Number.isInteger);
+  if (!ints.length) return 0;
+  const sum = ints.reduce((a,b)=>a+b,0);
+  return Number((sum / ints.length).toFixed(2));
+}
+console.log(averageIntegers([1, 2.5, 3, 4.1])); // 2.00
+```
 
 ## Array Method
 
+```
+### ⚙️ 실전 알고리즘 예시
+```javascript title='📚 ' showLineNumbers
+```
+
+```
+### ⚙️ 실전 알고리즘 예시
+```javascript title='📚 ' showLineNumbers
+```
 ## Object Method
 
-## Map, Set, Obeject
+```
+### ⚙️ 실전 알고리즘 예시
+```javascript title='📚 ' showLineNumbers
+```
 
-## 실전 Map, Set 알고리즘 풀이방식
-
+```
+### ⚙️ 실전 알고리즘 예시
+```javascript title='📚 ' showLineNumbers
+```
 <Callout type='info'>참고 자료</Callout>
 1. https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects [MDN]
