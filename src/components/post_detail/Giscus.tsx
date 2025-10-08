@@ -9,14 +9,15 @@ const repoId = process.env.NEXT_PUBLIC_GISCUS_REPO_ID || '';
 const categoryId = process.env.NEXT_PUBLIC_GISCUS_CATEGORY_ID || '';
 
 export default function Giscus() {
-  console.log(1);
   const ref = useRef<HTMLDivElement>(null);
   const { resolvedTheme } = useTheme();
 
   const theme = resolvedTheme === 'dark' ? 'dark' : 'light';
+  const isConfigured = Boolean(repoName && repoId && categoryId);
 
   useEffect(() => {
     if (!ref.current || ref.current.hasChildNodes()) return;
+    if (!isConfigured) return;
 
     const scriptElem = document.createElement('script');
     scriptElem.src = 'https://giscus.app/client.js';
@@ -25,7 +26,6 @@ export default function Giscus() {
 
     scriptElem.setAttribute('data-repo', repoName);
     scriptElem.setAttribute('data-repo-id', repoId);
-    scriptElem.setAttribute('data-category', 'Q&A');
     scriptElem.setAttribute('data-category-id', categoryId);
     scriptElem.setAttribute('data-mapping', 'pathname');
     scriptElem.setAttribute('data-strict', '0');
@@ -36,7 +36,7 @@ export default function Giscus() {
     scriptElem.setAttribute('data-lang', 'ko');
 
     ref.current.appendChild(scriptElem);
-  }, [theme]);
+  }, [theme, isConfigured]);
 
   useEffect(() => {
     const iframe = document.querySelector<HTMLIFrameElement>(
@@ -48,5 +48,20 @@ export default function Giscus() {
     );
   }, [theme]);
 
-  return <section ref={ref} />;
+  if (!isConfigured) {
+    // 개발 환경에서만 환경 변수 누락을 알림
+    if (process.env.NODE_ENV !== 'production') {
+      return (
+        <section className='giscus'>
+          <div className='text-sm text-red-500'>
+            Giscus 환경 변수가 설정되지 않았습니다.
+            NEXT_PUBLIC_GISCUS_REPO_NAME, NEXT_PUBLIC_GISCUS_REPO_ID,
+            NEXT_PUBLIC_GISCUS_CATEGORY_ID를 확인하세요.
+          </div>
+        </section>
+      );
+    }
+  }
+
+  return <section ref={ref} className='giscus' />;
 }
