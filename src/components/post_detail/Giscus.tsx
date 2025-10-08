@@ -9,6 +9,7 @@ const repoId = process.env.NEXT_PUBLIC_GISCUS_REPO_ID || '';
 const categoryId = process.env.NEXT_PUBLIC_GISCUS_CATEGORY_ID || '';
 
 export default function Giscus() {
+  console.log(1);
   const ref = useRef<HTMLDivElement>(null);
   const { resolvedTheme } = useTheme();
 
