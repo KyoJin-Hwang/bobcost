@@ -1,6 +1,7 @@
 import Link from 'next/link';
 
-import Button from '../ui/Button';
+import { ButtonVariants } from '../ui/Button';
+import { cn } from '@/lib/utils';
 
 interface Props {
   isCurrent: boolean;
@@ -12,11 +13,16 @@ interface Props {
 const CategoryButton = ({ isCurrent, displayName, href, count }: Props) => {
   return (
     <li>
-      <Button variant={isCurrent ? 'default' : 'ghost'}>
-        <Link href={href}>
-          {displayName} ({count})
-        </Link>
-      </Button>
+      <Link
+        href={href}
+        prefetch
+        aria-current={isCurrent ? 'page' : undefined}
+        className={cn(
+          ButtonVariants({ variant: isCurrent ? 'default' : 'ghost' })
+        )}
+      >
+        {displayName} ({count})
+      </Link>
     </li>
   );
 };
