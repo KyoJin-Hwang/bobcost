@@ -47,7 +47,10 @@ export const parsePostAbstract = (postPath: string) => {
     .replace('.mdx', '');
 
   const [categoryPath, slug] = filePath.split('/');
-  const url = `/blog/${categoryPath}/${slug}`;
+  // 한글 카테고리명과 슬러그를 URL 인코딩
+  const encodedCategory = encodeURIComponent(categoryPath);
+  const encodedSlug = encodeURIComponent(slug);
+  const url = `/blog/${encodedCategory}/${encodedSlug}`;
   const categoryPublicName = getCategoryPublicName(categoryPath);
 
   return { url, categoryPath, categoryPublicName, slug };
@@ -100,7 +103,9 @@ export const getPostList = customUnstableCache(
 // Retrieves a sorted list of posts
 export const getSortedPostList = customUnstableCache(
   async (category?: string) => {
-    const postList = await getPostList(category);
+    // URL 디코딩 처리
+    const decodedCategory = category ? decodeURIComponent(category) : undefined;
+    const postList = await getPostList(decodedCategory);
     return sortPostList(postList);
   },
   ['sorted-posts']
@@ -109,7 +114,10 @@ export const getSortedPostList = customUnstableCache(
 // Retrieves the details for a single post
 export const getPostDetail = customUnstableCache(
   async (category: string, slug: string) => {
-    const filePath = `${POSTS_PATH}/${category}/${slug}/content.mdx`;
+    // URL 디코딩 처리 (카테고리와 슬러그 모두)
+    const decodedCategory = decodeURIComponent(category);
+    const decodedSlug = decodeURIComponent(slug);
+    const filePath = `${POSTS_PATH}/${decodedCategory}/${decodedSlug}/content.mdx`;
     return parsePost(filePath);
   },
   ['post-detail']

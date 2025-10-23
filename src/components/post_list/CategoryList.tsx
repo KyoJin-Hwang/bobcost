@@ -29,7 +29,7 @@ const CategoryList = ({
     if (value === 'all') {
       router.push('/blog');
     } else {
-      router.push(`/blog/${value}`);
+      router.push(`/blog/${encodeURIComponent(value)}`);
     }
   };
 
@@ -47,7 +47,7 @@ const CategoryList = ({
           {categoryList.map((cg) => (
             <CategoryButton
               key={cg.dirName}
-              href={`/blog/${cg.dirName}`}
+              href={`/blog/${encodeURIComponent(cg.dirName)}`}
               displayName={cg.publicName}
               isCurrent={cg.dirName === currentCategory}
               count={cg.count}
