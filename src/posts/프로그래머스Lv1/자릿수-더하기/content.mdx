@@ -1,0 +1,72 @@
+---
+title: '자릿수 더하기'
+desc: 프로그래머스 LV1 문제 자릿수 더하기 풀이
+createdAt: 2025-10-23 19:00
+thumbnail: /posts/frontend/javascript/learnJs.png
+group: JS
+look: on
+---
+
+## 프로그래머스 Lv1: 자릿수 더하기
+
+### 문제 설명
+자연수 `N`이 주어지면, `N`의 각 자릿수의 합을 구해서 return 하는 `solution` 함수를 만들어 주세요.  
+
+예를 들어, `N = 123`이면 `1 + 2 + 3 = 6`을 return 하면 됩니다.
+
+### 제한사항
+- N의 범위: 100,000,000 이하의 자연수
+
+### 입출력 예
+
+| N   | answer |
+| --- | ------ |
+| 123 | 6      |
+| 987 | 24     |
+
+### 입출력 예 설명
+- 입출력 예 #1  
+  문제의 예시와 같습니다.
+- 입출력 예 #2  
+  9 + 8 + 7 = 24이므로 24를 return 하면 됩니다.
+
+### 나의 풀이
+
+문자열로 변환한 뒤, 각 자리 숫자를 배열로 만들고 `reduce`로 합산하는 방법.
+
+```javascript showLineNumbers
+function solution(n) {
+  return n.toString().split('').reduce((sum, digit) => sum + Number(digit), 0);
+}
+```
+
+### 다른 사람 풀이
+
+#### 풀이 방법 해석
+1. `sum` 변수 초기화
+2. `do...while` 반복문 사용
+   - `n % 10`으로 마지막 자리 추출 → `sum`에 더함  
+   - `n = Math.floor(n / 10)`으로 자리수 제거 후 반복
+3. 반복 종료 후 `sum` 반환
+
+#### 장점 및 단점
+
+| 장점 | 단점 |
+| ---- | ---- |
+| 문자열 변환 없이 숫자 연산만 사용 → 성능 안정적 | 반복문 사용, 코드 길이 증가 |
+| `do...while` 사용으로 최소 한 번 실행 보장 | 초보자에게 `%`와 `Math.floor` 개념 필요 |
+| 큰 숫자에도 안전하게 동작 | — |
+
+#### 코드
+```javascript showLineNumbers
+function solution(n){
+    // 숫자풀이
+    var sum = 0;
+
+    do {
+        sum += n % 10;
+        n = Math.floor(n / 10);
+    } while(n > 0);
+
+    return sum;
+}
