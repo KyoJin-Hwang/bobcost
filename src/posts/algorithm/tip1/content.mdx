@@ -1,9 +1,9 @@
 ---
-title: 'JS 알고리즘 1편 (Method)'
-desc: 자바스크립트 Method를 먼저 알아야 효율적으로 문제를 풀 수 있기 때문에 1편은 Method를 정리하게 되었다.
+title: 'JS 코테에서 자주 사용되는 Method'
+desc: 자바스크립트 Method를 먼저 알아야 효율적으로 문제를 풀 수 있기 때문에 Method를 정리하게 되었다.
 createdAt: 2025-09-09 14:09
 thumbnail: /posts/frontend/javascript/learnAlgorithm.png
-group: JS
+group: JSㄹ
 look: on
 ---
 
@@ -16,9 +16,9 @@ Javascript로 코딩테스트를 준비하면서 가장 크게 느낀 어려움�
 
 이런 경험을 통해 단순히 문제 풀이 연습만 하는 것이 아니라, 자주 쓰이는 메소드와 알고리즘을 체계적으로 정리해두는 것이 필요하다고 느꼈습니다. 이 글의 목적은 기억을 강화하고, 실전 코딩테스트에서 바로 활용할 수 있는 유용한 팁과 메소드를 정리하는 데 있습니다.
 
-## 1편 글 구성
+## 글 구성
 
-이번 1편에서는 알고리즘 문제 풀이 과정에서 가장 자주 활용되는 JavaScript 기본 Method를 정리합니다.
+이번에는 알고리즘 문제 풀이 과정에서 가장 자주 활용되는 JavaScript 기본 Method를 정리합니다.
 - Array, String, Object, Math 관련 메소드들의 기본 사용법
 - 각 메소드를 실전에서 더 효율적으로 활용할 수 있는 팁과 패턴
 
@@ -57,25 +57,6 @@ const arr2 = str2.split(",");
 console.log(arr2); // ["red","green","blue"]
 ```
 
-### ⚙️ 실전 알고리즘 예시
-```javascript title='📚 단어 개수 세기' showLineNumbers
-function countWords(sentence) {
-  const words = sentence.split(" "); // 공백 기준 배열 생성
-  return words.length;
-}
-
-console.log(countWords("I love coding in JavaScript")); // 5
-```
-
-```javascript title='📚 CSV 문자열 👉 배열 변환' showLineNumbers
-function parseCSV(csv) {
-  return csv.split(",").map(item => item.trim()); // 배열로 변환 + 공백 제거
-}
-
-console.log(parseCSV("apple, banana, orange")); 
-// ["apple", "banana", "orange"]
-```
-
 ---
 
 ### 💡 substring
@@ -103,37 +84,6 @@ console.log(str.substring(0, 4)); // "Java"
 console.log(str.substring(4)); // "Script"
 ```
 
-### ⚙️ 실전 알고리즘 예시
-```javascript title='📚 부분 문자열비교 (슬라이딩 윈도우)' showLineNumbers
-function findSubstring(text, target) {
-  for (let i = 0; i <= text.length - target.length; i++) {
-    if (text.substring(i, i + target.length) === target) {
-      return i; // 위치 반환
-    }
-  }
-  return -1;
-}
-
-console.log(findSubstring("hellojavascript", "java")); 
-// 5
-```
-```javascript title='📚 접두사 검사' showLineNumbers
-function hasPrefix(word, prefix) {
-  return word.substring(0, prefix.length) === prefix;
-}
-
-console.log(hasPrefix("javascript", "java")); // true
-console.log(hasPrefix("javascript", "script")); // false
-```
-```javascript title='📚 접미사 검사' showLineNumbers
-function hasSuffix(word, suffix) {
-  return word.substring(word.length - suffix.length) === suffix;
-}
-
-console.log(hasSuffix("javascript", "script")); // true
-console.log(hasSuffix("javascript", "java"));   // false
-```
-
 ---
 
 ### 💡 includes
@@ -159,27 +109,6 @@ const arr = [1, 2, 3, 4];
 console.log(arr.includes(3)); // true
 ```
 
-### ⚙️ 실전 알고리즘 예시
-```javascript title='📚 금지 단어 체크' showLineNumbers
-function hasForbiddenWord(text, forbidden) {
-  for (let word of forbidden) {
-    if (text.includes(word)) return true;
-  }
-  return false;
-}
-```
-
-```javascript title='📚 배열 중복 체크' showLineNumbers
-// 2. 
-function hasDuplicate(nums) {
-  let seen = [];
-  for (let num of nums) {
-    if (seen.includes(num)) return true;
-    seen.push(num);
-  }
-  return false;
-}
-```
 
 ---
 
@@ -208,29 +137,6 @@ console.log(str.lastIndexOf("a")); // 3
 const arr = [1, 2, 3, 2];
 console.log(arr.indexOf(2)); // 1
 console.log(arr.lastIndexOf(2)); // 3
-```
-
-### ⚙️ 실전 알고리즘 예시
-```javascript title='📚 첫 번째 문자 위치 찾기' showLineNumbers
-function firstOccurrence(str, char) {
-  return str.indexOf(char);
-}
-
-console.log(firstOccurrence("hello world", "o")); // 4
-```
-```javascript title='📚 마지막 문자 위치 찾기' showLineNumbers
-function lastOccurrence(str, char) {
-  return str.lastIndexOf(char);
-}
-
-console.log(lastOccurrence("hello world", "l")); // 9
-```
-```javascript title='📚 배열 내 특정 값 위치 찾기' showLineNumbers
-function findIndex(arr, value) {
-  return arr.indexOf(value);
-}
-
-console.log(findIndex([1,2,3,2], 2)); // 1
 ```
 
 ---
@@ -263,29 +169,6 @@ const arr = ["apple", "banana"];
 console.log(arr.map(x => x.replace("a", "@"))); // ["@pple", "b@nana"]
 ```
 
-### ⚙️ 실전 알고리즘 예시
-```javascript title='📚 공백 제거' showLineNumbers
-function removeSpaces(str) {
-  return str.replaceAll(" ", "");
-}
-
-console.log(removeSpaces("a b c d")); // "abcd"
-```
-```javascript title='📚 특정 단어 치환' showLineNumbers
-function maskWord(str, word) {
-  return str.replaceAll(word, "*".repeat(word.length));
-}
-
-console.log(maskWord("hello world", "world")); // "hello *****"
-```
-```javascript title='📚 첫 번째 단어만 치환' showLineNumbers
-function replaceFirst(str, oldWord, newWord) {
-  return str.replace(oldWord, newWord);
-}
-
-console.log(replaceFirst("hello world hello", "hello", "hi")); // "hi world hello"
-```
-
 ---
 
 ### 💡 padStart / padEnd
@@ -312,30 +195,6 @@ console.log(str.padEnd(3, "0"));   // "500"
 
 // 길이가 이미 길면 변경 없음
 console.log("12345".padStart(3, "0")); // "12345"
-```
-### ⚙️ 실전 알고리즘 예시
-```javascript title='📚 번호 포맷 맞추기' showLineNumbers
-function formatNumber(num) {
-  return num.toString().padStart(4, "0");
-}
-
-console.log(formatNumber(7));   // "0007"
-console.log(formatNumber(123)); // "0123"
-```
-```javascript title='📚 시간 문자열 맞추기' showLineNumbers
-function formatTime(hour, min) {
-  return hour.toString().padStart(2, "0") + ":" + min.toString().padStart(2, "0");
-}
-
-console.log(formatTime(9, 5)); // "09:05"
-console.log(formatTime(12, 30)); // "12:30"
-```
-```javascript title='📚 문자열 뒤쪽 채우기' showLineNumbers
-function fillRight(str, length) {
-  return str.padEnd(length, ".");
-}
-
-console.log(fillRight("hi", 5)); // "hi..."
 ```
 
 ---
@@ -364,31 +223,7 @@ console.log(str.toUpperCase()); // "JAVASCRIPT"
 // 문자열 비교 시 활용
 console.log(str.toLowerCase() === "javascript"); // true
 ```
-### ⚙️ 실전 알고리즘 예시
-```javascript title='📚 대소문자 구분 없이 검색' showLineNumbers
-function containsWordIgnoreCase(sentence, word) {
-  return sentence.toLowerCase().includes(word.toLowerCase());
-}
 
-console.log(containsWordIgnoreCase("Hello World", "hello")); // true
-console.log(containsWordIgnoreCase("JavaScript", "SCRIPT")); // true
-```
-```javascript title='📚 이름 표준화' showLineNumbers
-function normalizeName(name) {
-  return name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
-}
-
-console.log(normalizeName("jOhN")); // "John"
-console.log(normalizeName("ALICE")); // "Alice"
-```
-```javascript title='📚 문자열 비교' showLineNumbers
-function isEqualIgnoreCase(str1, str2) {
-  return str1.toLowerCase() === str2.toLowerCase();
-}
-
-console.log(isEqualIgnoreCase("abc", "ABC")); // true
-console.log(isEqualIgnoreCase("Hello", "HELLO")); // true
-```
 ---
 ### 💡 trim
 > 📊 사용도: 상  
@@ -414,29 +249,6 @@ console.log(str.trim() === "JavaScript"); // true
 
 // 다른 문자열과 연결
 console.log("Hello " + str.trim() + "!"); // "Hello JavaScript!"
-```
-
-### ⚙️ 실전 알고리즘 예시
-```javascript title='📚 입력 공백 제거' showLineNumbers
-function cleanInput(input) {
-  return input.trim();
-}
-
-console.log(cleanInput("  hello world  ")); // "hello world"
-```
-```javascript title='📚 여러 문자열 공백 제거' showLineNumbers
-function trimAll(strings) {
-  return strings.map(s => s.trim());
-}
-
-console.log(trimAll(["  a ", " b  ", " c "])); // ["a", "b", "c"]
-```
-```javascript title='📚 비교 문자열 표준화' showLineNumbers
-function isEqualTrimmed(str1, str2) {
-  return str1.trim() === str2.trim();
-}
-
-console.log(isEqualTrimmed(" abc ", "abc")); // true
 ```
 
 ---
@@ -466,33 +278,7 @@ console.log(str.match(/o/g)); // ["o", "o"]
 console.log(str.match(/bye/g)); // null
 ```
 
-### ⚙️ 실전 알고리즘 예시
-```javascript title='📚 특정 단어 개수' showLineNumbers
-function countWord(str, word) {
-  const matches = str.match(new RegExp(word, "g"));
-  return matches ? matches.length : 0;
-}
-
-console.log(countWord("hello world hello", "hello")); // 2
-```
-```javascript title='📚 모음 개수' showLineNumbers
-function countVowels(str) {
-  const matches = str.match(/[aeiou]/gi);
-  return matches ? matches.length : 0;
-}
-
-console.log(countVowels("hello world")); // 3
-```
-```javascript title='📚 특정 문자 확인' showLineNumbers
-function hasChar(str, char) {
-  return str.match(new RegExp(char)) !== null;
-}
-
-console.log(hasChar("javascript", "s")); // true
-console.log(hasChar("javascript", "z")); // false
-```
 ---
-
 
 ## Math, Number Method
 
@@ -518,26 +304,8 @@ console.log(Math.max(...arr)); // 7
 console.log(Math.min(...arr)); // 2
 ```
 
-### ⚙️ 실전 알고리즘 예시
-```javascript title='📚 배열 최댓값/최솟값 찾기' showLineNumbers
-function findMaxMin(arr) {
-  return [Math.max(...arr), Math.min(...arr)];
-}
-console.log(findMaxMin([1, 5, 3, 9, 2])); // [9, 1]
-```
-```javascript title='📚 점수 차이 계산' showLineNumbers
-function scoreDiff(scores) {
-  return Math.max(...scores) - Math.min(...scores);
-}
-console.log(scoreDiff([70, 85, 90, 60])); // 30
-```
-```javascript title='📚 삼각형 조건 확인' showLineNumbers
-function canFormTriangle(a, b, c) {
-  const maxSide = Math.max(a, b, c);
-  return maxSide < a + b + c - maxSide;
-}
-console.log(canFormTriangle(3, 4, 5)); // true
-```
+---
+
 ### 💡 Math.abs
 > 📊 사용도: 상  
 > 👉 어떤 수의 절댓값(부호 제거)을 구할 때 사용  
@@ -559,29 +327,8 @@ console.log(Math.abs(7));   // 7
 const diff = Math.abs(5 - 12);
 console.log(diff); // 7
 ```
-### ⚙️ 실전 알고리즘 예시
-```javascript title='📚 두 점의 거리(1차원)' showLineNumbers
-function distance(a, b) {
-  return Math.abs(a - b);
-}
-console.log(distance(10, 3)); // 7
-```
 
-```javascript title='📚 좌표거리 (맨해튼 거리)' showLineNumbers
-function manhattan(x1, y1, x2, y2) {
-  return Math.abs(x1 - x2) + Math.abs(y1 - y2);
-}
-console.log(manhattan(1, 2, 4, 6)); // 7
-```
-
-```javascript title='📚 가까운 수 찾기' showLineNumbers
-function findClosest(arr, target) {
-  return arr.reduce((a, b) =>
-    Math.abs(b - target) < Math.abs(a - target) ? b : a
-  );
-}
-console.log(findClosest([3, 8, 10, 15], 9)); // 8
-```
+---
 
 ### 💡 Math.floor / Math.ceil / Math.round / Math.trunc
 > 📊 사용도: 상  
@@ -604,25 +351,7 @@ console.log(Math.round(3.5)); // 4  (반올림)
 console.log(Math.trunc(3.9)); // 3  (소수점 절삭)
 ```
 
-### ⚙️ 실전 알고리즘 예시
-```javascript title='📚 정수 나눗셈' showLineNumbers
-function divide(a, b) {
-  return Math.floor(a / b);
-}
-console.log(divide(7, 3)); // 2
-```
-```javascript title='📚 시험점수 반올림 처리' showLineNumbers
-function roundScore(score) {
-  return Math.round(score / 5) * 5;
-}
-console.log(roundScore(83)); // 85
-```
-```javascript title='📚 좌표 격자 위치 찾기' showLineNumbers
-function gridIndex(x, size) {
-  return Math.trunc(x / size);
-}
-console.log(gridIndex(17, 5)); // 3
-```
+---
 
 ### 💡 Math.pow / Math.sqrt
 > 📊 사용도: 상  
@@ -646,21 +375,8 @@ console.log(2 ** 3);         // 8 (같은 결과, ** 연산자)
 console.log(Math.sqrt(16));  // 4
 console.log(Math.sqrt(2));   // 1.4142135623730951
 ```
-### ⚙️ 실전 알고리즘 예시
-```javascript title='📚 제곱 계산' showLineNumbers
-function square(num) {
-  return Math.pow(num, 2);
-}
-console.log(square(5)); // 25
-```
-```javascript title='📚 제곱근 활용 조건 확인' showLineNumbers
-function isPerfectSquare(num) {
-  const root = Math.sqrt(num);
-  return root === Math.floor(root);
-}
-console.log(isPerfectSquare(16)); // true
-console.log(isPerfectSquare(20)); // false
-```
+
+---
 
 ### 💡 Math.random
 > 📊 사용도: 상  
@@ -681,36 +397,7 @@ console.log(Math.floor(Math.random() * 10)); // 0~9 사이 정수
 console.log(Math.floor(Math.random() * 6) + 1); // 1~6 사이 정수 (주사위)
 ```
 
-### ⚙️ 실전 알고리즘 예시
-```javascript title='📚 배열 랜덤 섞기' showLineNumbers
-function shuffle(arr) {
-  for (let i = arr.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [arr[i], arr[j]] = [arr[j], arr[i]];
-  }
-  return arr;
-}
-
-console.log(shuffle([1,2,3,4,5]));
-```
-```javascript title='📚 난수 기반 시뮬레이션' showLineNumbers
-function simulateDiceRolls(n) {
-  const results = [];
-  for (let i = 0; i < n; i++) {
-    results.push(Math.floor(Math.random() * 6) + 1);
-  }
-  return results;
-}
-
-console.log(simulateDiceRolls(10)); // 예: [3,1,6,4,...]
-```
-```javascript title='📚 범위 내 랜덤 정수 생성' showLineNumbers
-function randomScore(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-console.log(randomScore(50, 100)); // 50~100 사이 점수
-```
+---
 
 ### 💡 Math.sign
 > 📊 사용도: 중  
@@ -736,40 +423,7 @@ const signs = arr.map(x => Math.sign(x));
 console.log(signs); // [-1, 1, 0, -1]
 ```
 
-### ⚙️ 실전 알고리즘 예시
-```javascript title='📚 수 배열 부호 변경' showLineNumbers
-function flipSigns(arr) {
-  return arr.map(x => -Math.sign(x) * Math.abs(x));
-}
-console.log(flipSigns([-2, 3, -5, 0])); // [2, -3, 5, 0]
-```
-```javascript title='📚 양수 음구 구분' showLineNumbers
-function countPosNeg(arr) {
-  let pos = 0, neg = 0;
-  arr.forEach(x => {
-    if (Math.sign(x) === 1) pos++;
-    if (Math.sign(x) === -1) neg++;
-  });
-  return {pos, neg};
-}
-console.log(countPosNeg([-1, 2, 0, 3, -4])); // {pos: 2, neg: 2}
-```
-```javascript title='📚 수열 변화 방향 판별' showLineNumbers
-function getSequenceTrend(arr) {
-  // 연속된 수의 증가/감소/유지 여부를 배열로 반환
-  // 1 → 증가, -1 → 감소, 0 → 동일
-  const trends = [];
-  for (let i = 1; i < arr.length; i++) {
-    const diff = arr[i] - arr[i - 1];
-    trends.push(Math.sign(diff));
-  }
-  return trends;
-}
-
-console.log(getSequenceTrend([3, 5, 2, 2, 6])); 
-// [1, -1, 0, 1]
-// 설명: 3→5 증가(1), 5→2 감소(-1), 2→2 유지(0), 2→6 증가(1)
-```
+---
 
 ### 💡 Number.prototype.toFixed
 > 📊 사용도: 중  
@@ -794,37 +448,7 @@ const avg = (10 + 15 + 20) / 3;
 console.log(Number(avg.toFixed(1))); // 15.0
 ```
 
-### ⚙️ 실전 알고리즘 예시
-```javascript title='📚 점수 평균' showLineNumbers
-function averageScore(scores) {
-  const avg = scores.reduce((a,b)=>a+b,0)/scores.length;
-  // 소수점 둘째 자리까지 반올림
-  return Number(avg.toFixed(2));
-}
-
-console.log(averageScore([70, 85, 90])); // 81.67
-```
-```javascript title='📚 확률 계산' showLineNumbers
-function winProbability(wins, total) {
-  // 소수점 넷째 자리까지 고정
-  return (wins / total).toFixed(4);
-}
-
-console.log(winProbability(7, 12)); // "0.5833"
-```
-```javascript title='📚 이자 계산 시 누적 반올림' showLineNumbers
-function compoundInterest(principal, rate, years) {
-  let amount = principal;
-  for(let i=0; i<years; i++){
-    amount += amount * rate;
-    // 매년 소수점 두 자리 반올림
-    amount = Number(amount.toFixed(2));
-  }
-  return amount;
-}
-
-console.log(compoundInterest(1000, 0.057, 5)); // 1322.92
-```
+---
 
 ### 💡 Number.parseInt
 > 📊 사용도: 상  
@@ -845,35 +469,7 @@ console.log(Number.parseInt("007"));  // 7
 console.log(Number.parseInt("3.14")); // 3
 ```
 
-### ⚙️ 실전 알고리즘 예시
-```javascript title='📚 문자열 내 숫자 합' showLineNumbers
-function sumNumbers(str) {
-  return str.split('').reduce((sum, ch) => {
-    const n = Number.parseInt(ch);
-    return sum + (Number.isInteger(n) ? n : 0);
-  }, 0);
-}
-
-console.log(sumNumbers("a1b2c3")); // 6
-```
-```javascript title='📚 문자열 속 연속 숫자 추출 후 합계' showLineNumbers
-function sumAllNumbers(str) {
-  let numStr = '';
-  let sum = 0;
-  for (let ch of str) {
-    if (!isNaN(ch) && ch !== ' ') {
-      numStr += ch;
-    } else if (numStr) {
-      sum += Number.parseInt(numStr);
-      numStr = '';
-    }
-  }
-  if (numStr) sum += Number.parseInt(numStr);
-  return sum;
-}
-
-console.log(sumAllNumbers("abc12de3f45")); // 60 (12+3+45)
-```
+---
 
 ### 💡 Number.isInteger
 > 📊 사용도: 중  
@@ -898,44 +494,591 @@ const integers = arr.filter(Number.isInteger);
 console.log(integers); // [1, 3]
 ```
 
-### ⚙️ 실전 알고리즘 예시
-```javascript title='📚 정수만 합계' showLineNumbers
-function sumIntegers(arr) {
-  return arr.filter(Number.isInteger).reduce((a,b)=>a+b,0);
-}
-console.log(sumIntegers([1, 2.5, 3, 4.1])); // 4
-```
-```javascript title='📚 소수 제거 후 평균' showLineNumbers
-function averageIntegers(arr) {
-  const ints = arr.filter(Number.isInteger);
-  if (!ints.length) return 0;
-  const sum = ints.reduce((a,b)=>a+b,0);
-  return Number((sum / ints.length).toFixed(2));
-}
-console.log(averageIntegers([1, 2.5, 3, 4.1])); // 2.00
-```
+---
 
 ## Array Method
 
-```
-### ⚙️ 실전 알고리즘 예시
-```javascript title='📚 ' showLineNumbers
+### 💡 Array.prototype.map
+> 📊 사용도: 상  
+> 👉 배열의 각 요소를 **변환(transform)** 할 때 사용  
+
+🔹 어떤 알고리즘 문제에 사용되는지  
+- 배열 내 값에 연산을 적용할 때 (예: 제곱, 변환 등)  
+- 문자열/숫자 데이터 매핑  
+- 좌표 변환, 데이터 포맷 변경  
+
+🔹 사용 이유  
+- 반복문 없이도 배열의 모든 요소에 쉽게 함수 적용 가능  
+- 불변성 유지 (`map`은 원본 배열 변경 ❌ 새로운 배열 생성 ✅)  
+
+```javascript title='사용방법' showLineNumbers
+const arr = [1, 2, 3];
+const squared = arr.map(x => x ** 2);
+console.log(squared); // [1, 4, 9]
 ```
 
+### 💡 Array.prototype.filter
+
+> 📊 사용도: 상
+> 👉 배열에서 조건을 만족하는 요소만 남길 때 사용
+
+🔹 어떤 알고리즘 문제에 사용되는지
+- 특정 기준으로 데이터 필터링
+- 조건에 맞는 값만 추출 (짝수, 홀수, 음수, 양수 등)
+- 유효한 데이터만 남기기
+
+🔹 사용 이유
+- 조건문과 push 없이 간결한 코드 가능
+- 원본 배열 변경 ❌ ( Map 과 동일함)
+
+```javascript title='사용방법' showLineNumbers
+const numbers = [1, 2, 3, 4, 5];
+const even = numbers.filter(n => n % 2 === 0);
+console.log(even); // [2, 4]
 ```
-### ⚙️ 실전 알고리즘 예시
-```javascript title='📚 ' showLineNumbers
+
+--- 
+
+### 💡 Array.prototype.reduce
+
+> 📊 사용도: 상  
+> 👉 배열의 모든 요소를 **누적(accumulate)** 하여 하나의 값으로 만들 때 사용
+
+🔹 어떤 알고리즘 문제에 사용되는지
+- 배열 요소 합계, 곱, 평균 계산
+- 최대값/최소값 찾기
+- 문자열 연결, 객체 집계 등
+
+🔹 사용 이유
+- 반복문 없이 누적 연산 가능
+- 다양한 축약 작업에 활용
+- 원본 배열 변경 ❌
+
+```javascript title='사용방법' showLineNumbers
+const numbers = [1, 2, 3, 4, 5];
+
+// 합계 계산
+const sum = numbers.reduce((acc, cur) => acc + cur, 0);
+console.log(sum); // 15
+
+// 최대값 찾기
+const max = numbers.reduce((acc, cur) => (cur > acc ? cur : acc), numbers[0]);
+console.log(max); // 5
+
+// 문자열 연결
+const words = ['hello', 'world'];
+const sentence = words.reduce((acc, word) => acc + ' ' + word, '');
+console.log(sentence); // " hello world"
 ```
-## Object Method
+
+---
+
+### 💡 Array.prototype.forEach
+
+> 📊 사용도: 상  
+> 👉 배열을 순회하며 **부수 효과(side effect)** 수행할 때 사용
+
+🔹 어떤 알고리즘 문제에 사용되는지
+- 누적, 카운트, 출력, DOM 조작 등
+- 데이터 전처리, 조건 체크
+
+🔹 사용 이유
+- 단순 순회 시 가독성 좋음
+- 명령형 코드보다 선언적 표현 가능
+- 원본 배열 변경 가능 ✅
+
+```javascript title='사용방법' showLineNumbers
+const letters = ['a', 'b', 'c'];
+
+// 인덱스와 값 출력
+letters.forEach((value, index) => console.log(index, value));
+// 0 a
+// 1 b
+// 2 c
+
+// 값 누적
+let sum = 0;
+const numbers = [1, 2, 3, 4, 5];
+numbers.forEach(n => sum += n);
+console.log(sum); // 15
+```
+
+---
+
+### 💡 Array.prototype.find
+
+> 📊 사용도: 중  
+> 👉 조건을 만족하는 **첫 번째 요소**를 반환할 때 사용
+
+🔹 어떤 알고리즘 문제에 사용되는지
+- 특정 조건 만족 값 탐색
+- 중복 데이터 중 첫 번째 일치 요소 찾기
+- 특정 ID, 키 기반 객체 탐색
+
+🔹 사용 이유
+- 반복문 대신 간결하게 조건 탐색 가능
+- 일치하는 요소 없으면 `undefined` 반환
+
+```javascript title='사용방법' showLineNumbers
+const users = [
+  { id: 1, name: 'Tom' },
+  { id: 2, name: 'Jane' },
+  { id: 3, name: 'Bob' }
+];
+
+// id가 2인 객체 찾기
+const user = users.find(u => u.id === 2);
+console.log(user); // { id: 2, name: 'Jane' }
+
+// 조건 없는 경우 undefined 반환
+const notFound = users.find(u => u.id === 5);
+console.log(notFound); // undefined
 
 ```
-### ⚙️ 실전 알고리즘 예시
-```javascript title='📚 ' showLineNumbers
+
+---
+
+### 💡 Array.prototype.findIndex
+
+> 📊 사용도: 중  
+> 👉 조건을 만족하는 **첫 번째 요소의 인덱스**를 반환할 때 사용
+
+🔹 어떤 알고리즘 문제에 사용되는지
+- 특정 조건을 만족하는 요소 위치 찾기
+- 배열 값 업데이트, 삭제 시 인덱스 필요
+- 중복 데이터 중 첫 번째 일치 위치 탐색
+
+🔹 사용 이유
+- 반복문 없이 인덱스 탐색 가능
+- 조건 만족 요소 없으면 `-1` 반환
+
+```javascript title='사용방법' showLineNumbers
+const users = [
+  { id: 1, name: 'Tom' },
+  { id: 2, name: 'Jane' },
+  { id: 3, name: 'Bob' }
+];
+
+// id가 2인 객체의 인덱스 찾기
+const index = users.findIndex(u => u.id === 2);
+console.log(index); // 1
+
+// 조건 만족 없으면 -1
+const notFoundIndex = users.findIndex(u => u.id === 5);
+console.log(notFoundIndex); // -1
 ```
 
+---
+
+### 💡 Array.prototype.some
+
+> 📊 사용도: 중  
+> 👉 배열 내 **하나라도 조건을 만족**하는지 확인
+
+🔹 어떤 알고리즘 문제에 사용되는지
+- 특정 값 존재 여부 확인
+- 조건 만족 여부 체크 후 분기 처리
+- 문제 조건 충족 여부 검증
+
+🔹 사용 이유
+- 반복문 + if 대신 간결하게 조건 체크 가능
+- 불리언 결과 반환
+
+```javascript title='사용방법' showLineNumbers
+const numbers = [1, 2, 3, 4, 5];
+
+// 배열에 짝수가 하나라도 있는지 확인
+const hasEven = numbers.some(n => n % 2 === 0);
+console.log(hasEven); // true
+
+// 조건 만족 없으면 false
+const hasGreaterThanTen = numbers.some(n => n > 10);
+console.log(hasGreaterThanTen); // false
 ```
-### ⚙️ 실전 알고리즘 예시
-```javascript title='📚 ' showLineNumbers
+
+---
+
+### 💡 Array.prototype.every
+
+> 📊 사용도: 중  
+> 👉 배열 내 **모든 요소가 조건을 만족**하는지 확인
+
+🔹 어떤 알고리즘 문제에 사용되는지
+- 배열 값 모두 양수인지, 특정 범위 내인지 확인
+- 조건 검증 단계에서 유용
+- 문제 조건 충족 여부 전체 체크
+
+🔹 사용 이유
+- 반복문 + if 없이 전체 조건 체크 가능
+- 불리언 결과 반환
+
+```javascript title='사용방법' showLineNumbers
+const numbers = [2, 4, 6];
+
+// 모든 요소가 짝수인지 확인
+const allEven = numbers.every(n => n % 2 === 0);
+console.log(allEven); // true
+
+// 조건 만족하지 않으면 false
+const numbers2 = [2, 3, 6];
+const allEven2 = numbers2.every(n => n % 2 === 0);
+console.log(allEven2); // false
+
 ```
+
+---
+
+### 💡 Array.prototype.includes
+
+> 📊 사용도: 중  
+> 👉 배열 내 **특정 값 존재 여부** 확인
+
+🔹 어떤 알고리즘 문제에 사용되는지
+- 중복 값 제거 시 체크
+- 특정 값 포함 여부 확인 후 분기
+- 배열 조건 검증
+
+🔹 사용 이유
+- indexOf보다 직관적
+- 불리언 반환
+- 간단한 조건 체크에 유용
+
+```javascript title='사용방법' showLineNumbers
+const numbers = [1, 2, 3];
+
+// 값 존재 여부 확인
+console.log(numbers.includes(2)); // true
+console.log(numbers.includes(5)); // false
+
+// 문자열 포함 확인
+const fruits = ['apple', 'banana', 'orange'];
+console.log(fruits.includes('banana')); // true
+console.log(fruits.includes('grape'));  // false
+```
+
+---
+
+### 💡 Array.prototype.flat
+
+> 📊 사용도: 중  
+> 👉 다차원 배열을 **지정 깊이(depth)까지 평탄화(flatten)** 할 때 사용
+
+🔹 어떤 알고리즘 문제에 사용되는지
+- 중첩 배열 1차원으로 변환
+- 데이터를 단일 배열로 통합
+- 다중 배열 요소 접근 및 연산
+
+🔹 사용 이유
+- 반복문 없이 배열 평탄화 가능
+- map + concat보다 간결
+- 깊이 지정 가능
+
+```javascript title='사용방법' showLineNumbers
+const nested = [1, [2, 3], [4, [5, 6]]];
+
+// 기본: 1단계 평탄화
+console.log(nested.flat()); // [1, 2, 3, 4, [5, 6]]
+
+// 깊이 지정: 2단계까지 평탄화
+console.log(nested.flat(2)); // [1, 2, 3, 4, 5, 6]
+
+// 깊이 무한대(flatten all)
+const deepNested = [1, [2, [3, [4]]]];
+console.log(deepNested.flat(Infinity)); // [1, 2, 3, 4]
+```
+
+---
+
+### 💡 Array.prototype.flatMap
+
+> 📊 사용도: 중  
+> 👉 배열을 변환하고 **1단계 평탄화(flat)** 동시에 수행
+
+🔹 어떤 알고리즘 문제에 사용되는지
+- 다중 배열 전처리 후 1차원 배열 생성
+- 문자열 토큰화, 데이터 변환 + 평탄화
+- map + flat(1) 결합 작업
+
+🔹 사용 이유
+- map과 flat(1) 결합으로 코드 간결
+- 불변성 유지
+- 1단계 배열 평탄화 필요 시 편리
+
+```javascript title='사용방법' showLineNumbers
+const phrases = ['hello world', 'foo bar'];
+
+// 문자열을 공백 단위로 나누고 1차원 배열로 변환
+const words = phrases.flatMap(str => str.split(' '));
+console.log(words); // ['hello', 'world', 'foo', 'bar']
+
+// 숫자 배열 변환 + 평탄화
+const nested = [[1, 2], [3, 4]];
+const doubled = nested.flatMap(arr => arr.map(x => x * 2));
+console.log(doubled); // [2, 4, 6, 8]
+```
+
+--- 
+
+
+### 💡 Array.prototype.concat
+
+> 📊 사용도: 중  
+> 👉 두 개 이상의 배열을 **합쳐 새로운 배열** 생성
+
+🔹 어떤 알고리즘 문제에 사용되는지
+- 배열 병합
+- 중복 제거 전 배열 합치기
+- 여러 데이터 소스 통합
+
+🔹 사용 이유
+- 원본 배열 변경 ❌
+- 단순하고 직관적으로 배열 결합 가능
+
+```javascript title='사용방법' showLineNumbers
+const arr1 = [1, 2, 3];
+const arr2 = [4, 5, 6];
+
+// 배열 합치기
+const combined = arr1.concat(arr2);
+console.log(combined); // [1, 2, 3, 4, 5, 6]
+
+// 여러 배열 합치기
+const arr3 = [7, 8];
+const allCombined = arr1.concat(arr2, arr3);
+console.log(allCombined); // [1, 2, 3, 4, 5, 6, 7, 8]
+
+// 원본 배열은 변경되지 않음
+console.log(arr1); // [1, 2, 3]
+```
+
+---
+
+### 💡 Array.prototype.slice
+
+> 📊 사용도: 중  
+> 👉 배열의 **일부 요소를 잘라내어 새로운 배열** 생성
+
+🔹 어떤 알고리즘 문제에 사용되는지
+- 배열 일부 추출
+- 구간 처리, 부분 배열 계산
+- 원본 배열 유지하며 작업
+
+🔹 사용 이유
+- 원본 배열 변경 ❌
+- 특정 구간 접근 시 간편
+
+```javascript title='사용방법' showLineNumbers
+const arr = [1, 2, 3, 4, 5];
+
+// 인덱스 1~3 (끝 제외) 추출
+const part = arr.slice(1, 4);
+console.log(part); // [2, 3, 4]
+
+// 시작 인덱스만 지정하면 끝까지 추출
+console.log(arr.slice(2)); // [3, 4, 5]
+
+// 음수 인덱스 사용 가능
+console.log(arr.slice(-2)); // [4, 5]
+
+// 원본 배열은 변경되지 않음
+console.log(arr); // [1, 2, 3, 4, 5]
+```
+
+---
+
+### 💡 Array.prototype.splice
+
+> 📊 사용도: 중  
+> 👉 배열의 **요소 제거, 추가, 교체** 가능 (원본 배열 변경)
+
+🔹 어떤 알고리즘 문제에 사용되는지
+- 배열 특정 위치 제거/추가
+- 데이터 수정, 삽입
+- 스택/큐 일부 조작
+
+🔹 사용 이유
+- 직접 배열 수정 가능 ✅
+- 제거, 추가를 한 번에 처리 가능
+
+```javascript title='사용방법' showLineNumbers
+const arr = [1, 2, 3, 4, 5];
+
+// 인덱스 1부터 2개 제거
+const removed = arr.splice(1, 2);
+console.log(removed); // [2, 3]
+console.log(arr);     // [1, 4, 5]
+
+// 인덱스 1 위치에 값 추가
+arr.splice(1, 0, 20, 30);
+console.log(arr); // [1, 20, 30, 4, 5]
+
+// 제거 + 교체
+arr.splice(2, 2, 99);
+console.log(arr); // [1, 20, 99, 5]
+```
+
+---
+
+### 💡 Array.prototype.push / pop / shift / unshift
+
+> 📊 사용도: 상  
+> 👉 배열의 **끝 또는 앞에 요소 추가/제거** 시 사용 (원본 배열 변경)
+
+🔹 어떤 알고리즘 문제에 사용되는지
+- 스택/큐 구현
+- 배열 끝/앞 요소 삽입, 제거
+- 데이터 처리 순서 관리
+
+🔹 사용 이유
+- 간단하게 배열 수정 가능 ✅
+- 스택/큐 구조에서 직관적 사용 가능
+
+```javascript title='사용방법' showLineNumbers
+const arr = [1, 2, 3];
+
+// push: 배열 끝에 요소 추가
+arr.push(4);
+console.log(arr); // [1, 2, 3, 4]
+
+// pop: 배열 끝 요소 제거
+const last = arr.pop();
+console.log(last); // 4
+console.log(arr);  // [1, 2, 3]
+
+// unshift: 배열 앞에 요소 추가
+arr.unshift(0);
+console.log(arr); // [0, 1, 2, 3]
+
+// shift: 배열 앞 요소 제거
+const first = arr.shift();
+console.log(first); // 0
+console.log(arr);   // [1, 2, 3]
+```
+
+---
+
+### 💡 Array.prototype.reverse
+
+> 📊 사용도: 중  
+> 👉 배열 요소의 **순서를 뒤집기** (원본 배열 변경)
+
+🔹 어떤 알고리즘 문제에 사용되는지
+- 배열 순서 반전
+- 경로/순열 문제
+- 스택/큐 구조 변환
+
+🔹 사용 이유
+- 반복문 없이 배열 순서 반전 가능
+- 원본 배열 자체를 바꿀 수 있어 효율적
+
+```javascript title='사용방법' showLineNumbers
+const arr = [1, 2, 3, 4, 5];
+
+arr.reverse();
+console.log(arr); // [5, 4, 3, 2, 1]
+
+// 문자열 배열도 가능
+const letters = ['a', 'b', 'c'];
+letters.reverse();
+console.log(letters); // ['c', 'b', 'a']
+```
+
+---
+
+### 💡 Array.prototype.sort
+
+> 📊 사용도: 상  
+> 👉 배열 요소를 **정렬** (원본 배열 변경, 기본은 문자열 기준)
+
+🔹 어떤 알고리즘 문제에 사용되는지
+- 숫자/문자 배열 정렬
+- 조건 기반 정렬
+- 최대/최소 값 탐색 전 처리
+
+🔹 사용 이유
+- 기본 문자열 정렬 외, 커스텀 비교 함수 가능
+- 복잡한 정렬 문제도 단순화 가능
+
+```javascript title='사용방법' showLineNumbers
+const numbers = [10, 5, 20, 3];
+
+// 숫자 오름차순 정렬
+numbers.sort((a, b) => a - b);
+console.log(numbers); // [3, 5, 10, 20]
+
+// 숫자 내림차순 정렬
+numbers.sort((a, b) => b - a);
+console.log(numbers); // [20, 10, 5, 3]
+
+// 문자열 정렬
+const fruits = ['banana', 'apple', 'orange'];
+fruits.sort();
+console.log(fruits); // ['apple', 'banana', 'orange']
+```
+
+---
+
+### 💡 Array.prototype.join
+
+> 📊 사용도: 중  
+> 👉 배열 요소를 **문자열로 합치기** (구분자 지정 가능)
+
+🔹 어떤 알고리즘 문제에 사용되는지
+- CSV, 출력 포맷 변환
+- 문자열 재조합
+- 배열 → 문자열 변환 후 조건 처리
+
+🔹 사용 이유
+- 간단하게 배열을 문자열로 변환 가능
+- 구분자 지정으로 유연한 문자열 생성
+
+```javascript title='사용방법' showLineNumbers
+const arr = ['apple', 'banana', 'orange'];
+
+// 기본 구분자: 쉼표
+console.log(arr.join()); // "apple,banana,orange"
+
+// 구분자 지정
+console.log(arr.join(' - ')); // "apple - banana - orange"
+
+// 숫자 배열도 가능
+const numbers = [1, 2, 3];
+console.log(numbers.join('')); // "123"
+
+```
+
+---
+
+### 💡 Array.prototype.indexOf / lastIndexOf
+
+> 📊 사용도: 중  
+> 👉 배열 내 **특정 값의 인덱스 검색**  
+> `indexOf`: 첫 번째 위치, `lastIndexOf`: 마지막 위치
+
+🔹 어떤 알고리즘 문제에 사용되는지
+- 중복 데이터 위치 확인
+- 특정 값 존재 여부 체크
+- 배열 값 업데이트/삭제 위치 탐색
+
+🔹 사용 이유
+- 반복문 없이 위치 확인 가능
+- 없으면 -1 반환, 조건 처리 용이
+
+```javascript title='사용방법' showLineNumbers
+const arr = [1, 2, 3, 2, 4];
+
+// 첫 번째 위치
+console.log(arr.indexOf(2)); // 1
+
+// 마지막 위치
+console.log(arr.lastIndexOf(2)); // 3
+
+// 없는 값
+console.log(arr.indexOf(5)); // -1
+
+```
+
+## 💡 Object Method
+
 <Callout type='info'>참고 자료</Callout>
 1. https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects [MDN]
