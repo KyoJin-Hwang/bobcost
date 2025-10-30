@@ -1,0 +1,153 @@
+---
+title: '자바스크립트란 무엇인가? 브라우저에서의 역할 이해하기'
+desc: 자바스크립트는 어떻게 생겨나고 브라우저에서의 어떤 역할을 하는지 알아보기 위해 정리한 글
+createdAt: 2025-08-22 12:00
+thumbnail: /posts/frontend/javascript/learnJs.png
+group: JS
+look: on
+---
+
+## 📌 자바스크립트의 탄생과 목적
+
+- **자바스크립트 (JavaScript)** 는 1995년, 넷스케이프(Netscape)의 *브렌던 아이크 (Brendan Eich)* 가 
+단 10일 만에 만든 프로그래밍 언어입니다. 당시 웹은 주로 정적인 문서 중심이었고, 사용자가 상호작용할 수 있는 기능은 거의 없었습니다.  
+  **자바스크립트 (JavaScript)** 는 이러한 제한을 극복하고, 웹 페이지에 **동적인 요소 (인터랙션)** 를 추가하기 위해 만들어졌습니다.
+
+- 초기 예제로는 버튼 클릭 시 알림창을 띄우거나, 폼 입력값을 검증하는 기능 등이 있습니다.  
+  이는 단순히 화면에 정보를 보여주는 것 이상의 **행동과 반응** 을 웹에 추가하는 시도였습니다.
+
+> `HTML` 은 페이지의 **구조 (뼈대)** 를 정의하고,  
+> `CSS` 는 페이지의 **스타일과 디자인 (색상, 레이아웃)** 을 담당합니다.  
+> **`JavaScript`** 는 웹 페이지의 행동 (동작, 인터랙션, 이벤트 처리) 을 담당합니다.  
+
+- 오늘날 **자바스크립트 (JavaScript)** 는 단순한 인터랙션을 넘어서,  
+  데이터 처리, 서버 통신, SPA(Single Page Application) 개발, Node.js 기반 서버 개발 등 웹 전반에서 핵심 역할을 수행합니다.  
+  즉, **웹, 모바일앱, 데스크톱앱 에 생명을 불어넣는 언어** 라고 할 수 있습니다.
+
+## 📌 자바스크립트의 실행 환경과 브라우저 vs Node.js
+
+**자바스크립트 (JavaScript)** 는 단일 환경에서만 동작하는 것이 아니라,  
+다양한 환경에서 실행될 수 있는 범용 언어입니다.  
+주요 환경으로는 **브라우저 환경**과 **서버 환경(Node.js)** 가 있습니다.
+
+---
+
+### 1️⃣ 브라우저 환경
+
+- 브라우저 환경에서 자바스크립트는 웹 페이지를 **동적으로 만들고, 사용자와 상호작용**을 처리합니다.
+- 주요 기능:
+  - **DOM 조작**
+    ```js
+    const title = document.querySelector('h1');
+    title.textContent = '안녕하세요, JavaScript!';
+    ```
+  - **이벤트 처리**
+    ```js
+    const button = document.querySelector('button');
+    button.addEventListener('click', () => alert('버튼이 클릭되었습니다!'));
+    ```
+  - **브라우저 API 사용**
+    ```js
+    const user = await fetch('https://jsonplaceholder.typicode.com/users/1')
+      .then(res => res.json());
+    console.log(user);
+    ```
+
+> 브라우저는 사용자 화면(UI)과 직접 연결되어 있으며, **DOM, 이벤트, fetch 등** 브라우저 전용 API를 제공합니다.
+
+---
+
+### 2️⃣ 서버 환경 (Node.js)
+
+- **Node.js** 는 브라우저가 아닌 환경에서 자바스크립트를 실행할 수 있도록 해주는 서버 런타임입니다.
+- 브라우저에서 제공하지 않는 기능을 사용할 수 있습니다:
+  - **파일 시스템 접근**
+    ```js
+    const fs = require('fs');
+    const data = fs.readFileSync('example.txt', 'utf-8');
+    console.log(data);
+    ```
+  - **서버 구축 및 HTTP 요청 처리**
+    ```js
+    const http = require('http');
+    const server = http.createServer((req, res) => {
+      res.end('Hello Node.js');
+    });
+    server.listen(3000, () => console.log('서버 실행 중'));
+    ```
+  - **데이터베이스 연동 (MySQL 예제)**
+    ```js
+    import mysql from 'mysql2/promise';
+
+    async function connectDB() {
+      const connection = await mysql.createConnection({
+        host: 'localhost',
+        user: 'root',
+        password: 'pw',
+        database: 'testdb'
+      });
+
+      const [rows] = await connection.execute('SELECT * FROM users');
+      console.log(rows);
+      await connection.end();
+    }
+
+    connectDB();
+    ```
+
+> Node.js는 서버 환경에서 동작하며, **파일, DB, 서버 API 처리** 등 백엔드 중심으로 활용됩니다.
+
+---
+
+### 3️⃣ 브라우저 vs Node.js 비교
+
+| 구분 | 브라우저 | Node.js |
+|------|----------|---------|
+| 실행 환경 | 사용자 PC 브라우저 | 서버 환경 |
+| 주요 역할 | DOM 조작, 이벤트 처리, UI 동적 제어 | 파일 시스템, 서버, API 처리, DB 연동 |
+| 제공 API | DOM, BOM, fetch, localStorage 등 | fs, http, os, fetch, DB 라이브러리 등 |
+| 특징 | 사용자 상호작용 중심 | 서버 로직 중심, 범용 프로그래밍 가능 |
+
+---
+
+## 📌 예상 면접 질문 & 답변
+
+#### Q1: 자바스크립트는 브라우저에서 어떤 역할을 하나요?
+- **포인트**: DOM 조작, 이벤트 처리, 브라우저 API 활용
+- **답변 예시**:  
+  "자바스크립트는 브라우저에서 웹 페이지를 동적으로 만들고 사용자와 상호작용을 처리합니다.  
+  예를 들어 DOM 요소를 선택하거나 변경하고, 클릭/입력 이벤트를 처리하며, fetch API로 서버와 데이터를 주고받는 역할을 합니다."
+
+#### Q2: 브라우저와 Node.js에서 자바스크립트의 차이는 무엇인가요?
+- **포인트**: 실행 환경, 제공 API, 활용 목적
+- **답변 예시**:  
+  "브라우저는 사용자 화면과 직접 연결되어 DOM, 이벤트, fetch 등 UI 중심의 기능을 제공하고,  
+  Node.js는 서버 환경에서 파일 시스템, DB, 서버 API 등 백엔드 중심으로 자바스크립트를 활용할 수 있습니다."
+
+#### Q3: Node.js에서 fetch API를 사용하려면 어떻게 해야 하나요?
+- **포인트**: 브라우저 기본 제공 API vs Node.js 외부 모듈
+- **답변 예시**:  
+  "브라우저에서는 fetch가 기본 제공되지만, Node.js에서는 기본 fetch가 없기 때문에 node-fetch나 axios와 같은 
+  외부 모듈을 설치해서 사용해야 합니다."
+
+#### Q4: 브라우저에서 자바스크립트로 DOM을 조작하는 예를 들어주세요.
+- **포인트**: document.querySelector, textContent, innerHTML 활용
+- **답변 예시**:  
+  예를 들어 HTML의 h1 요소를 변경하고 싶다면 
+  ```javascript
+  const title = document.querySelector('h1'); 
+  title.textContent = '안녕하세요!';
+  ```
+  처럼 선택 후 값을 수정할 수 있습니다.
+  
+
+#### Q5: 브라우저 API와 Node.js API를 혼동하지 않으려면 어떻게 해야 하나요?
+- **포인트**: 환경 구분, API 제공 범위 이해
+- **답변 예시**:  
+  "브라우저 API는 UI와 관련된 기능, Node.js API는 서버/파일/DB 처리와 관련된 기능이라는 점을 기준으로 구분하면 됩니다.  
+  예를 들어 localStorage는 브라우저에서만 동작하고, fs는 Node.js에서만 사용할 수 있습니다."
+
+#### Q6: 자바스크립트를 배우면서 브라우저와 Node.js 환경을 동시에 이해하는 것이 왜 중요한가요?
+- **포인트**: 범용 프로그래밍 이해, 프론트엔드+백엔드 연결
+- **답변 예시**:  
+  "자바스크립트는 프론트엔드뿐만 아니라 Node.js를 통해 백엔드에서도 사용되므로, 두 환경의 차이와 제공 API를 이해하면 SPA 개발, 서버 통신, 데이터 처리까지 폭넓게 활용할 수 있습니다."
