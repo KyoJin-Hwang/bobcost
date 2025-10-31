@@ -61,7 +61,8 @@ export default function CodeRunner({
       .map((line) => line.match(/^[\t ]*/)?.[0].length ?? 0);
     // smallest POSITIVE indent among non-empty lines
     const positiveIndents = indentLengths.filter((n) => n > 0);
-    const minIndent = positiveIndents.length > 0 ? Math.min(...positiveIndents) : 0;
+    const minIndent =
+      positiveIndents.length > 0 ? Math.min(...positiveIndents) : 0;
     if (minIndent === 0) return lines.join('\n');
     return lines
       .map((line) => {
@@ -144,7 +145,7 @@ export default function CodeRunner({
           onClick={copyCode}
           aria-label='코드 복사'
           className={cn(
-            'absolute right-2 top-2 opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus:opacity-100',
+            'absolute right-2 top-2 opacity-100 transition-opacity duration-200',
             copied && 'max-h-6 opacity-100'
           )}
         >
