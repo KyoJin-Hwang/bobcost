@@ -146,7 +146,7 @@ first();
 
 이벤트 루프는 프로그램이 종료될 때까지 다음과 같은 과정을 **계속 반복** 하며 자바스크립트의 동시성을 관리합니다.
 
-![예시 이미지](https://blog.kakaocdn.net/dna/bfVyEB/btsvNysLSVD/AAAAAAAAAAAAAAAAAAAAAJxhbgrFAtY0raLeVI7bMN_TKvGRcRW7R2jIgwX0x4_o/img.gif?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1761922799&allow_ip=&allow_referer=&signature=ZYtaQbU0xQDh1uWC5rFZE35iScY%3D)
+![예시 이미지](/posts/frontend/javascript/loof.gif)
 
 1.  **1. 콜 스택(Call Stack) 확인**
     * 이벤트 루프는 가장 먼저 **콜 스택** 이 비어 있는지 확인합니다.
@@ -216,30 +216,34 @@ greet();
 respond();
 ```
 
-![예제2 이미지1](https://blog.kakaocdn.net/dna/dSKYuj/btsvMMEP4MD/AAAAAAAAAAAAAAAAAAAAAFYSd6TgLLL7iSpEENZ4UZ-D7qELDNxlxzHfh3hXgKtw/img.gif?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1761922799&allow_ip=&allow_referer=&signature=cmQn%2BaWpTv3ScdaAi6I%2BD1ibvyU%3D)
+![예제2 이미지](/posts/frontend/javascript/loof1-1.gif)
+
 1. greet 함수를 만나서 호출한다.
 2. 콜스택에 실행 중인 작업이 없기 때문에 콜스택에 추가 된다.
 3. greet 함수를 실행 시켜서 "Hello"를 출력하고 콜스택에서 사라진다.
 4. 다음 respond 함수를 콜스택에 추가 한다.
 
-![예제2 이미지2](https://blog.kakaocdn.net/dna/bHjCkQ/btsvYWFy4vr/AAAAAAAAAAAAAAAAAAAAAMMMrqHSxyOMpIU9GfcPttfzZIdQ_wnoKkOk5bmEqyH5/img.gif?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1761922799&allow_ip=&allow_referer=&signature=117wqSwTITU5%2FcfHFKrc2MUDAuY%3D)
+![예제2 이미지2](/posts/frontend/javascript/loof1-2.gif)
 
 1.  `setTimeout` 함수가 **콜 스택** 에 추가(Push)됩니다.
 2.  `setTimeout`은 브라우저(Web API)에게 "이 콜백 함수를 1000ms 뒤에 실행해 줘"라고 등록 요청을 보냅니다.
 3.  요청을 마친 `setTimeout` 함수 자체는 **콜 스택** 에서 즉시 제거(Pop)됩니다. (다른 동기 코드들은 계속 실행됩니다.)
 4.  등록된 콜백 함수는 **Web API** 환경으로 이동하여 타이머(1000ms)가 시작됩니다.
 
-![예제2 이미지3](https://blog.kakaocdn.net/dna/xw9bM/btsvNvCQTIO/AAAAAAAAAAAAAAAAAAAAAKt_OhDFFMwajoPOjxK5PVarLvxrYCBxfCGMBzk71RRY/img.gif?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1761922799&allow_ip=&allow_referer=&signature=KVPt6iNUj50OzmIa2vh4LehrSNo%3D)
+![예제2 이미지3](/posts/frontend/javascript/loof1-3.gif)
+
 1.  Web API에서 1000ms 타이머가 완료됩니다.
 2.  타이머가 완료된 콜백 함수는 **콜 스택** 으로 *바로 들어가는 것이 아니라* , **콜백 큐 (Callback Queue)** 로 이동하여 대기합니다.
 3.  (더 자세히는 `setTimeout`의 콜백이므로 **태스크 큐 (Task Queue)** 로 들어간 것입니다.)
 
-![예제2 이미지4](https://blog.kakaocdn.net/dna/Dd2MN/btsvNwIuPSn/AAAAAAAAAAAAAAAAAAAAANU0pG3E35c4mz73gvYN2UrbszZ7qDhSszjFqJujaylK/img.gif?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1761922799&allow_ip=&allow_referer=&signature=3d91zEWwsZpAi9JcPIf4brlFXdg%3D)
+![예제2 이미지4](/posts/frontend/javascript/loof1-4.gif)
+
 1.  **이벤트 루프** 는 **콜 스택** 이 완전히 비어있는지 계속 확인합니다.
 2.  콜 스택이 비워진 것을 확인한 이벤트 루프는 **콜백 큐** (태스크 큐)를 확인합니다.
 3.  큐에 대기 중인 콜백 함수를 발견하고, 해당 함수를 **콜 스택** 으로 이동시킵니다.
 
-![예제2 이미지5](https://blog.kakaocdn.net/dna/pJxRO/btsvNO9YROc/AAAAAAAAAAAAAAAAAAAAAJdAPumAce4tc2yxXSbTR5x_GR8FcPSNJMvudZeqzXHp/img.gif?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1761922799&allow_ip=&allow_referer=&signature=%2FcalNEPBYhJFwdIIlr%2BzOnMgTgs%3D)
+![예제2 이미지5](/posts/frontend/javascript/loof1-5.gif)
+
 1.  콜 스택에 들어온 함수는 즉시 실행됩니다. (예: 내부의 `Hey`가 실행됨)
 2.  실행이 완료된 콜백 함수는 **콜 스택** 에서 최종적으로 제거(Pop)됩니다.
 

@@ -1,6 +1,6 @@
 import type { NextConfig } from 'next';
 
-const hostName = ['blog.kakaocdn.net'];
+const hostName = [''];
 
 const nextConfig: NextConfig = {
   transpilePackages: ['next-mdx-remote'],
