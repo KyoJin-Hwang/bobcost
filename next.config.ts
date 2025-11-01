@@ -1,17 +1,17 @@
 import type { NextConfig } from 'next';
 
-const hostName = [''];
+// const hostName = [''];
 
 const nextConfig: NextConfig = {
   transpilePackages: ['next-mdx-remote'],
 
-  images: {
-    remotePatterns: hostName.map((el) => ({
-      protocol: 'https',
-      hostname: el,
-      pathname: '/**',
-    })),
-  },
+  // images: {
+  //   remotePatterns: hostName.map((el) => ({
+  //     protocol: 'https',
+  //     hostname: el,
+  //     pathname: '/**',
+  //   })),
+  // },
 
   // 한글 URL 지원을 위한 설정
   experimental: {
